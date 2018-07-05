@@ -1,0 +1,21 @@
+global:
+  contact: "Faron Anslow (fanslow@uvic.ca)"
+  conventions: "CF-1.5"
+  domain: "bc"
+  experiment_id: "historical"
+  frequency: "mon"
+  institute_id: "PCIC"
+  institution: "PCIC (Pacific Climate Impacts Consortium, University of Victoria, Victoria, BC, Canada)"
+  modeling_realm: "atmos"
+  model_id: "PRISM"
+  product: "gridded observations"
+  project_id: "other"
+  run: "run1"
+  table_id: "Table Amon (10 Jun 2010)"
+  title: "Climatologically aided interpolation of monthly averages of daily minimum temperature: 1950 - 2007"
+
+crs:
+  crs_wkt: <-spatial_ref
+
+tmin:
+  grid_mapping:
