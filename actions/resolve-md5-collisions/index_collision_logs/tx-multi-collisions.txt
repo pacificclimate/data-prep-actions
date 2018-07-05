@@ -1,0 +1,575 @@
+2018-03-05 15:45:03 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:45:03 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:03 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:45:03 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:03 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:45:04 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:04 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:45:04 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:04 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:45:04 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:04 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:45:05 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:07 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19610101-19901231.nc
+2018-03-05 15:45:07 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:07 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19710101-20001231.nc
+2018-03-05 15:45:07 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:07 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19810101-20101231.nc
+2018-03-05 15:45:08 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:08 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20100101-20391231.nc
+2018-03-05 15:45:08 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:08 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20400101-20691231.nc
+2018-03-05 15:45:08 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:08 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20700101-20991231.nc
+2018-03-05 15:45:08 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:12 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:45:12 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:12 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:45:12 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:12 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:45:13 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:13 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:45:13 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:13 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:45:13 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:13 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:45:13 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:26 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19610101-19901231.nc
+2018-03-05 15:45:26 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:27 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19710101-20001231.nc
+2018-03-05 15:45:27 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:27 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19810101-20101231.nc
+2018-03-05 15:45:27 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:27 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20100101-20391231.nc
+2018-03-05 15:45:27 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:27 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20400101-20691231.nc
+2018-03-05 15:45:27 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:27 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20700101-20991231.nc
+2018-03-05 15:45:28 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:47 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:45:47 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:47 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:45:47 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:47 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:45:47 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:47 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:45:48 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:48 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:45:48 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:48 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:45:48 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:53 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19610101-19901231.nc
+2018-03-05 15:45:53 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:54 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19710101-20001231.nc
+2018-03-05 15:45:54 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:54 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19810101-20101231.nc
+2018-03-05 15:45:54 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:54 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20100101-20391231.nc
+2018-03-05 15:45:54 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:54 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20400101-20691231.nc
+2018-03-05 15:45:54 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:45:54 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20700101-20991231.nc
+2018-03-05 15:45:54 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:08 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:46:08 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:09 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:46:09 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:09 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:46:09 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:09 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:46:09 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:10 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:46:10 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:10 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:46:10 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:39 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19610101-19901231.nc
+2018-03-05 15:46:40 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:40 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19710101-20001231.nc
+2018-03-05 15:46:40 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:40 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19810101-20101231.nc
+2018-03-05 15:46:40 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:40 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20100101-20391231.nc
+2018-03-05 15:46:40 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:40 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20400101-20691231.nc
+2018-03-05 15:46:41 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:41 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20700101-20991231.nc
+2018-03-05 15:46:41 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:46:56 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:46:56 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:46:56 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:46:56 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:46:56 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:46:57 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:46:59 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19610101-19901231.nc
+2018-03-05 15:47:00 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:00 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19710101-20001231.nc
+2018-03-05 15:47:00 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:00 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19810101-20101231.nc
+2018-03-05 15:47:00 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:00 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20100101-20391231.nc
+2018-03-05 15:47:00 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:00 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20400101-20691231.nc
+2018-03-05 15:47:00 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:01 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20700101-20991231.nc
+2018-03-05 15:47:01 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:08 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:47:08 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:08 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:47:08 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:08 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:47:09 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:09 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:47:09 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:09 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:47:09 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:09 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:47:09 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:29 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19610101-19901231.nc
+2018-03-05 15:47:29 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:29 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19710101-20001231.nc
+2018-03-05 15:47:29 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19810101-20101231.nc
+2018-03-05 15:47:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20100101-20391231.nc
+2018-03-05 15:47:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20400101-20691231.nc
+2018-03-05 15:47:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx10pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20700101-20991231.nc
+2018-03-05 15:47:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:41 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:47:41 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:41 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:47:41 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:41 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:47:41 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:42 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:47:42 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:42 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:47:42 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:42 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:47:42 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:45 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19610101-19901231.nc
+2018-03-05 15:47:45 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:45 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19710101-20001231.nc
+2018-03-05 15:47:45 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:45 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19810101-20101231.nc
+2018-03-05 15:47:45 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:45 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20100101-20391231.nc
+2018-03-05 15:47:45 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:45 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20400101-20691231.nc
+2018-03-05 15:47:45 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:46 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20700101-20991231.nc
+2018-03-05 15:47:46 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:51 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:47:51 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:51 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:47:51 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:51 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:47:51 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:51 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:47:51 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:51 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:47:51 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:47:52 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:47:52 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:07 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19610101-19901231.nc
+2018-03-05 15:48:07 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:07 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19710101-20001231.nc
+2018-03-05 15:48:07 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:07 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19810101-20101231.nc
+2018-03-05 15:48:07 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:07 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20100101-20391231.nc
+2018-03-05 15:48:07 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:08 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20400101-20691231.nc
+2018-03-05 15:48:08 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:08 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20700101-20991231.nc
+2018-03-05 15:48:08 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:29 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:48:29 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:29 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:48:29 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:48:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:48:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:48:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:48:31 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:38 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19610101-19901231.nc
+2018-03-05 15:48:38 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:38 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19710101-20001231.nc
+2018-03-05 15:48:38 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:38 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19810101-20101231.nc
+2018-03-05 15:48:38 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:38 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20100101-20391231.nc
+2018-03-05 15:48:38 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:39 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20400101-20691231.nc
+2018-03-05 15:48:39 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:39 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20700101-20991231.nc
+2018-03-05 15:48:39 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:51 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:48:51 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:51 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:48:51 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:51 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:48:51 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:51 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:48:51 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:51 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:48:52 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:48:52 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:48:52 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:29 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19610101-19901231.nc
+2018-03-05 15:49:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19710101-20001231.nc
+2018-03-05 15:49:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19810101-20101231.nc
+2018-03-05 15:49:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20100101-20391231.nc
+2018-03-05 15:49:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:30 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20400101-20691231.nc
+2018-03-05 15:49:30 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:31 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_mClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20700101-20991231.nc
+2018-03-05 15:49:31 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:47 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:49:47 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:47 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:49:47 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:47 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:49:48 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:48 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:49:48 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:48 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:49:48 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:48 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:49:48 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:52 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19610101-19901231.nc
+2018-03-05 15:49:52 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:52 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19710101-20001231.nc
+2018-03-05 15:49:52 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:52 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19810101-20101231.nc
+2018-03-05 15:49:52 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:52 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20100101-20391231.nc
+2018-03-05 15:49:53 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:53 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20400101-20691231.nc
+2018-03-05 15:49:53 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:49:53 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20700101-20991231.nc
+2018-03-05 15:49:53 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:00 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:50:00 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:00 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:50:00 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:00 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:50:00 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:01 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:50:01 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:01 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:50:01 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:01 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:50:01 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:20 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19610101-19901231.nc
+2018-03-05 15:50:20 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:20 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19710101-20001231.nc
+2018-03-05 15:50:20 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:21 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19810101-20101231.nc
+2018-03-05 15:50:21 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:21 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20100101-20391231.nc
+2018-03-05 15:50:21 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:21 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20400101-20691231.nc
+2018-03-05 15:50:21 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:21 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/tx90pETCCDI_sClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20700101-20991231.nc
+2018-03-05 15:50:21 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:33 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:50:33 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:33 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:50:33 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:33 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:50:33 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:33 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:50:33 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:33 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:50:33 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:34 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:50:34 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:36 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19610101-19901231.nc
+2018-03-05 15:50:36 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:36 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19710101-20001231.nc
+2018-03-05 15:50:36 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:36 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19810101-20101231.nc
+2018-03-05 15:50:36 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:36 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20100101-20391231.nc
+2018-03-05 15:50:37 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:37 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20400101-20691231.nc
+2018-03-05 15:50:37 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:37 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20700101-20991231.nc
+2018-03-05 15:50:37 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:42 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:50:42 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:42 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:50:42 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:42 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:50:42 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:42 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:50:42 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:42 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:50:42 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:42 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:50:43 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:54 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19610101-19901231.nc
+2018-03-05 15:50:54 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:54 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19710101-20001231.nc
+2018-03-05 15:50:54 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19810101-20101231.nc
+2018-03-05 15:50:56 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20100101-20391231.nc
+2018-03-05 15:50:57 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:57 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20400101-20691231.nc
+2018-03-05 15:50:57 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:50:57 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txnETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20700101-20991231.nc
+2018-03-05 15:50:57 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:34 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:53:34 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:34 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:53:34 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:34 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:53:34 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:34 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:53:35 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:35 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:53:35 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:35 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CanESM2_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:53:35 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:37 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19610101-19901231.nc
+2018-03-05 15:53:37 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:37 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19710101-20001231.nc
+2018-03-05 15:53:37 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:37 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_19810101-20101231.nc
+2018-03-05 15:53:38 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:38 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20100101-20391231.nc
+2018-03-05 15:53:38 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:38 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20400101-20691231.nc
+2018-03-05 15:53:38 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:38 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CCSM4_historical+rcp85_r2i1p1_20700101-20991231.nc
+2018-03-05 15:53:38 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:43 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19610101-19901231.nc
+2018-03-05 15:53:43 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:44 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19710101-20001231.nc
+2018-03-05 15:53:44 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:44 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_19810101-20101231.nc
+2018-03-05 15:53:44 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:44 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20100101-20391231.nc
+2018-03-05 15:53:44 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:44 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20400101-20691231.nc
+2018-03-05 15:53:44 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:44 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_CNRM-CM5_historical+rcp85_r1i1p1_20700101-20991231.nc
+2018-03-05 15:53:45 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19610101-19901231.nc
+2018-03-05 15:53:56 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19710101-20001231.nc
+2018-03-05 15:53:56 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:56 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_19810101-20101231.nc
+2018-03-05 15:53:56 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:57 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20100101-20391231.nc
+2018-03-05 15:53:57 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:57 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20400101-20691231.nc
+2018-03-05 15:53:57 ERROR: Encountered an unanticipated case:
+--
+2018-03-05 15:53:57 INFO: Processing file: /storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/climdex/txxETCCDI_aClim_BCCAQ_MRI-CGCM3_historical+rcp45_r1i1p1_20700101-20991231.nc
+2018-03-05 15:53:57 ERROR: Encountered an unanticipated case:
