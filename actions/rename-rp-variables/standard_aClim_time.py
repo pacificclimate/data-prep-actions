@@ -54,12 +54,12 @@ if not "time" in file.variables:
     
 time = file.variables["time"]
 
-expected_units = "days since 1-01-01 00:00:00"
-units = time.getncattr("units")
-if not units == expected_units:
-    print("  Error: expected time.units to be {}, found {}".format(expected_units, units))
-    file.close()
-    sys.exit()
+#expected_units = "days since 1-01-01 00:00:00"
+#units = time.getncattr("units")
+#if not units == expected_units:
+#    print("  Error: expected time.units to be {}, found {}".format(expected_units, units))
+#    file.close()
+#    sys.exit()
 
 calendar = time.getncattr("calendar")
 if calendar in ("gregorian", "standard", "proleptic_gregorian"):
@@ -106,6 +106,8 @@ def delta_days(cal, sYear, sMonth, sDay, eYear, eMonth, eDay):
 
 # set the baseline time: Jan 1, 1950
 time.setncattr("units", "days since 1950-01-01 00:00:00")
+time.setncattr("long_name", "time")
+time.setncattr("standard_name", "time")
 
 # set time value
 delta = delta_days(calendar, 1950, 1, 1, endYear, 1, 1)
@@ -119,6 +121,7 @@ time_bnds = file.createVariable("time_bnds", "f8", ("time", "bnds"))
 start_delta = delta_days(calendar, 1950, 1, 1, startYear, 1, 1)
 end_delta = delta_days(calendar, 1950, 1, 1, endYear, 12, 31)
 time_bnds[:] = np.array([[start_delta, end_delta]])
+time.setncattr("bounds", "time_bnds")
 print("  Created time_bnds")
 
 entry = "{}: standard_aClim_time {}".format(datetime.datetime.now().strftime("%a %b %d %H:%M:%S %Y"), filename.split("/")[-1])
