@@ -9,7 +9,7 @@ for file in /path/to/files/*.nc ; do python scripts/update_metadata -u global.ya
 ```
 (Note that global.yaml provides a couple options that may vary across your data collection: method, method_id, and package_id. These are currently set for BCCAQv2; change or remove them if your dataset was generated some other way.)
 
-The four variable files add human friendly variable descriptions taken from a variable metadata spreadsheet Travis gave me. There's no harm in running these updates on the wrong variables; they just spit error messages. Something like:
+The four variable files add human friendly variable descriptions taken from a variable metadata spreadsheet Trevor gave me. There's no harm in running these updates on the wrong variables; they just spit error messages. Something like:
 
 ```
 for file in /path/to/files/cdd*.nc ; do python scripts update_metadata -u cdd.yaml $file ; done
