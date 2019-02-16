@@ -1,0 +1,14 @@
+# fills in metadata attributes missing from degree-day files.
+
+global:
+  version: "1" 
+  contact: Pacific Climate Impacts Consortium
+  target__history: <-target_history
+  target__dataset_id: <-target_id
+  table_id: Table day (10 Jun 2010)
+  project_id: CMIP5
+  product: downscaled output
+  domain: Canada
+  method: Quantile Delta Mapping
+  package_id: github.com/pacificclimate/ClimDown
+  method_id: BCCAQv2
