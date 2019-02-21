@@ -1,0 +1,3 @@
+tasmax:
+        long_name: "Daily Minimum Near-Surface Air Temperature"
+        cell_methods: "time: maximum"
