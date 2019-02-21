@@ -7,9 +7,9 @@ The ANUSPLIN dataset was added for the [p2a](https://github.com/pacificclimate/p
 
 ### 1. General update of missing global metadata
 
-Using the `update_metadata` script from [climate-explorer-data-prep](https://github.com/pacificclimate/climate-explorer-data-prep) update the three anusplin\_[variable_name]\_final.nc files found at `/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/`.
+Using the `update_metadata` script from [climate-explorer-data-prep](https://github.com/pacificclimate/climate-explorer-data-prep) update the `anusplin\_[variable_name]\_final.nc`.
 
-NOTE: These files were copied to `/local_temp/[user]/` as to not change the original data files
+**NOTE:** These files were copied to `/local_temp/[user]/` as to not change the original data files
 
 ```
 (venv)$ python scripts/update_metadata -u ../updates.yaml ../anusplin_tasmin_final.nc
