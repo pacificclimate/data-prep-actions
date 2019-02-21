@@ -1,0 +1,3 @@
+pr:
+        long_name: "Precipitation"
+        cell_methods: "time: mean"

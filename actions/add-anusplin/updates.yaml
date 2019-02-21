@@ -1,0 +1,6 @@
+global:
+        project_id: other
+        institute_id: "PCIC"
+        experiment_id: "historical"
+        run: "nominal"
+        model_id: "anusplin"
