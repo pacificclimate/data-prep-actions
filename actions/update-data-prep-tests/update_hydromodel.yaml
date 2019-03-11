@@ -1,0 +1,23 @@
+global:
+        downscaling__method: <-forcing_downscaling_method
+        downscaling__method_id: <-forcing_downscaling_method_id
+        downscaling__package_id: <-forcing_downscaling_package_id
+
+        downscaling__GCM__experiment: <-forcing_driving_experiment
+        downscaling__GCM__experiment_id: <-forcing_driving_experiment_id
+        downscaling__GCM__initialization_method: <-forcing_driving_initialization_method
+        downscaling__GCM__institute_id: <-forcing_driving_institute_id
+        downscaling__GCM__institution: <-forcing_driving_institution
+        downscaling__GCM__model_id: <-forcing_driving_model_id
+        downscaling__GCM__physics_version: <-forcing_driving_physics_version
+        downscaling__GCM__realization: <-forcing_driving_realization
+
+        model_cal__contact: <-forcing_target_contact
+        model_cal__dataset: <-forcing_target_dataset
+        model_cal__dataset_id: <-forcing_target_dataset_id
+        model_cal__institute_id: <-forcing_target_institute_id
+        model_cal__institution: <-forcing_target_institution
+        model_cal__references: <-forcing_target_references
+        model_cal__version: <-forcing_target_version
+
+        method_id: <-hydromodel_method_id
