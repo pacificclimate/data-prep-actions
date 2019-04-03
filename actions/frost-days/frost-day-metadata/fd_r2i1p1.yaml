@@ -1,0 +1,4 @@
+global:
+        GCM__realization: 2
+        GCM__initialization_method: 1
+        GCM__physics_version: 1

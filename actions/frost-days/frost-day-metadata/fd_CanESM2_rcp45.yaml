@@ -1,0 +1,2 @@
+global:
+        GCM__experiment: CanESM2, historical+rcp45, r1i1p1

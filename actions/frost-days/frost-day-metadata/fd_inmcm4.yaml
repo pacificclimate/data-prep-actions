@@ -1,0 +1,4 @@
+global:
+        GCM__institute_id: INM
+        GCM__institution: Institute for Numerical Mathematics
+        GCM__model_id: inmcm4

@@ -1,0 +1,2 @@
+global:
+        GCM__experiment: CCSM4, historical+rcp85, r2i1p1

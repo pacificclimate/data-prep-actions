@@ -1,0 +1,4 @@
+global:
+        GCM__institute_id: CCCma
+        GCM__institution: Canadian Centre for Climate Modelling and Analysis
+        GCM__model_id: CanESM2

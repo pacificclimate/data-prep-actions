@@ -1,0 +1,4 @@
+global:
+        GCM__institute_id: MRI
+        GCM__institution: Meteorological Research Institute
+        GCM__model_id: MRI-CGCM3
