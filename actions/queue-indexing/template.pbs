@@ -1,0 +1,29 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /path/to/log/directory
+#PBS -e /path/to/log/directory
+#PBS -m abe
+#PBS -N pdp_indexNUMBER
+
+database=postgresql://username:password@server.pcic.uvic.ca/databasename
+venv=/path/to/modelmeta/
+
+
+file=FILENAME
+base=$(basename $file)
+
+echo "$(date) Copying $base to $TMPDIR"
+cp $file $TMPDIR
+
+echo "$(date) Indexing $base"
+cd $venv
+source venv/bin/activate
+python scripts/index_netcdf -d $database $TMPDIR/$base
+
+echo "$(date) removing $base"
+rm $TMPDIR/$base
+
+echo "$(date) updating file location in database"
+python scripts/index_netcdf -d $database $file
