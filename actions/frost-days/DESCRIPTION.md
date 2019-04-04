@@ -1,8 +1,6 @@
 # Add metadata to fdETCCDI datafiles
 
 ## Purpose
-The ANUSPLIN dataset was added for the [p2a](https://github.com/pacificclimate/p2a-rule-engine) rule engine.  It will replace `CRU_TS_21` as the new historical baseline.  The following commands were run to produce the climatologies.
-
 The [p2a](https://github.com/pacificclimate/p2a-rule-engine) rule engine required monthy fdETCCDI data in order to produce `number of frost free days`.  The following commands were run in order to add metadata to the files.
 
 ## Commands
