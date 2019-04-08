@@ -1,4 +1,4 @@
 cdd:
   standard_name: cooling_degree_days
   long_name: "Cooling Degree Days (Threshold: 18C)"
-  cell_methods: "time:sum"
+  cell_methods: "time: sum within years"

@@ -1,4 +1,4 @@
 hdd:
   standard_name: heating_degree_days
   long_name: "Heating Degree Days (Threshold: 18C)"
-  cell_methods: "time:sum"
+  cell_methods: "time: sum within years"
