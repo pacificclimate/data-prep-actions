@@ -1,0 +1,5 @@
+gdd:
+  standard_name: growing_degree_days
+  long_name: "Growing Degree Days (Threshold: 5C)"
+  cell_methods: "time: sum within years"
+

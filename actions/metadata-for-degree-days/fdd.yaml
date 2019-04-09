@@ -1,0 +1,4 @@
+fdd:
+  standard_name: freezing_degree_days
+  long_name: "Freezing Degree Days (Threshold: 0C)"
+  cell_methods: "time: sum within years"
