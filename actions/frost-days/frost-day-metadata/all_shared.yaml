@@ -1,0 +1,27 @@
+global:
+        - contact: Pacfic Climate Impacts Consortium
+        - Conventions: CF-1.4
+        - creation_date: '2019-03-05T10:58:00Z'
+        - frequency: mon
+        - institute_id: PCIC
+        - institution: Pacific Climate Impacts Consortium (PCIC), Victoria, BC, www.pacificclimate.org
+        - modeling_realm: atmos
+        - product: downscaled output
+        - project_id: CMIP5
+        - table_id: Table day (10 Jun 2010)
+        - title: ETCCDI indices computed on Bias Correction/Constructed Analogue Quantile Mapping (BCCAQ) downscaling model output for Canada
+        
+        - method: Bias Correction/Constructed Analogue Quantile Mapping (BCCAQ)
+        - method_id: BCCAQ
+        - package_id: github.com/pacificclimate/ClimDown 
+        
+        - target__contact: Pia Papadopol (pia.papadopol@nrcan-rncan.gc.ca)
+        - target__dataset: ANUSPLIN interpolated Canada daily 300 arc second climate grids
+        - target__dataset_id: ANUSPLIN300
+        - target__institute_id: CFS-NRCan
+        - target__institution: Canadian Forest Service, Natural Resources Canada
+        - target__references: 'McKenney, D.W., Hutchinson, M.F., Papadopol, P., Lawrence, K., Pedlar, J.,\nCampbell, K., Milewska, E., Hopkinson, R., Price, D., and Owen, T.,\n2011. Customized spatial climate models for North America.\nBulletin of the American Meteorological Society, 92(12): 1611-1622.\n\nHopkinson, R.F., McKenney, D.W., Milewska, E.J., Hutchinson, M.F.,\nPapadopol, P., Vincent, L.A., 2011. Impact of aligning climatological day\non gridding daily maximum-minimum temperature and precipitation over Canada.\nJournal of Applied Meteorology and Climatology 50: 1654-1665.'
+        - target__version: canada_daily_standard_grids
+
+fdETCCDI:
+        cell_methods: 'time: sum within years'

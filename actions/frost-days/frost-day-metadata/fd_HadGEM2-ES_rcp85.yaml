@@ -1,0 +1,2 @@
+global:
+        GCM__experiment: HadGEM2-ES, historical+rcp85, r1i1p1

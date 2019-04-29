@@ -1,0 +1,2 @@
+global:
+        GCM__experiment: MPI-ESM-LR, historical+rcp85, r1i1p1

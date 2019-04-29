@@ -1,0 +1,4 @@
+global:
+        GCM__institute_id: NCAR
+        GCM__institution: National Center for Atmospheric Research
+        GCM__model_id: CCSM4

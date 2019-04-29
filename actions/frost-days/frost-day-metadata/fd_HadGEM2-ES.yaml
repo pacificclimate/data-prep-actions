@@ -1,0 +1,4 @@
+global:
+        GCM__institute_id: MOHC
+        GCM__institution: Met Office Hadley Centre
+        GCM__model_id: HadGEM2-ES
