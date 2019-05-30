@@ -58,9 +58,11 @@ data:
 }
 ```
 
-WARNING 1: this script has not been tested outside the dataset it was written for use with. Be very careful about applying it to new datasets.
+**WARNING 1**: this script has not been tested outside the dataset it was written for use with. Be very careful about applying it to new datasets.
 
 For example, as checks on data consistency, it assumes that the dataset starts January first and that the dataset has a CMOR-style filename containing extractable dates. These assumptions are *not* reliable across all PCIC datasets or all netCDF files.
+
+**WARNING 2**: This script does not check that all values in the time variable either monotonically increasing and equally spaced; a file that violated those constraints recently cause us some trouble.
 
 
 ## Procedure
