@@ -12,7 +12,7 @@ inaccurate names for these hydrology data files. If you need to
 ask Hydrology for some files, functional descriptions might be
 needed.
 
-###A baseflow netCDF file
+### A baseflow netCDF file
 This file provides the data from which streamflow is calculated.
 It is a raster file containing a timeseries of hydrological
 data about how water flows over and under the ground, based on modeled
