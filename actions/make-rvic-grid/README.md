@@ -110,3 +110,19 @@ for i in {0..49} ; do qsub rvic$i.pbs ; done
  ```
  ls CanESM2_rcp85_r1i1p1_process9_point*.nc | wc -l
  ```
+
+## Date-filename problem
+We cannot choose the name of the file RVIC outputs from the first step,
+which contains the Impulse Response Functions used to calculate
+streamflow and is needed as input to the second step.
+RVIC generates a name for this file that includes the
+date the file was created.
+
+This script uses shell commands to assemble the filename, including the
+date, but is, on rare occaisions, incorrect if the impulse response
+function calculations began before midnight but finished after midnight.
+Anecdotally, this seems to happen about 0.02% of the time.
+
+The missing-points.py script is intended to check for this particular
+failure. Given that the peace watershed is about 7500 grid cells, it
+does actually come up sometimes.
