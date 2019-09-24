@@ -1,0 +1,15 @@
+global:
+  institude_id:
+  institute_id: PCIC
+  product: gridded observations
+  frequency: fx
+  creation_date: 2018-01-08-T11:05:31Z
+  project_id: other
+  domain: nwna
+  experiment_id: historical
+  modeling_realm: land
+  model_id: base
+  run: run1
+
+elev:
+  cell_methods: "area: mean"
