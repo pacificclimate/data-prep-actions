@@ -8,8 +8,8 @@ global:
   domain: nwna
   experiment_id: historical
   modeling_realm: land
-  model_id: base
-  run: run1
+  model_id: GMTED2010
+  run: na
 
 elev:
   cell_methods: "area: mean"
