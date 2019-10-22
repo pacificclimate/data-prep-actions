@@ -1,0 +1,341 @@
+--- # Experiment description
+CMIP5: # Coupled Model Experiment
+  description: Simulations based based on projections from the Coupled Model Intercomparison Project Phase 5
+  experiments:
+    access1.0.rcp45.r1i1p1:
+      model_name: Australian Community Climate and Earth System Simulator (version 1.0)
+      model_id: ACCESS1-0
+      experiment_id: rcp45
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: CSIRO (Commonwealth Scientific and Industrial Research Organisation) and BOM (Bureau of Meteorology)
+      institute_id: CSIRO-BOM
+    access1.0.rcp85.r1i1p1:
+      model_name: Australian Community Climate and Earth System Simulator (version 1.0)
+      model_id: ACCESS1-0
+      experiment_id: rcp85
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: CSIRO (Commonwealth Scientific and Industrial Research Organisation) and BOM (Bureau of Meteorology)
+      institute_id: CSIRO-BOM
+    canesm2.rcp45.r1i1p1:
+      model_name: Canadian Earth System Model (second generation)
+      model_id: CanESM2
+      experiment_id: rcp45
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: Canadian Centre for Climate Modelling and Analysis
+      institute_id: CCCma
+    canesm2.rcp45.r2i1p1:
+      model_name: Canadian Earth System Model (second generation)
+      model_id: CanESM2
+      experiment_id: rcp45
+      realization: r2
+      initialization_method: i1
+      physics_version: p1
+      institution: Canadian Centre for Climate Modelling and Analysis
+      institute_id: CCCma
+    canesm2.rcp45.r3i1p1:
+      model_name: Canadian Earth System Model (second generation)
+      model_id: CanESM2
+      experiment_id: rcp45
+      realization: r3
+      initialization_method: i1
+      physics_version: p1
+      institution: Canadian Centre for Climate Modelling and Analysis
+      institute_id: CCCma
+    canesm2.rcp45.r4i1p1:
+      model_name: Canadian Earth System Model (second generation)
+      model_id: CanESM2
+      experiment_id: rcp45
+      realization: r4
+      initialization_method: i1
+      physics_version: p1
+      institution: Canadian Centre for Climate Modelling and Analysis
+      institute_id: CCCma
+    canesm2.rcp45.r5i1p1:
+      model_name: Canadian Earth System Model (second generation)
+      model_id: CanESM2
+      experiment_id: rcp45
+      realization: r5
+      initialization_method: i1
+      physics_version: p1
+      institution: Canadian Centre for Climate Modelling and Analysis
+      institute_id: CCCma
+    canesm2.rcp85.r1i1p1:
+      model_name: Canadian Earth System Model (second generation)
+      model_id: CanESM2
+      experiment_id: rcp85
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: Canadian Centre for Climate Modelling and Analysis
+      institute_id: CCCma
+    canesm2.rcp85.r2i1p1:
+      model_name: Canadian Earth System Model (second generation)
+      model_id: CanESM2
+      experiment_id: rcp85
+      realization: r2
+      initialization_method: i1
+      physics_version: p1
+      institution: Canadian Centre for Climate Modelling and Analysis
+      institute_id: CCCma
+    canesm2.rcp85.r3i1p1:
+      model_name: Canadian Earth System Model (second generation)
+      model_id: CanESM2
+      experiment_id: rcp85
+      realization: r3
+      initialization_method: i1
+      physics_version: p1
+      institution: Canadian Centre for Climate Modelling and Analysis
+      institute_id: CCCma
+    canesm2.rcp85.r4i1p1:
+      model_name: Canadian Earth System Model (second generation)
+      model_id: CanESM2
+      experiment_id: rcp85
+      realization: r4
+      initialization_method: i1
+      physics_version: p1
+      institution: Canadian Centre for Climate Modelling and Analysis
+      institute_id: CCCma
+    canesm2.rcp85.r5i1p1:
+      model_name: Canadian Earth System Model (second generation)
+      model_id: CanESM2
+      experiment_id: rcp85
+      realization: r5
+      initialization_method: i1
+      physics_version: p1
+      institution: Canadian Centre for Climate Modelling and Analysis
+      institute_id: CCCma
+    ccsm4.rcp45.r1i1p1:
+      model_name: Community Climate System Model (version 4.0)
+      model_id: CCSM4
+      experiment_id: rcp45
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: National Center for Atmospheric Research
+      institute_id: NCAR
+    ccsm4.rcp45.r2i1p1:
+      model_name: Community Climate System Model (version 4.0)
+      model_id: CCSM4
+      experiment_id: rcp45
+      realization: r2
+      initialization_method: i1
+      physics_version: p1
+      institution: National Center for Atmospheric Research
+      institute_id: NCAR
+    ccsm4.rcp45.r6i1p1:
+      model_name: Community Climate System Model (version 4.0)
+      model_id: CCSM4
+      experiment_id: rcp45
+      realization: r6
+      initialization_method: i1
+      physics_version: p1
+      institution: National Center for Atmospheric Research
+      institute_id: NCAR
+    ccsm4.rcp85.r1i1p1:
+      model_name: Community Climate System Model (version 4.0)
+      model_id: CCSM4
+      experiment_id: rcp85
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: National Center for Atmospheric Research
+      institute_id: NCAR
+    ccsm4.rcp85.r2i1p1:
+      model_name: Community Climate System Model (version 4.0)
+      model_id: CCSM4
+      experiment_id: rcp85
+      realization: r2
+      initialization_method: i1
+      physics_version: p1
+      institution: National Center for Atmospheric Research
+      institute_id: NCAR
+    ccsm4.rcp85.r6i1p1:
+      model_name: Community Climate System Model (version 4.0)
+      model_id: CCSM4
+      experiment_id: rcp85
+      realization: r6
+      initialization_method: i1
+      physics_version: p1
+      institution: National Center for Atmospheric Research
+      institute_id: NCAR
+    cnrm.cm5.rcp45.r1i1p1:
+      model_name: Centre National de Recherches Météorologiques Climate Model
+      model_id: CNRM-CM5
+      experiment_id: rcp45
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: Centre National de Recherches Meteorologiques and Centre Europeen de Recherche et Formation Avancee en Calcul Scientifique
+      institute_id: CNRM-CERFACS
+    cnrm.cm5.rcp85.r1i1p1:
+      model_name: Centre National de Recherches Météorologiques Climate Model
+      model_id: CNRM-CM5
+      experiment_id: rcp85
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: Centre National de Recherches Meteorologiques and Centre Europeen de Recherche et Formation Avancee en Calcul Scientifique
+      institute_id: CNRM-CERFACS
+    hadgem2.es.rcp45.r1i1p1:
+      model_name: Hadley Global Environment Model (full Earth System configuration)
+      model_id: HadGEM2-ES
+      experiment_id: rcp45
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: Met Office Hadley Centre (additional HadGEM2-ES realizations contributed by Instituto Nacional de Pesquisas Espaciais)
+      institute_id: MOHC-INPE
+    hadgem2.es.rcp45.r2i1p1:
+      model_name: Hadley Global Environment Model (full Earth System configuration)
+      model_id: HadGEM2-ES
+      experiment_id: rcp45
+      realization: r2
+      initialization_method: i1
+      physics_version: p1
+      institution: Met Office Hadley Centre (additional HadGEM2-ES realizations contributed by Instituto Nacional de Pesquisas Espaciais)
+      institute_id: MOHC-INPE
+    hadgem2.es.rcp45.r3i1p1:
+      model_name: Hadley Global Environment Model (full Earth System configuration)
+      model_id: HadGEM2-ES
+      experiment_id: rcp45
+      realization: r3
+      initialization_method: i1
+      physics_version: p1
+      institution: Met Office Hadley Centre (additional HadGEM2-ES realizations contributed by Instituto Nacional de Pesquisas Espaciais)
+      institute_id: MOHC-INPE
+    hadgem2.es.rcp45.r4i1p1:
+      model_name: Hadley Global Environment Model (full Earth System configuration)
+      model_id: HadGEM2-ES
+      experiment_id: rcp45
+      realization: r4
+      initialization_method: i1
+      physics_version: p1
+      institution: Met Office Hadley Centre (additional HadGEM2-ES realizations contributed by Instituto Nacional de Pesquisas Espaciais)
+      institute_id: MOHC-INPE
+    hadgem2.es.rcp85.r1i1p1:
+      model_name: Hadley Global Environment Model (full Earth System configuration)
+      model_id: HadGEM2-ES
+      experiment_id: rcp85
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: Met Office Hadley Centre (additional HadGEM2-ES realizations contributed by Instituto Nacional de Pesquisas Espaciais)
+      institute_id: MOHC-INPE
+    hadgem2.es.rcp85.r2i1p1:
+      model_name: Hadley Global Environment Model (full Earth System configuration)
+      model_id: HadGEM2-ES
+      experiment_id: rcp85
+      realization: r2
+      initialization_method: i1
+      physics_version: p1
+      institution: Met Office Hadley Centre (additional HadGEM2-ES realizations contributed by Instituto Nacional de Pesquisas Espaciais)
+      institute_id: MOHC-INPE
+    hadgem2.es.rcp85.r3i1p1:
+      model_name: Hadley Global Environment Model (full Earth System configuration)
+      model_id: HadGEM2-ES
+      experiment_id: rcp85
+      realization: r3
+      initialization_method: i1
+      physics_version: p1
+      institution: Met Office Hadley Centre (additional HadGEM2-ES realizations contributed by Instituto Nacional de Pesquisas Espaciais)
+      institute_id: MOHC-INPE
+    hadgem2.es.rcp85.r4i1p1:
+      model_name: Hadley Global Environment Model (full Earth System configuration)
+      model_id: HadGEM2-ES
+      experiment_id: rcp85
+      realization: r4
+      initialization_method: i1
+      physics_version: p1
+      institution: Met Office Hadley Centre (additional HadGEM2-ES realizations contributed by Instituto Nacional de Pesquisas Espaciais)
+      institute_id: MOHC-INPE
+    mpi.esm.lr.rcp45.r1i1p1:
+      model_name: MPI Earth System Model (base resolution)
+      model_id: MPI-ESM-LR
+      experiment_id: rcp45
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: Max Planck Institute for Meteorology
+      institute_id: MPI-M
+    mpi.esm.lr.rcp45.r2i1p1:
+      model_name: MPI Earth System Model (base resolution)
+      model_id: MPI-ESM-LR
+      experiment_id: rcp45
+      realization: r2
+      initialization_method: i1
+      physics_version: p1
+      institution: Max Planck Institute for Meteorology
+      institute_id: MPI-M
+    mpi.esm.lr.rcp45.r3i1p1:
+      model_name: MPI Earth System Model (base resolution)
+      model_id: MPI-ESM-LR
+      experiment_id: rcp45
+      realization: r3
+      initialization_method: i1
+      physics_version: p1
+      institution: Max Planck Institute for Meteorology
+      institute_id: MPI-M
+    mpi.esm.lr.rcp85.r1i1p1:
+      model_name: MPI Earth System Model (base resolution)
+      model_id: MPI-ESM-LR
+      experiment_id: rcp85
+      realization: r1
+      initialization_method: i1
+      physics_version: p1
+      institution: Max Planck Institute for Meteorology
+      institute_id: MPI-M
+    mpi.esm.lr.rcp85.r2i1p1:
+      model_name: MPI Earth System Model (base resolution)
+      model_id: MPI-ESM-LR
+      experiment_id: rcp85
+      realization: r2
+      initialization_method: i1
+      physics_version: p1
+      institution: Max Planck Institute for Meteorology
+      institute_id: MPI-M
+    mpi.esm.lr.rcp85.r3i1p1:
+      model_name: MPI Earth System Model (base resolution)
+      model_id: MPI-ESM-LR
+      experiment_id: rcp85
+      realization: r3
+      initialization_method: i1
+      physics_version: p1
+      institution: Max Planck Institute for Meteorology
+      institute_id: MPI-M
+      
+Reanalysis:
+  description: Simulations based on Reanalysis
+  experiments:
+    20cr_v2c:
+      model_name: NCEP Global Forecast System 2008ex
+      model_id: NCEP_GFS_2008ex
+      experiment_id: reanalysis
+      run: V2c
+      initialization_method: ~
+      physics_version: NCEP_GFS_2008ex
+      institution: National Oceanic and Atmospheric Administration - Cooperative Institute for Research in Environmental Sciences
+      institute_id: NOAA-CIRES
+    era-20c:
+      model_name: Integrated Forecasting System cycle 38r1
+      model_id: IFS_Cy38r1
+      experiment_id: reanalysis
+      run: 20C
+      initialization_method: ~
+      physics_version: IFS_Cy38r1
+      institution: European Centre for Medium-Range Weather Forecasts
+      institute_id: ECMWF
+    era-interim:
+      model_name: Integrated Forecasting System cycle 31r2
+      model_id: IFS_Cy31r2
+      experiment_id: reanalysis
+      run: Interim
+      initialization_method: ~
+      physics_version: IFS_Cy31r2
+      institution: European Centre for Medium-Range Weather Forecasts
+      institute_id: ECMWF
