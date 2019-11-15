@@ -1,0 +1,2 @@
+prcptotETCCDI:
+  cell_methods: "time: sum within years time: mean over years"
