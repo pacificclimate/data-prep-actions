@@ -1,0 +1,19 @@
+global:
+  institute_id: PCIC
+  institution: Pacific Climate Impacts Consortium
+  contact: Markus Schnorbus, mschnorb@uvic.ca
+  product: gridded observations
+  frequency: fx
+  creation_date: 2016-10-18-T13:55:23Z
+  project_id: other
+  domain: nwna
+  experiment_id: historical
+  modeling_realm: land
+  model_id: RVIC
+  model: RVIC streamflow routing model
+  model_version: 1.0.0
+  run: na
+  table_id: na
+
+area:
+  cell_methods: "area: sum"
