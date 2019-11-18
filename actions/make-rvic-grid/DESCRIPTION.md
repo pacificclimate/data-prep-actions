@@ -111,6 +111,13 @@ for i in {0..49} ; do qsub rvic$i.pbs ; done
  ls CanESM2_rcp85_r1i1p1_process9_point*.nc | wc -l
  ```
 
+## Metadata
+`rvic-assembler.py` copies metadata attributes from the baseflow file
+to the final gridded streamflow file, prepending `hydromodel__`
+to each. Further metadata formatting is probably needed, however.
+`streamflow.yaml` is a sample input file for the `update_metadata`
+tool.
+
 ## Date-filename problem
 We cannot choose the name of the file RVIC outputs from the first step,
 which contains the Impulse Response Functions used to calculate
