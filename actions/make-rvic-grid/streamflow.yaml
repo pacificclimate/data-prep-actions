@@ -1,0 +1,37 @@
+global:
+  project_id: CMIP5
+  product: streamflow model output
+  domain: peace
+  hydromodel__forcing_type: downscaled gcm
+ 
+  hydromodel__downscaling__method: <-hydromodel__downscaling_method
+  hydromodel__downscaling__method_id: <-hydromodel__downscaling_method_id
+  hydromodel__downscaling__package_id: <-hydromodel__downscaling_package_id
+
+
+  hydromodel__downscaling__target__contact: <-hydromodel__downscaling_target_contact
+  hydromodel__downscaling__target__dataset: <-hydromodel__downscaling_target_dataset
+  hydromodel__downscaling__target__dataset_id: <-hydromodel__downscaling_target_dataset_id
+  hydromodel__downscaling__target__institute_id: <-hydromodel__downscaling_target_institute_id
+  hydromodel__downscaling__target__institution: <-hydromodel__downscaling_target_institution
+  hydromodel__downscaling__target__references: <-hydromodel__downscaling_target_references
+  hydromodel__downscaling__target__version: <-hydromodel__downscaling_target_version
+
+  hydromodel__model_cal__contact: <-hydromodel__model_cal_contact
+  hydromodel__model_cal__dataset: <-hydromodel__model_cal_dataset
+  hydromodel__model_cal__dataset_id: <-hydromodel__model_cal_dataset_id
+  hydromodel__model_cal__start_date: <-hydromodel__model_cal_start_date
+  hydromodel__model_cal__end_date: <-hydromodel__model_cal_end_date
+  hydromodel__model_cal__institution: <-hydromodel__model_cal_institution
+  hydromodel__model_cal__institute_id: <-hydromodel__model_cal_institute_id
+  hydromodel__model_cal__references: <-hydromodel__model_cal_references
+  hydromodel__model_cal__version: <-hydromodel__model_cal_version
+
+  hydromodel__downscaling__GCM__experiment: <-hydromodel__downscaling_GCM_experiment
+  hydromodel__downscaling__GCM__experiment_id: <-hydromodel__downscaling_GCM_experiment_id
+  hydromodel__downscaling__GCM__initialization_method: <-hydromodel__downscaling_GCM_initialization_method
+  hydromodel__downscaling__GCM__institute_id: <-hydromodel__downscaling_GCM_institute_id
+  hydromodel__downscaling__GCM__institution: <-hydromodel__downscaling_GCM_institution
+  hydromodel__downscaling__GCM__model_id: <-hydromodel__downscaling_GCM_model_id
+  hydromodel__downscaling__GCM__physics_version: <-hydromodel__downscaling_GCM_physics_version
+  hydromodel__downscaling__GCM__realization: <-hydromodel__downscaling_GCM_realization
