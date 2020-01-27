@@ -26,6 +26,10 @@ This script typically takes a couple hours to chew through all the requests;
 it's intended as a shakedown for new ncWMS instances. For routine testing of an existant
 instance, you might want to hit only 10% of the files, or something.
 
+To use as a stress-test, you can change the size of the request image to 1024 x 1024
+(the ncWMS maximum). If running multiple copies of the script at once, randomize the
+file order to prevent ncWMS from just caching the data and getting off easy.
+
 ## Usage
 
 ```
