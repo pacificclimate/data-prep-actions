@@ -18,7 +18,7 @@ all relevant (and some irrelevant) metadata from individual streamflow
 files and the baseflow file, so it makes a start on metadata.
 '''
 
-from netCDF4 import Dataset
+from netCDF4 import Dataset, default_fillvals
 import numpy as np
 import argparse
 import os
@@ -89,14 +89,16 @@ with Dataset(args.domain) as domain:
 # create streamflow variable, copying metadata from an 
 # arbitrary streamflow file
 # some metadata is not applicable, because it only applies to a
-# single grid cell and not the whole hting, but fixing them is
+# single grid cell and not the whole thing, but fixing them is
 # left to update_metadata, not this script.
 # select an arbitrary streamflow output
 with Dataset("{}{}".format(args.streamflow_dir,
                             os.listdir(args.streamflow_dir)[1]), "r") as sf_meta:
+    default_fill = default_fillvals['f4']
     sf_var = output.createVariable("streamflow", 
                                    sf_meta.variables["streamflow"].dtype,
-                                   ("time", "lat", "lon"))
+                                   ("time", "lat", "lon"),
+                                   fill_value=default_fill)
     sf_var.setncatts(sf_meta.variables["streamflow"].__dict__)
     output.setncatts(sf_meta.__dict__)
 

@@ -100,19 +100,6 @@ Submit the jobs to the queue.
 Once all the jobs have been submitted and run, you can run `rvic-assembler.py` 
 on the resulting streamflow files to get a grid again.
 
-There is an oversight in `rvic-assembler.py`: it does not assign an explicit
-`_FillValue` attribute to streamflow, and streamflow ends up with the default
-fill value for float variables of `9.96921e+36`, and no explicit `_FillValue`
-attribute. Most netCDF tools seem to make allowances for a default
-unspecified fill value, but the modelmeta indexer does not, and it's
-certainly better to explicitly assign it anyway. So you can either update
-`rvic-assembler.py` before it is next used or use `ncatted` to manually
-assign the fill value attribute, like this:
-```
-ncatted -a _FillValue,streamflow,c,f,9.96921e+36 streamflow_aClimMean_CanESM2_rcp85_r1i1p1_19610101-19901231_peace.nc streamflow.nc
-mv streamflow.nc streamflow_aClimMean_CanESM2_rcp85_r1i1p1_19610101-19901231_peace.nc
-```
-
 ## Helpful commands
 To submit jobs in batches:
  ```
