@@ -1,0 +1,33 @@
+SELECT 
+  data_files.filename, 
+  data_file_variables.netcdf_variable_name, 
+  variable_aliases.variable_units, 
+  runs.run_name, 
+  emissions.emission_short_name, 
+  models.model_short_name, 
+  time_sets.start_date, 
+  time_sets.end_date, 
+  time_sets.calendar, 
+  time_sets.time_resolution
+FROM 
+  ce_meta.data_file_variables, 
+  ce_meta.data_files, 
+  ce_meta.variable_aliases, 
+  ce_meta.emissions, 
+  ce_meta.models, 
+  ce_meta.runs, 
+  ce_meta.time_sets, 
+  ce_meta.ensemble_data_file_variables, 
+  ce_meta.ensembles
+WHERE 
+  data_file_variables.data_file_id = data_files.data_file_id AND
+  data_files.time_set_id = time_sets.time_set_id AND
+  variable_aliases.variable_alias_id = data_file_variables.variable_alias_id AND
+  runs.run_id = data_files.run_id AND
+  runs.model_id = models.model_id AND
+  runs.emission_id = emissions.emission_id AND
+  ensemble_data_file_variables.data_file_variable_id = data_file_variables.data_file_variable_id AND
+  ensemble_data_file_variables.ensemble_id = ensembles.ensemble_id AND
+  time_sets.multi_year_mean = TRUE AND 
+  data_file_variables.netcdf_variable_name LIKE 'tas%' AND 
+  ensembles.ensemble_name = 'p2a_files';
