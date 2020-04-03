@@ -1,0 +1,25 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=06:00:00
+#PBS -o /home/lzeman/csv-merge/logs
+#PBS -e /home/lzeman/csv-merge/logs
+#PBS -m abe
+#PBS -N merge_csvNAME
+
+base=NAME
+dir=DATADIR
+
+echo "$(date) copying python script"
+cp /home/lzeman/csv-merge/merge-timeseries-csv.py $TMPDIR
+
+echo "$(date) copying input files"
+cp DATADIR/NAME*.csv $TMPDIR
+
+echo "$(date) merging NAME"
+python $TMPDIR/merge-timeseries-csv.py -o $TMPDIR/NAME.csv $TMPDIR/NAME*.csv
+
+echo "$(date) copying results"
+cp $TMPDIR/NAME.csv /home/lzeman/csv-merge/output
+
+echo "$(date) Done!"
