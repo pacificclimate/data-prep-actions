@@ -1,5 +1,3 @@
 # Frost Free Days
 
 This script is passed an input directory and an output directory. It opens every file in the input directory. If that file has a frost days variable (`fdETCCDI`) it creates a version in the output directory that has frost free days (`ffd`) instead. In other respects, the files are identical, with the same dimensions,  non-frost-related variables, and metadata except variable metadata, and an update to the `history` attribute. The frost free day file will have the same name as the frost day file, but with `ffd` substituted for `fdETCCDI`.
-
-**WARNING**: This script calculates Frost Free Days by subtracting the number of frost days from 365. This is fine for annual datasets, but is incorrect for monthly or seasonal datasets. This script does *not* check the time resolution of a file and is perfectly willing to output garbage for monthly or seasonal datasets. So, for example, if there were 31 frost days in January in a particular wintry location, the script would claim there were somehow 334 frost free days in January.
