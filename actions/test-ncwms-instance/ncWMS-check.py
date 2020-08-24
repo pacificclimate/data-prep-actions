@@ -21,16 +21,24 @@ parser.add_argument('-d', '--dsn',
                     "postgresql://user:password@host:port/database")
 parser.add_argument('-s', '--ncwms',
                     help="ncWMS base url of the form https://example.org/dir/ncwms")
+parser.add_argument('-v', '--version', type=int, default=1, choices=[1,2],
+                    help="ncWMS version format")
+parser.add_argument('-p', '--prefix', help="prefix to use (iff a dynamic ncWMS instance)")
 parser.add_argument('ensemble', help="name of data ensemble to check")
+
 
 args = parser.parse_args()
 
 def parse_ncWMS_exception(xml):
     '''if ncWMS has returned an error message, extract it'''
-    ed = xmltodict.parse(xml)
-    if 'ServiceExceptionReport' in ed and 'ServiceException' in ed['ServiceExceptionReport']:
-        return ed['ServiceExceptionReport']['ServiceException']
-    return None
+    try:
+        ed = xmltodict.parse(xml)
+        if 'ServiceExceptionReport' in ed and 'ServiceException' in ed['ServiceExceptionReport']:
+            return ed['ServiceExceptionReport']['ServiceException']
+        return None
+    except:
+        raise("ncWMS did not return an XML response. Check your ncWMS URL")
+        
 
 # connect to the database
 engine = create_engine(args.dsn)
@@ -53,16 +61,22 @@ errors = 0
 error_files = set()
 
 for unique_id, filename, var_name, range_min, range_max, variable_standard_name in vars:
-    print("Now checking {}".format(unique_id))
+    # for a dynamic dataset, maps are called via a prefix and the filepath
+    # for a static dataset, maps are called via unique_id.
+    identification = "{}{}".format(args.prefix, filename) if args.prefix else unique_id
+    style = "boxfill/default" if args.version == 1 else "default"
+    
+    
+    print("Now checking {}".format(identification))
     
     # make a GetCapabilities query on this dataset
     gc_params = {
         "REQUEST": "GetCapabilities",
         "SERVICE": "WMS",
         "VERSION": "1.1.1",
-        "DATASET": unique_id,
+        "DATASET": identification,
         }
-    response = requests.get('{}/wms'.format(args.ncwms), params=gc_params)
+    response = requests.get('{}'.format(args.ncwms), params=gc_params)
     if response.status_code == 200:
         print("  GetCapabilites call OK")
     else:
@@ -70,7 +84,7 @@ for unique_id, filename, var_name, range_min, range_max, variable_standard_name 
         print("  ERROR: GetCapabilities returned {} ({})".format(response.status_code, 
                                                         error if error else "unable to parse error"))
         errors += 1
-        error_files.add(unique_id)
+        error_files.add(identification)
         
     # extract spatial and temporal extent from xml returned by GetCapabilities
     # we'll need this for the other queries
@@ -90,7 +104,7 @@ for unique_id, filename, var_name, range_min, range_max, variable_standard_name 
     else:
         print("  ERROR: cannot parse GetCapabilities response")
         errors += 1
-        error_files.add(unique_id)
+        error_files.add(identification)
         continue
         
     
@@ -113,8 +127,8 @@ for unique_id, filename, var_name, range_min, range_max, variable_standard_name 
         "REQUEST": "GetFeatureInfo",
         "SERVICE": "WMS",
         "VERSION": "1.1.1",
-        "QUERY_LAYERS": "{}/{}".format(unique_id, var_name),
-        "LAYERS": "{}/{}".format(unique_id, var_name),
+        "QUERY_LAYERS": "{}/{}".format(identification, var_name),
+        "LAYERS": "{}/{}".format(identification, var_name),
         "WIDTH": 100,
         "HEIGHT": 100,
         "SRS": srs,
@@ -124,7 +138,7 @@ for unique_id, filename, var_name, range_min, range_max, variable_standard_name 
         "Y": 50
         }
     
-    response = requests.get('{}/wms'.format(args.ncwms), params=gfi_params)
+    response = requests.get('{}'.format(args.ncwms), params=gfi_params)
     if response.status_code == 200:
         print("  GetFeatureInfo call OK")
     else:
@@ -132,7 +146,7 @@ for unique_id, filename, var_name, range_min, range_max, variable_standard_name 
         print("  ERROR: GetFeatureInfo returned {} ({})".format(response.status_code, 
                                                         error if error else "unable to parse error"))
         errors += 1
-        error_files.add(unique_id)
+        error_files.add(identification)
         
     # make a GetMap query on this dataset
     #&TIME=2000-01-01T12%3A00%3A00.00Z
@@ -140,9 +154,9 @@ for unique_id, filename, var_name, range_min, range_max, variable_standard_name 
         "REQUEST": "GetMap",
         "SERVICE": "WMS",
         "VERSION": "1.1.1",
-        "LAYERS": "{}/{}".format(unique_id, var_name),
+        "LAYERS": "{}/{}".format(identification, var_name),
         "TRANSPARENT": "true",
-        "STYLES": "boxfill/default",
+        "STYLES": style,
         "NUMCOLORBANDS": 254,
         "SRS": srs,
         "LOGSCALE": "false",
@@ -154,7 +168,7 @@ for unique_id, filename, var_name, range_min, range_max, variable_standard_name 
         "TIME": default_timestamp
         }
 
-    response = requests.get('{}/wms'.format(args.ncwms), params=gm_params)
+    response = requests.get('{}'.format(args.ncwms), params=gm_params)
     if response.status_code == 200:
         print("  GetMap call OK")
     else:
@@ -162,7 +176,7 @@ for unique_id, filename, var_name, range_min, range_max, variable_standard_name 
         print("  ERROR: GetMap returned {} ({})".format(response.status_code, 
                                                         error if error else "unable to parse error"))
         errors += 1
-        error_files.add(unique_id)
+        error_files.add(identification)
         
     files += 1
 
@@ -186,7 +200,7 @@ glg_params = {
     "PALETTE": "default"
     }
     
-response = requests.get('{}/wms'.format(args.ncwms), params=glg_params)
+response = requests.get('{}'.format(args.ncwms), params=glg_params)
 if response.status_code == 200:
     print("\nGetLegendGraphic call OK")
 else:
