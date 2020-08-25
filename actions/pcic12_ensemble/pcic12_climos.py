@@ -49,23 +49,29 @@ for file in os.listdir(indir):
     experiment = experiment.replace(",", "+") if experiment else None
     experiment = experiment.replace(" ", "") if experiment else None
     
-    PCIC12_models = [
-        "ACCESS1-0",
-        "CanESM2",
-        "CCSM4",
-        "CNRM-CM5",
-        "CSIRO-Mk3-6-0",
-        "GFDL-ESM2G",
-        "HadGEM2-CC",
-        "HadGEM2-ES",
-        "inmcm4",
-        "MIROC5",
-        "MPI-ESM-LR",
-        "MRI-CGCM3",
-        ]
+    PCIC12_models = {
+        "ACCESS1-0": "r1i1p1",
+        "CanESM2": "r1i1p1",
+        "CCSM4": "r2i1p1",
+        "CNRM-CM5": "r1i1p1",
+        "CSIRO-Mk3-6-0": "r1i1p1",
+        "GFDL-ESM2G": "r1i1p1",
+        "HadGEM2-CC": "r1i1p1",
+        "HadGEM2-ES": "r1i1p1",
+        "inmcm4": "r1i1p1",
+        "MIROC5": "r3i1p1",
+        "MPI-ESM-LR": "r3i1p1",
+        "MRI-CGCM3": "r1i1p1",
+        }
     model = globals["GCM__model_id"]
+    ensemble_member = "r{}i{}p{}".format(globals["GCM__realization"],
+                                         globals["GCM__initialization_method"],
+                                         globals["GCM__physics_version"])
     if model not in PCIC12_models:
         print("  WARNING: Unexpected model found: {}".format(model))
+        model = None
+    elif ensemble_member != PCIC12_models[model]:
+        print("  WARNING: Non-PCIC12 run found: {}".format(ensemble_member))
         model = None
     
     startmatch = re.match(r'^(\d\d\d\d)-01-01T00:00:00Z$', globals["climo_start_time"])
