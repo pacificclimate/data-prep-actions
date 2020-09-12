@@ -14,18 +14,22 @@ def time_format(t):
     local_time = time.localtime(t)
     t1 = time.mktime(local_time)
     ms = round((t - t1) * 1000)
-    return f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(t))}.{ms}"
-
-
-def action_print(t):
-    """A scheduled action for demonstration/testing."""
-    print(f"Action at {time_format(t)}:\t{time.time()}")
+    return f"{time.strftime('%H:%M:%S', time.localtime(t))}.{ms}"
+    # return f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(t))}.{ms}"
 
 
 responses = []
 
 
-def action_request(t, ncwms, dataset):
+def action_print(sched_time, sleep):
+    """A scheduled action for demonstration/testing."""
+    req_time = time.time()
+    print(f"Action at {time_format(sched_time)}:\t{time_format(time.time())}")
+    time.sleep(sleep)
+    responses.append((sched_time, req_time, time.time(), None))
+
+
+def action_request(sched_time, ncwms, dataset):
     """A scheduled action that issues http requests and accumulates their responses."""
     params = {
         "request": "GetCapabilities",
@@ -33,8 +37,9 @@ def action_request(t, ncwms, dataset):
         "version": "1.1.1",
         "dataset": dataset,
     }
+    req_time = time.time()
     response = requests.get(ncwms, params=params)
-    responses.append((t, response))
+    responses.append((sched_time, req_time, time.time(), response))
 
 
 def parse_ncWMS_exception(xml):
@@ -71,19 +76,29 @@ def main(
     # Schedule requests
     for t in times:
         if dry_run:
-            s.enterabs(t, 0, action_print, argument=(t,))
+            s.enterabs(t, 0, action_print, argument=(t, 1.0))
         else:
             s.enterabs(t, 0, action_request, argument=(t, ncwms, dataset))
     s.run()
 
     # Print results
     print("Responses")
+    print("sched-time\tdelta\treq-time\treq-int\tres-time\tlag\tstatus\tmessage")
     errors = 0
-    for t, response in responses:
-        status_code = response.status_code
-        content = response.content
+    for i, (sched_time, req_time, resp_time, response) in enumerate(responses):
+        delta = round(req_time - sched_time, 2)
+        req_interval = " -- " if i == 0 else round(req_time - responses[i-1][1], 3)
+        resp_lag = round(resp_time - req_time, 2)
+        status_code = response and response.status_code
+        content = response and response.content
         print(
-            f"\t{time_format(t)}\t  {status_code}"
+            f"{time_format(sched_time)}"
+            f"\t{delta}"
+            f"\t{time_format(req_time)}"
+            f"\t{req_interval}"
+            f"\t{time_format(resp_time)}"
+            f"\t{resp_lag}"
+            f"\t{status_code}    "
             f" {'OK' if status_code == 200 else parse_ncWMS_exception(content)}"
         )
         if status_code != 200:
@@ -114,7 +129,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-c", "--count", help="Number of requests (s)", type=int, default=10
     )
-    parser.add_argument("-y", "--dry-run", dest="dry_run", action="store_true")
+    parser.add_argument("-y", "--dryrun", dest="dry_run", action="store_true")
 
     args = parser.parse_args()
 
