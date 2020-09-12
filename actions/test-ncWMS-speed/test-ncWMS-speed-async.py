@@ -63,7 +63,8 @@ async def job_request(id, delay, ncwms, dataset, session=None):
         "request": "GetCapabilities",
         "service": "WMS",
         "version": "1.1.1",
-        "dataset": dataset,
+        # Note: Must use `layers` param, not `dataset` for dynamic datasets
+        "layers": dataset,
     }
     sched_time = time.time() + delay
     await asyncio.sleep(delay)
