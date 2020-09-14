@@ -8,9 +8,15 @@ sub-1-second intervals. Stupid. We want to schedule at intervals of 10 ms or les
 Fortunately it is not hard to do simple scheduling with `asyncio.sleep()`.
 
 We also learn that we cannot use synchronous methods inside jobs, otherwise their
-sychronousness makes nominally async processes synchronous, or at least that they
-wait for the synchronous process to complete before they return. Specifically, can't
-use `requests`. Have to use an async http library, like `aiohttp`. Yay.
+sychronousness makes nominally async processes synchronous, or at least they
+wait for the synchronous process to complete before they return. Specifically, we
+can't use package `requests`. Have to use an async http library, like `aiohttp`.
+
+With the async version working, we observe that ncWMS does not seem to choke on
+GetCapabilities requests even when many (20) requests are made at intervals of 5 ms.
+First run gives all lags ~ 0.5s. Subsequent runs gives lags ~ 0.1 - 0.2 s.
+
+So now we must add GetMap requests to see if those fail.
 """
 from argparse import ArgumentParser
 import time
@@ -24,7 +30,6 @@ def time_format(t):
     t1 = time.mktime(local_time)
     ms = round((t - t1) * 1000)
     return f"{time.strftime('%H:%M:%S', time.localtime(t))}.{ms}"
-    # return f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(t))}.{ms}"
 
 
 def parse_ncWMS_exception(xml):
@@ -53,23 +58,64 @@ async def job_print(id, delay, sync=False):
     return id, sched_time, req_time, time.time(), None
 
 
-async def fetch(session, url, params):
+async def fetch(session, url, params, content_type="text"):
     async with session.get(url, params=params) as response:
-        return response.status, await response.text()
+        # url = str(response.url)
+        # print(f"URL (len {len(url)}) '{url}'")
+        if content_type == "text" or response.status != 200:
+            return response.status, await response.text()
+        else:
+            return response.status, await response.read()
 
 
-async def job_request(id, delay, ncwms, dataset, session=None):
-    params = {
-        "request": "GetCapabilities",
+async def job_request(
+    id,
+    delay,
+    ncwms,
+    dataset,
+    request,
+    bbox=None,
+    width=None,
+    height= None,
+    timestamp=None,
+    session=None
+):
+    base_params = {
+        "request": request,
         "service": "WMS",
         "version": "1.1.1",
         # Note: Must use `layers` param, not `dataset` for dynamic datasets
         "layers": dataset,
     }
+    if request == "GetCapabilities":
+        params = base_params
+    elif request == "GetMap":
+        # TODO: Make most of these extra params be arguments to cmd line
+        # These work for datasets like
+        # x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/plan2adapt/pcic12/tasmean_mClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20700101-20991231_Canada.nc/tasmean
+
+
+        params = {
+            **base_params,
+            "TRANSPARENT": "true",
+            "STYLES": "default-scalar/x-Occam",
+            "NUMCOLORBANDS": "254",
+            "SRS": "EPSG:4326",
+            "LOGSCALE": "false",
+            "FORMAT": "image/png",
+            "BBOX": bbox,
+            "WIDTH": width,
+            "HEIGHT": height,
+            "COLORSCALERANGE": "-5,15",
+            "TIME": timestamp,
+        }
+    else:
+        raise ValueError(f"Invalid request type '{request}'")
     sched_time = time.time() + delay
     await asyncio.sleep(delay)
     req_time = time.time()
-    status, content = await fetch(session, ncwms, params)
+    content_type = "text" if request == "GetCapabilities" else "binary"
+    status, content = await fetch(session, ncwms, params, content_type)
     return id, sched_time, req_time, time.time(), status, content
 
 
@@ -77,15 +123,30 @@ async def main(
     version=None,
     ncwms="https://services.pacificclimate.org/pcex/ncwms",
     dataset="tasmean_aClimMean_anusplin_historical_19610101-19901231",
+    request="GetCapabilities",
+    bbox=None,
+    width=None,
+    height=None,
+    timestamp=None,
     delay=0,
     interval=0.01,
     count=5,
     dry_run=False,
 ):
     print(
-        f"args: version='{version}' ncwms='{ncwms}' dataset='{dataset}' "
-        f"delay={delay} interval={interval} count={count} "
-        f"dry_run={dry_run}"
+        f"args: "
+        f"\n--version={version} \\"
+        f"\n--ncwms={ncwms} \\"
+        f"\n--dataset={dataset} \\"
+        f"\n--request={request} \\"
+        f"\n--bbox={bbox} \\"
+        f"\n--width={width} \\"
+        f"\n--height={height} \\"
+        f"\n--time={timestamp} \\"
+        f"\n--delay={delay} \\"
+        f"\n--interval={interval} \\"
+        f"\n--count={count} \\"
+        f"\n--dryrun={dry_run}"
     )
     async with aiohttp.ClientSession() as session:
         tasks = (
@@ -95,6 +156,11 @@ async def main(
                     delay=delay + i * interval,
                     ncwms=ncwms,
                     dataset=dataset,
+                    request=request,
+                    bbox=bbox,
+                    width=width,
+                    height=height,
+                    timestamp=timestamp,
                     session=session,
                 )
             )
@@ -109,7 +175,7 @@ async def main(
         print(f"Elapsed time: {end_time - start_time}")
 
         print()
-        print("Results")
+        print(f"Results (request={request} delay={delay}, interval={interval})")
         print("Job id\tSched time\tDelta\tReq time\tResp time\tLag\tStatus\tMessage")
         errors = 0
         total_lag = 0
@@ -148,7 +214,40 @@ if __name__ == "__main__":
     )
     parser.add_argument("-D", "--dataset", help="Dataset identifier")
     parser.add_argument(
+        "-r",
+        "--request",
+        help="ncWMS request",
+        choices=["GetCapabilities", "GetMap"],
+        default="GetCapabilities",
+    )
+    parser.add_argument(
         "-d", "--delay", help="Delay before start (s)", type=float, default=5.0
+    )
+    parser.add_argument(
+        "-b",
+        "--bbox",
+        help="Bounding box for GetMap requests",
+        default="-125.00000000000001,65,-112.5,77.5",
+    )
+    parser.add_argument(
+        "-w",
+        "--width",
+        help="Tile width for GetMap requests",
+        type=int,
+        default=256,
+    )
+    parser.add_argument(
+        "-H",
+        "--height",
+        help="Tile height for GetMap requests",
+        type=int,
+        default=256,
+    )
+    parser.add_argument(
+        "-t",
+        "--time",
+        help="Time arg for GetMap requests",
+        default="2085-07-02T00:00:00Z",  # yeah, right
     )
     parser.add_argument(
         "-i", "--interval", help="Time between requests (s)", type=float, default=0.1
@@ -165,6 +264,11 @@ if __name__ == "__main__":
             ncwms=args.ncwms,
             version=args.version,
             dataset=args.dataset,
+            request=args.request,
+            bbox=args.bbox,
+            width=args.width,
+            height=args.height,
+            timestamp=args.time,
             delay=args.delay,
             interval=args.interval,
             count=args.count,
