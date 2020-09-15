@@ -65,61 +65,50 @@ async def fetch(session, url, params, content_type="text"):
         # url = str(response.url)
         # print(f"URL (len {len(url)}) '{url}'")
         if content_type == "text" or response.status != 200:
-            return response.status, await response.text()
+            return str(response.url), response.status, await response.text()
         else:
-            return response.status, await response.read()
+            return str(response.url), response.status, await response.read()
 
 
 async def job_request(
+    session,
     id,
     delay,
-    ncwms,
-    dataset,
-    request,
-    bbox=None,
-    width=None,
-    height= None,
-    timestamp=None,
-    session=None
+    params,
 ):
-    base_params = {
-        "request": request,
+    request_ = params["request"]
+    base_query_params = {
+        "request": request_,
         "service": "WMS",
         "version": "1.1.1",
         # Note: Must use `layers` param, not `dataset` for dynamic datasets
-        "layers": dataset,
+        "layers": params["dataset"],
     }
-    if request == "GetCapabilities":
-        params = base_params
-    elif request == "GetMap":
-        # TODO: Make most of these extra params be arguments to cmd line
-        # These work for datasets like
-        # x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/plan2adapt/pcic12/tasmean_mClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20700101-20991231_Canada.nc/tasmean
-
-
-        params = {
-            **base_params,
+    if request_ == "GetCapabilities":
+        query_params = base_query_params
+    elif request_ == "GetMap":
+        query_params = {
+            **base_query_params,
             "TRANSPARENT": "true",
             "STYLES": "default-scalar/x-Occam",
             "NUMCOLORBANDS": "254",
             "SRS": "EPSG:4326",
             "LOGSCALE": "false",
             "FORMAT": "image/png",
-            "BBOX": bbox,
-            "WIDTH": width,
-            "HEIGHT": height,
+            "BBOX": params["bbox"],
+            "WIDTH": params["width"],
+            "HEIGHT": params["height"],
             "COLORSCALERANGE": "-5,15",
-            "TIME": timestamp,
+            "TIME": params["timestamp"],
         }
     else:
-        raise ValueError(f"Invalid request type '{request}'")
-    print(f"{id}: {params}")
+        raise ValueError(f"Invalid request type '{request_}'")
     sched_time = time.time() + delay
     await asyncio.sleep(delay)
     req_time = time.time()
-    content_type = "text" if request == "GetCapabilities" else "binary"
-    status, content = await fetch(session, ncwms, params, content_type)
-    return id, sched_time, req_time, time.time(), status, content
+    content_type = "text" if request_ == "GetCapabilities" else "binary"
+    url, status, content = await fetch(session, params["ncwms"], query_params, content_type)
+    return id, params, url, sched_time, req_time, time.time(), status, content
 
 
 def iterate(spec):
@@ -192,36 +181,23 @@ async def main(
         jobid = 0
         tasks = []
         for paramset in paramsets:
-            version = paramset["version"]
-            ncwms = paramset["ncwms"]
-            dataset = paramset["dataset"]
-            request = paramset["request"]
-            bbox = paramset["bbox"]
-            width = paramset["width"]
-            height = paramset["height"]
-            timestamp = paramset["timestamp"]
             delay = paramset["delay"]
             interval = paramset["interval"]
             count = paramset["count"]
-            print(
-                f"Jobs {jobid} to {jobid + count -1}:"
-                f"\n\t{paramset}"
-            )
+            if dry_run:
+                print(
+                    f"Jobs {jobid} to {jobid + count -1}:"
+                    f"\n\t{paramset}"
+                )
             for i in range(count):
                 if not dry_run:
                     tasks.append(
                         asyncio.create_task(
                             job_request(
+                                session=session,
                                 id=jobid,
                                 delay=delay + i * interval,
-                                ncwms=ncwms,
-                                dataset=dataset,
-                                request=request,
-                                bbox=bbox,
-                                width=width,
-                                height=height,
-                                timestamp=timestamp,
-                                session=session,
+                                params=paramset,
                             )
                         )
                     )
@@ -235,16 +211,21 @@ async def main(
         print(f"Elapsed time: {end_time - start_time}")
 
         print()
-        print(f"Results (request={request} delay={delay}, interval={interval})")
+        print(f"Results")
         print("Job id\tSched time\tDelta\tReq time\tResp time\tLag\tStatus\tMessage")
         errors = 0
         total_lag = 0
-        for jobid, sched_time, req_time, resp_time, status, content in results:
+        for jobid, params, url, sched_time, req_time, resp_time, status, content \
+            in results:
             delta = req_time - sched_time
             resp_lag = resp_time - req_time
             total_lag += resp_lag
+            print()
             print(
-                f"{jobid}"
+                f"{jobid}\t{params['title']}"
+                f"\n\t{url}"
+            )
+            print(
                 f"\t{time_format(sched_time)}"
                 f"\t{round(delta, 3)}"
                 f"\t{time_format(req_time)}"
@@ -253,10 +234,12 @@ async def main(
                 f"\t{status}    "
                 f" {'OK' if status == 200 else parse_ncWMS_exception(content)}"
             )
+            # print(f"\t{params}")
             if status != 200:
                 errors += 1
-        print(f"Total lag: {total_lag}")
+        print()
         print(f"{errors} errors in {len(results)} requests")
+        print(f"Total lag: {total_lag}")
 
 
 if __name__ == "__main__":
