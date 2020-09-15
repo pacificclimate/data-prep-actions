@@ -1,12 +1,13 @@
 #!/bin/bash
-python test-ncWMS-speed-async.py \
-  --ncwms=https://services.pacificclimate.org/dev/pcex/ncwms \
-  --dataset=x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/prsn_aClimMean_anusplin_historical_19610101-19901231.nc/prsn \
-  --request=GetMap \
-  --time=1977-07-01T00:00:00Z \
-  --delay=0 \
-  --interval=1 \
-  --count=2
+python test-ncWMS-speed-async.py --file=spec1.yaml
+#python test-ncWMS-speed-async.py \
+#  --ncwms=https://services.pacificclimate.org/dev/pcex/ncwms \
+#  --dataset=x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/prsn_aClimMean_anusplin_historical_19610101-19901231.nc/prsn \
+#  --request=GetMap \
+#  --time=1977-07-01T00:00:00Z \
+#  --delay=0 \
+#  --interval=1 \
+#  --count=2 -y
 #python test-ncWMS-speed-async.py \
 #  --ncwms=https://services.pacificclimate.org/dev/pcex/ncwms \
 #  --dataset=x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/plan2adapt/pcic12/prsn_aClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20400101-20691231_Canada.nc/prsn \

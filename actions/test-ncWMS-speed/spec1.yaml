@@ -1,0 +1,37 @@
+- names: version
+  values: ["1.1.1"]
+- names:
+    - ncwms
+    - dataset
+  values:
+    -
+      - https://services.pacificclimate.org/pcex/ncwms
+      - prsn_yr_anusplin_historical_19610101-19901231/prsn
+    -
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/prsn_aClimMean_anusplin_historical_19610101-19901231.nc/prsn
+    -
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - weird2/prsn
+- names:
+    - request
+    - bbox
+    - width
+    - height
+  values:
+    -
+      - GetMap
+      - "-125.00000000000001,65,-112.5,77.5"
+      - 256
+      - 256
+- names: timestamp
+  values: ["1977-07-02T00:00:00Z"]
+- names:
+    - delay
+    - interval
+    - count
+  values:
+    -
+      - 1
+      - 1
+      - 2

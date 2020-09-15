@@ -23,6 +23,8 @@ import time
 import asyncio
 import xmltodict
 import aiohttp
+import yaml
+from itertools import product
 
 
 def time_format(t):
@@ -111,6 +113,7 @@ async def job_request(
         }
     else:
         raise ValueError(f"Invalid request type '{request}'")
+    print(f"{id}: {params}")
     sched_time = time.time() + delay
     await asyncio.sleep(delay)
     req_time = time.time()
@@ -119,53 +122,110 @@ async def job_request(
     return id, sched_time, req_time, time.time(), status, content
 
 
+def iterate(spec):
+    """
+    Generic iterator
+
+    Forms the cross product of value sets specified in `spec`.
+    Yields each elements of the cross product as a dict.
+    Value sets are tuples of values, which are flattened for output. This permits
+    iteration of selected groupings of values, rather than forcing the cross product
+    of values within the group. This is the reason for existence of this generator
+    (otherwise itertools.product would be sufficient).
+
+    :param spec: specifier for iteration (see above)
+    :return: generator yielding items from cross product
+
+    The specifier, `spec`
+    - specifies both names and values of sets whose cross product it forms
+    - groups names and values in sets to be iterated as a unit
+
+    As an example, spec takes the form (in YAML notation):
+
+        - names: ['a', 'b']
+          values:
+            - ["a1", "b1"]
+            - ["a2", "b2"]
+        - names: "c"
+          values:
+            - "c1"
+            - "c2"
+
+    The values for `a` and `b` are iterated as a unit, which is to say they are treated
+    as a single set in the cross product. The values for `c` are also iterated as a
+    unit; but since the unit contains only one parameter, this is like an ordinary
+    contributor to the cross product. Note in the case of singleton groups, both
+    names and values be specified either as lists (each containing a single item) or as
+    single items, sans enclosing list, as above.
+
+    The cross product is thus formed as (a, b) x c.
+
+    The results of this cross product are "flattened" so that the yielded value
+    has the form (a, b, c) or {"a": a, "b": b, "c": c} according to `output`.
+
+    The output of the spec above would therefore be:
+
+        {'a': 'a1', 'b': 'b1', 'c': 'c1'}
+        {'a': 'a1', 'b': 'b1', 'c': 'c2'}
+        {'a': 'a2', 'b': 'b2', 'c': 'c1'}
+        {'a': 'a2', 'b': 'b2', 'c': 'c2'}
+    """
+    # print('###', spec)
+    def listify(x):
+        return x if type(x) == list else [x]
+
+    name_set = [listify(item["names"]) for item in spec]
+    value_sets = (map(listify, item["values"]) for item in spec)
+    for value_set in product(*value_sets):
+        yield {
+            name: value
+            for names, values in zip(name_set, value_set)
+            for name, value in zip(names, values)
+        }
+
+
 async def main(
-    version=None,
-    ncwms="https://services.pacificclimate.org/pcex/ncwms",
-    dataset="tasmean_aClimMean_anusplin_historical_19610101-19901231",
-    request="GetCapabilities",
-    bbox=None,
-    width=None,
-    height=None,
-    timestamp=None,
-    delay=0,
-    interval=0.01,
-    count=5,
-    dry_run=False,
+    paramsets,
+    dry_run=True,
 ):
-    print(
-        f"args: "
-        f"\n--version={version} \\"
-        f"\n--ncwms={ncwms} \\"
-        f"\n--dataset={dataset} \\"
-        f"\n--request={request} \\"
-        f"\n--bbox={bbox} \\"
-        f"\n--width={width} \\"
-        f"\n--height={height} \\"
-        f"\n--time={timestamp} \\"
-        f"\n--delay={delay} \\"
-        f"\n--interval={interval} \\"
-        f"\n--count={count} \\"
-        f"\n--dryrun={dry_run}"
-    )
     async with aiohttp.ClientSession() as session:
-        tasks = (
-            asyncio.create_task(
-                job_request(
-                    id=i,
-                    delay=delay + i * interval,
-                    ncwms=ncwms,
-                    dataset=dataset,
-                    request=request,
-                    bbox=bbox,
-                    width=width,
-                    height=height,
-                    timestamp=timestamp,
-                    session=session,
-                )
+        jobid = 0
+        tasks = []
+        for paramset in paramsets:
+            version = paramset["version"]
+            ncwms = paramset["ncwms"]
+            dataset = paramset["dataset"]
+            request = paramset["request"]
+            bbox = paramset["bbox"]
+            width = paramset["width"]
+            height = paramset["height"]
+            timestamp = paramset["timestamp"]
+            delay = paramset["delay"]
+            interval = paramset["interval"]
+            count = paramset["count"]
+            print(
+                f"Jobs {jobid} to {jobid + count -1}:"
+                f"\n\t{paramset}"
             )
-            for i in range(count)
-        )
+            for i in range(count):
+                if not dry_run:
+                    tasks.append(
+                        asyncio.create_task(
+                            job_request(
+                                id=jobid,
+                                delay=delay + i * interval,
+                                ncwms=ncwms,
+                                dataset=dataset,
+                                request=request,
+                                bbox=bbox,
+                                width=width,
+                                height=height,
+                                timestamp=timestamp,
+                                session=session,
+                            )
+                        )
+                    )
+                jobid += 1
 
         start_time = time.time()
         print(f"Main started at {time_format(start_time)}")
@@ -179,12 +239,12 @@ async def main(
         print("Job id\tSched time\tDelta\tReq time\tResp time\tLag\tStatus\tMessage")
         errors = 0
         total_lag = 0
-        for id, sched_time, req_time, resp_time, status, content in results:
+        for jobid, sched_time, req_time, resp_time, status, content in results:
             delta = req_time - sched_time
             resp_lag = resp_time - req_time
             total_lag += resp_lag
             print(
-                f"{id}"
+                f"{jobid}"
                 f"\t{time_format(sched_time)}"
                 f"\t{round(delta, 3)}"
                 f"\t{time_format(req_time)}"
@@ -211,6 +271,11 @@ if __name__ == "__main__":
         default=1,
         choices=[1, 2],
         help="ncWMS version format",
+    )
+    parser.add_argument(
+        "-f", "--file",
+        help="Specification file for iteration of parameter values. If this option "
+             "is specified, all other options except dry_run are ignored."
     )
     parser.add_argument("-D", "--dataset", help="Dataset identifier")
     parser.add_argument(
@@ -259,19 +324,18 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    if args.file:
+        with open(args.file) as file:
+            spec = yaml.safe_load(file)
+        paramsets = iterate(spec)
+    else:
+        paramsets = [
+            dict(ncwms=args.ncwms, version=args.version, dataset=args.dataset,
+            request=args.request, bbox=args.bbox, width=args.width, height=args.height,
+            timestamp=args.time, delay=args.delay, interval=args.interval,
+            count=args.count, )
+        ]
+
     asyncio.run(
-        main(
-            ncwms=args.ncwms,
-            version=args.version,
-            dataset=args.dataset,
-            request=args.request,
-            bbox=args.bbox,
-            width=args.width,
-            height=args.height,
-            timestamp=args.time,
-            delay=args.delay,
-            interval=args.interval,
-            count=args.count,
-            dry_run=args.dry_run
-        )
+        main(paramsets, dry_run=args.dry_run)
     )
