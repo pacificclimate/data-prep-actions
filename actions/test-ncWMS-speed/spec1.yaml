@@ -1,18 +1,46 @@
 - names: version
   values: ["1.1.1"]
 - names:
+    - title
     - ncwms
     - dataset
+    - timestamp
   values:
     -
+      - "tasmean: historical, prod static"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - tasmean_aClimMean_anusplin_historical_19610101-19901231/tasmean
+      - "1977-07-02T00:00:00Z"
+    -
+      - "tasmean: historical, dev dynamic"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/tasmean_aClimMean_anusplin_historical_19610101-19901231.nc/tasmean
+      - "1977-07-02T00:00:00Z"
+    -
+      - "tasmean: projected, prod static"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - tasmean_aClimMean_BCCAQv2_PCIC12_historical-rcp85_rXi1p1_20400101-20691231_Canada/tasmean
+      - "2055-07-02T00:00:00Z"
+    -
+      - "tasmean: projected, dev dynamic"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/tasmean_aClimMean_anusplin_historical_19610101-19901231.nc/tasmean
+      - "2055-07-02T00:00:00Z"
+    -
+      - "prsn: historical, prod static"
       - https://services.pacificclimate.org/pcex/ncwms
       - prsn_yr_anusplin_historical_19610101-19901231/prsn
+      - "1977-07-02T00:00:00Z"
     -
+      - "prsn: historical, dev dynamic"
       - https://services.pacificclimate.org/dev/pcex/ncwms
       - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/prsn_aClimMean_anusplin_historical_19610101-19901231.nc/prsn
+      - "1977-07-02T00:00:00Z"
     -
+      - "prsn: historical, dev static"
       - https://services.pacificclimate.org/dev/pcex/ncwms
       - weird2/prsn
+      - "1977-07-02T00:00:00Z"
 - names:
     - request
     - bbox
@@ -24,8 +52,6 @@
       - "-125.00000000000001,65,-112.5,77.5"
       - 256
       - 256
-- names: timestamp
-  values: ["1977-07-02T00:00:00Z"]
 - names:
     - delay
     - interval
@@ -34,4 +60,4 @@
     -
       - 1
       - 1
-      - 2
+      - 1
