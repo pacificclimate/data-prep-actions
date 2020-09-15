@@ -81,14 +81,17 @@ async def job_request(
         "request": request_,
         "service": "WMS",
         "version": "1.1.1",
-        # Note: Must use `layers` param, not `dataset` for dynamic datasets
-        "layers": params["dataset"],
     }
     if request_ == "GetCapabilities":
-        query_params = base_query_params
+        query_params = {
+            **base_query_params,
+            "dataset": params["dataset"],
+        }
     elif request_ == "GetMap":
         query_params = {
             **base_query_params,
+            # Note: Must use `layers` param, not `dataset` for dynamic datasets
+            "layers": f"{params['dataset']}/{params['variable']}",
             "TRANSPARENT": "true",
             "STYLES": "default-scalar/x-Occam",
             "NUMCOLORBANDS": "254",
