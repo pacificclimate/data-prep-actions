@@ -7,56 +7,211 @@
     - variable
     - timestamp
   values:
+    # TODO: Verify fails with static config in dev ncWMS
+    # cdd
     -
-      - "tasmean: historical, prod static"
+      - "cdd: prod static, historical"
       - https://services.pacificclimate.org/pcex/ncwms
-      - tasmean_aClimMean_anusplin_historical_19610101-19901231
-      - tasmean
+      - cdd_aClimMean_anusplin_historical_19610101-19901231
+      - cdd
       - "1977-07-02T00:00:00Z"
     -
-      - "tasmean: historical, dev dynamic"
+      - "cdd: prod static, projected"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - cdd_aClimMean_BCCAQv2_PCIC12_historical-rcp85_rXi1p1_20400101-20691231_Canada
+      - cdd
+      - "2055-07-02T00:00:00Z"
+    -
+      - "cdd: dev dynamic, historical"
       - https://services.pacificclimate.org/dev/pcex/ncwms
-      - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/tasmean_aClimMean_anusplin_historical_19610101-19901231.nc
-      - tasmean
+      - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/cdd_aClimMean_anusplin_historical_19610101-19901231.nc
+      - cdd
       - "1977-07-02T00:00:00Z"
     -
-      - "tasmean: projected, prod static"
-      - https://services.pacificclimate.org/pcex/ncwms
-      - tasmean_aClimMean_BCCAQv2_PCIC12_historical-rcp85_rXi1p1_20400101-20691231_Canada
-      - tasmean
-      - "2055-07-02T00:00:00Z"
-    -
-      - "tasmean: projected, dev dynamic"
+      - "cdd: dev dynamic, projected"
       - https://services.pacificclimate.org/dev/pcex/ncwms
-      - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/tasmean_aClimMean_anusplin_historical_19610101-19901231.nc
-      - tasmean
+      - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/degree_days/PCIC12/cdd_aClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20400101-20691231_Canada.nc
+      - cdd
+      - "2055-07-02T00:00:00Z"
+
+    # ffd
+    -
+      - "ffd: prod static, historical"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - ffd_yr_anusplin_historical_19610101-19901231
+      - ffd
+      - "1977-07-02T00:00:00Z"
+    -
+      - "ffd: prod static, projected"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - ffd_aClimMean_BCCAQ_PCIC12_historical-rcp85_rXi1p1_20400101-20691231
+      - ffd
       - "2055-07-02T00:00:00Z"
     -
-      - "prsn: historical, prod static"
+      - "ffd: dev dynamic, historical"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/plan2adapt/ffd_aClimMean_anusplin_historical_19610101-19901231.nc
+      - ffd
+      - "1977-07-02T00:00:00Z"
+    -
+      - "ffd: dev dynamic, projected"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/plan2adapt/pcic12/ffd_aClimMean_BCCAQ_PCIC12_historical+rcp85_rXi1p1_20400101-20691231_Canada.nc
+      - ffd
+      - "2055-07-02T00:00:00Z"
+
+    # gdd
+    -
+      - "gdd: prod static, historical"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - gdd_aClimMean_anusplin_historical_19610101-19901231
+      - gdd
+      - "1977-07-02T00:00:00Z"
+    -
+      - "gdd: prod static, projected"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - gdd_aClimMean_BCCAQv2_PCIC12_historical-rcp85_rXi1p1_20400101-20691231_Canada
+      - gdd
+      - "2055-07-02T00:00:00Z"
+    -
+      - "gdd: dev dynamic, historical"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/gdd_aClimMean_anusplin_historical_19610101-19901231.nc
+      - gdd
+      - "1977-07-02T00:00:00Z"
+    -
+      - "gdd: dev dynamic, projected"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/degree_days/PCIC12/gdd_aClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20400101-20691231_Canada.nc
+      - gdd
+      - "2055-07-02T00:00:00Z"
+
+    # hdd
+    -
+      - "hdd: prod static, historical"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - hdd_yr_anusplin_historical_19610101-19901231
+      - hdd
+      - "1977-07-02T00:00:00Z"
+    -
+      - "hdd: prod static, projected"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - hdd_aClimMean_BCCAQv2_PCIC12_historical-rcp85_rXi1p1_20400101-20691231_Canada
+      - hdd
+      - "2055-07-02T00:00:00Z"
+    -
+      - "hdd: dev dynamic, historical"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/hdd_aClimMean_anusplin_historical_19610101-19901231.nc
+      - hdd
+      - "1977-07-02T00:00:00Z"
+    -
+      - "hdd: dev dynamic, projected"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/degree_days/PCIC12/hdd_aClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20400101-20691231_Canada.nc
+      - hdd
+      - "2055-07-02T00:00:00Z"
+
+    # pr
+    -
+      - "pr: prod static, historical"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - pr_aClimMean_anusplin_historical_19610101-19901231
+      - pr
+      - "1977-07-02T00:00:00Z"
+    -
+      - "pr: prod static, projected"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - pr_aClimMean_BCCAQv2_PCIC12_historical-rcp85_rXi1p1_20400101-20691230_Canada
+      - pr
+      - "2055-07-02T00:00:00Z"
+    -
+      - "pr: dev dynamic, historical"  # checked
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/pr_aClimMean_anusplin_historical_19610101-19901231.nc
+      - pr
+      - "1977-07-02T00:00:00Z"
+    -
+      - "pr: dev dynamic, projected" # checked
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/pcic12/pr_aClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20400101-20691230_Canada.nc
+      - pr
+      - "2055-07-02T00:00:00Z"
+
+    # prsn
+    -
+      - "prsn: prod static, historical"
       - https://services.pacificclimate.org/pcex/ncwms
       - prsn_yr_anusplin_historical_19610101-19901231
       - prsn
       - "1977-07-02T00:00:00Z"
     -
-      - "prsn: historical, dev dynamic"
+      - "prsn: prod static, projected"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - prsn_aClimMean_BCCAQv2_PCIC12_historical-rcp85_rXi1p1_20400101-20691231_Canada
+      - prsn
+      - "2055-07-02T00:00:00Z"
+    -
+      - "prsn: dev dynamic, historical"
       - https://services.pacificclimate.org/dev/pcex/ncwms
       - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/prsn_aClimMean_anusplin_historical_19610101-19901231.nc
       - prsn
       - "1977-07-02T00:00:00Z"
     -
-      - "prsn: historical, dev static"
+      - "prsn: dev static, historical"
       - https://services.pacificclimate.org/dev/pcex/ncwms
       - weird2
       - prsn
       - "1977-07-02T00:00:00Z"
+    -
+      - "prsn: dev dynamic, projected"
+      - https://services.pacificclimate.org/pcex/dev/ncwms
+      - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/plan2adapt/pcic12/prsn_aClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20400101-20691231_Canada.nc
+      - prsn
+      - "2055-07-02T00:00:00Z"
+
+    # tasmean
+    -
+      - "tasmean: prod static, historical"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - tasmean_aClimMean_anusplin_historical_19610101-19901231
+      - tasmean
+      - "1977-07-02T00:00:00Z"
+    -
+      - "tasmean: prod static, projected"
+      - https://services.pacificclimate.org/pcex/ncwms
+      - tasmean_aClimMean_BCCAQv2_PCIC12_historical-rcp85_rXi1p1_20400101-20691231_Canada
+      - tasmean
+      - "2055-07-02T00:00:00Z"
+    -
+      - "tasmean: dev dynamic, historical"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/tasmean_aClimMean_anusplin_historical_19610101-19901231.nc
+      - tasmean
+      - "1977-07-02T00:00:00Z"
+    -
+      - "tasmean: dev dynamic, projected"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/plan2adapt/pcic12/tasmean_aClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20400101-20691231_Canada.nc
+      - tasmean
+      - "2055-07-02T00:00:00Z"
+
 - names:
+    - title
     - request
+  values:
+    -
+      - GetCapabilities
+      - GetCapabilities
+    -
+      - GetMap
+      - GetMap
+- names:
     - bbox
     - width
     - height
   values:
     -
-      - GetMap
       - "-125.00000000000001,65,-112.5,77.5"
       - 256
       - 256
