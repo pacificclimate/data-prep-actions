@@ -54,9 +54,15 @@
       - ffd
       - "1977-07-02T00:00:00Z"
     -
-      - "ffd: dev dynamic, projected"
+      - "ffd: dev dynamic, projected (verified fail)"
       - https://services.pacificclimate.org/dev/pcex/ncwms
       - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/plan2adapt/pcic12/ffd_aClimMean_BCCAQ_PCIC12_historical+rcp85_rXi1p1_20400101-20691231_Canada.nc
+      - ffd
+      - "2055-07-02T00:00:00Z"
+    -
+      - "ffd: dev static, projected"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - xffd_aClimMean_BCCAQ_PCIC12_historical-rcp85_rXi1p1_20400101-20691231
       - ffd
       - "2055-07-02T00:00:00Z"
 
@@ -126,15 +132,27 @@
       - pr
       - "2055-07-02T00:00:00Z"
     -
-      - "pr: dev dynamic, historical"  # checked
+      - "pr: dev dynamic, historical (verified fail)"  # checked
       - https://services.pacificclimate.org/dev/pcex/ncwms
       - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/pr_aClimMean_anusplin_historical_19610101-19901231.nc
       - pr
       - "1977-07-02T00:00:00Z"
     -
-      - "pr: dev dynamic, projected" # checked
+      - "pr: dev static, historical"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - xpr_aClimMean_anusplin_historical_19610101-19901231
+      - pr
+      - "1977-07-02T00:00:00Z"
+    -
+      - "pr: dev dynamic, projected (verified fail)" # checked
       - https://services.pacificclimate.org/dev/pcex/ncwms
       - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/pcic12/pr_aClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20400101-20691230_Canada.nc
+      - pr
+      - "2055-07-02T00:00:00Z"
+    -
+      - "pr: dev static, projected"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - xpr_aClimMean_BCCAQv2_PCIC12_historical-rcp85_rXi1p1_20400101-20691230_Canada
       - pr
       - "2055-07-02T00:00:00Z"
 
@@ -152,9 +170,15 @@
       - prsn
       - "2055-07-02T00:00:00Z"
     -
-      - "prsn: dev dynamic, historical"
+      - "prsn: dev dynamic, historical (verified fail)"
       - https://services.pacificclimate.org/dev/pcex/ncwms
       - x/storage/data/climate/downscale/BCCAQ2/ANUSPLIN/climatologies/prsn_aClimMean_anusplin_historical_19610101-19901231.nc
+      - prsn
+      - "1977-07-02T00:00:00Z"
+    -
+      - "prsn: dev static, historical"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - xprsn_yr_anusplin_historical_19610101-19901231
       - prsn
       - "1977-07-02T00:00:00Z"
     -
@@ -165,8 +189,14 @@
       - "1977-07-02T00:00:00Z"
     -
       - "prsn: dev dynamic, projected"
-      - https://services.pacificclimate.org/pcex/dev/ncwms
+      - https://services.pacificclimate.org/dev/pcex/ncwms
       - x/storage/data/projects/comp_support/climate_explorer_data_prep/climatological_means/plan2adapt/pcic12/prsn_aClimMean_BCCAQv2_PCIC12_historical+rcp85_rXi1p1_20400101-20691231_Canada.nc
+      - prsn
+      - "2055-07-02T00:00:00Z"
+    -
+      - "prsn: dev static, projected"
+      - https://services.pacificclimate.org/dev/pcex/ncwms
+      - xprsn_aClimMean_BCCAQv2_PCIC12_historical-rcp85_rXi1p1_20400101-20691231_Canada
       - prsn
       - "2055-07-02T00:00:00Z"
 
