@@ -114,6 +114,14 @@ async def job_request(
     return id, params, url, sched_time, req_time, time.time(), status, content
 
 
+def listify(x):
+    return x if type(x) == list else [x]
+
+
+def delistify(x):
+    return x if len(x) > 1 else x[0]
+
+
 def iterate(spec):
     """
     Generic iterator
@@ -162,19 +170,32 @@ def iterate(spec):
         {'a': 'a2', 'b': 'b2', 'c': 'c1'}
         {'a': 'a2', 'b': 'b2', 'c': 'c2'}
     """
-    # print('###', spec)
-    def listify(x):
-        return x if type(x) == list else [x]
-
+    # print("### iterate spec", spec)
     name_set = [listify(item["names"]) for item in spec]
     value_sets = (map(listify, item["values"]) for item in spec)
     for value_set in product(*value_sets):
-        yield {
-            name: value
-            for names, values in zip(name_set, value_set)
-            for name, value in zip(names, values)
-        }
+        result = {}
+        for names, values in zip(name_set, value_set):
+            for name, value in zip(names, values):
+                if name in result:
+                    result[name].append(value)
+                else:
+                    result[name] = [value]
+        yield { name: delistify(value) for name, value in result.items() }
 
+
+def extract_capabilities_info(content):
+    try:
+        d = xmltodict.parse(content)
+    except:
+        return "Hmmm"
+    return {
+        "layers": d["WMT_MS_Capabilities"]["Capability"]["Layer"]["Layer"]["Layer"]["Name"]
+    }
+
+
+def format_list(x):
+    return '; '.join(listify(x))
 
 async def main(
     paramsets,
@@ -225,7 +246,8 @@ async def main(
             total_lag += resp_lag
             print()
             print(
-                f"{jobid}\t{params['title']}"
+                f"{jobid}\t{'✔' if status == 200 else '❌'} "
+                f"{format_list(params['title'])}"
                 f"\n\t{url}"
             )
             print(
@@ -237,7 +259,8 @@ async def main(
                 f"\t{status}    "
                 f" {'OK' if status == 200 else parse_ncWMS_exception(content)}"
             )
-            # print(f"\t{params}")
+            if paramset["request"] == "GetCapabilities":
+                print(f"\t{extract_capabilities_info(content)}")
             if status != 200:
                 errors += 1
         print()
