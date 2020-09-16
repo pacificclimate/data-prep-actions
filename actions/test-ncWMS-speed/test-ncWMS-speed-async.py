@@ -18,6 +18,7 @@ First run gives all lags ~ 0.5s. Subsequent runs gives lags ~ 0.1 - 0.2 s.
 
 So now we must add GetMap requests to see if those fail.
 """
+import os
 from argparse import ArgumentParser
 import time
 import asyncio
@@ -234,38 +235,62 @@ async def main(
         print(f"Main finished at {time_format(end_time)}.")
         print(f"Elapsed time: {end_time - start_time}")
 
+        def tabulate(row):
+            widths = [3, 12, 6, 12, 12, 6, 6, 100]
+            return ' | '.join(str(col).ljust(width) for col, width in zip(row, widths))
+
+        def print_results(results):
+            print(tabulate(
+                "Job|Sched time|Delta|Req time|Resp time|Lag|Status|Message"
+                    .split('|')
+            ))
+            errors = []
+            for result in results:
+                jobid, params, url, sched_time, req_time, resp_time, status, content = \
+                    result
+                delta = req_time - sched_time
+                resp_lag = resp_time - req_time
+                print()
+                print(
+                    f"{jobid}\t{'✔' if status == 200 else '❌'} "
+                    f"{format_list(params['title'])}"
+                )
+                print(f"\t{url}")
+                print(tabulate([
+                    '',
+                    time_format(sched_time),
+                    round(delta, 3),
+                    time_format(req_time),
+                    time_format(resp_time),
+                    round(resp_lag, 3),
+                    status,
+                    'OK' if status == 200 else parse_ncWMS_exception(content),
+                ]))
+
+                # Check for file's existence if the request failed
+                if status != 200 and params["dataset"].startswith('x/'):
+                    filepath = params["dataset"][1:]
+                    exists = os.path.isfile(filepath)
+                    print(f"\t{'Exists' if exists else 'Absent'}: {filepath}")
+
+                # Print some stuff extracted from the response for GetCapabilities
+                if status == 200 and params["request"] == "GetCapabilities":
+                    print(f"\t{extract_capabilities_info(content)}")
+
+                if status != 200:
+                    errors.append(result)
+            return errors
+
         print()
-        print(f"Results")
-        print("Job id\tSched time\tDelta\tReq time\tResp time\tLag\tStatus\tMessage")
-        errors = 0
-        total_lag = 0
-        for jobid, params, url, sched_time, req_time, resp_time, status, content \
-            in results:
-            delta = req_time - sched_time
-            resp_lag = resp_time - req_time
-            total_lag += resp_lag
-            print()
-            print(
-                f"{jobid}\t{'✔' if status == 200 else '❌'} "
-                f"{format_list(params['title'])}"
-                f"\n\t{url}"
-            )
-            print(
-                f"\t{time_format(sched_time)}"
-                f"\t{round(delta, 3)}"
-                f"\t{time_format(req_time)}"
-                f"\t{time_format(resp_time)}"
-                f"\t{round(resp_lag, 3)}"
-                f"\t{status}    "
-                f" {'OK' if status == 200 else parse_ncWMS_exception(content)}"
-            )
-            if paramset["request"] == "GetCapabilities":
-                print(f"\t{extract_capabilities_info(content)}")
-            if status != 200:
-                errors += 1
+        print(f"All results")
+        errors = print_results(results)
+
         print()
-        print(f"{errors} errors in {len(results)} requests")
-        print(f"Total lag: {total_lag}")
+        print(f"{len(errors)} errors in {len(results)} requests")
+
+        print()
+        print(f"Error results only")
+        print_results(errors)
 
 
 if __name__ == "__main__":
