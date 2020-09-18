@@ -2,14 +2,20 @@ from itertools import product
 from collections.abc import Iterable, Mapping, Generator, Sequence
 
 
-def merge(dicts):
+def merge(items):
     """
-    Return a single dict resulting from merging all `dict`s in the iterable `dicts`
+    Return a single object (list or dict) resulting from merging all items in the
+    iterable `items`. Each such item must be of the same type (list or dict).
     """
     # print("  merge", dicts)
-    return {
-        name: value for d in dicts for name, value in d.items()
-    }
+    t = type(items[0])
+    if not all(type(item) == t for item in items):
+        raise ValueError(f"Cannot merge items of diverse types")
+    if t == dict:
+        return {name: value for d in items for name, value in d.items()}
+    if t == list:
+        return [element for l in items for element in l]
+    raise ValueError(f"Cannot merge items of type {t}")
 
 
 def mergeeach(dicts_seq, seq=list):
@@ -64,11 +70,7 @@ def ismapping(x):
 
 
 def isoperator(x):
-    return (
-        ismapping(x) and
-        len(x) == 1 and
-        list(x)[0] in {"$merge", "$mergeeach", "$for", "$prod", "$mergeeachprod"}
-    )
+    return ismapping(x) and len(x) == 1 and list(x)[0].startswith("$")
 
 
 def iterate(thing, seq=list):
@@ -76,19 +78,32 @@ def iterate(thing, seq=list):
     if isoperator(thing):
         operator, operands = tuple(thing.items())[0]
         # print("op:", operator, operands)
-        if operator == '$merge':
+        if operator == '$one':
+            return [iterate(operands)]
+        if operator in ['$merge', '$union', '$flatten']:
             return merge(iterate(operands))
-        elif operator == '$mergeeach':
+        if operator == '$mergeeach':
             return mergeeach(iterate(operands))
-        elif operator == '$for':
-            names, *value_seq = operands
-            return for_(names, iterate(value_seq))
-        elif operator == '$prod':
+        if operator in ['$for', '$each']:
+            if ismapping(operands):
+                # Special syntax for single key whose name is specified as a dict key
+                key, values = tuple(operands.items())[0]
+                keys = [key]
+                value_seq = [[value] for value in values]
+            else:
+                keys, *value_seq = operands
+                if type(keys) == str:
+                    # Special syntax for single key whose name is specified by a single
+                    # string value (not a list). Then all values must also be specified
+                    # by single values (not lists).
+                    keys = [keys]
+                    value_seq = [[value] for value in value_seq]
+            return for_(keys, iterate(value_seq))
+        if operator == '$prod':
             return prod(iterate(operands))
-        elif operator == '$mergeeachprod':
+        if operator in ['$mergeeachprod', '$combinations']:
             return mergeeachprod(iterate(operands))
-        else:
-            raise ValueError(f"Invalid operator '{operator}'")
+        raise ValueError(f"Invalid operator '{operator}'")
     elif ismapping(thing):
         return {key: iterate(value) for key, value in thing.items()}
     elif isiterable(thing):
