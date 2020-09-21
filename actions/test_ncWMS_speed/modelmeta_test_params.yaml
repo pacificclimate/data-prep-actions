@@ -1,0 +1,94 @@
+# This is a parameter-spec file for `test-from-modelmeta.py`.
+# It defines how to generate the combinations of parameters that script uses
+# to make ncWMS requests.
+
+layer_params:
+  # layer parameter keys:
+  # - ensemble_name
+  # - models
+  # - emissions
+  # - variable_name
+  # - year
+  # - timescale
+  # - season (optional)
+  # - month (optional)
+
+  $combinations:
+    # Fixed parameters
+    - $one:
+        ensemble_name: p2a_classic
+        models: [PCIC12, anusplin]
+        emissions:
+            - "historical,rcp85"
+            - "historical, rcp85"
+            - "historical"
+
+    # Varying parameters
+    - $each:
+        variable_name:
+#          - cdd
+  #        - ffd
+  #        - gdd
+  #        - hdd
+          - pr
+    - $each:
+        year: [2025, 2055, 2085]
+
+    - $union:
+        #      - $one:
+        #          timescale: yearly
+        - $combinations:
+            - $one:
+                timescale: yearly
+        - $combinations:
+            - $one:
+                timescale: seasonal
+            - $each:
+                season:
+                  - winter
+                  - fall
+        - $combinations:
+            - $one:
+                timescale: monthly
+            - $each:
+                month:
+                  - jan
+                  - feb
+
+ncwms_params:
+  # ncwms_parameter keys:
+  # - timing: -> ncwms_request(delay)
+  #   - delay
+  #   - interval
+  #   - count
+  # - http
+  #   - ncwms
+  #   - request (optional. default)
+  #   - dataset_type: dynamic | static (optional, default)
+  #   - bbox (optional, default)
+  #   - width (optional, default)
+  #   - height(optional, default)
+  $combinations:
+    - $one:
+        timing:
+          delay: 1
+          interval: 1
+          count: 1
+    - $for:
+        - http
+        - ncwms: https://services.pacificclimate.org/pcex/ncwms
+          request: GetMap
+          dataset_type: static
+          title: prod, GetMap, static
+#        - ncwms: https://services.pacificclimate.org/dev/pcex/ncwms
+#          request: GetMap
+#          dataset_type: static
+#          title: dev, GetMap, static
+        - ncwms: https://services.pacificclimate.org/dev/pcex/ncwms
+          request: GetMap
+          dataset_type: dynamic
+          title: dev, GetMap, dynamic
+
+
+
+

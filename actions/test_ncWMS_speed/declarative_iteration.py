@@ -15,7 +15,9 @@ def merge(items):
         return {name: value for d in items for name, value in d.items()}
     if t == list:
         return [element for l in items for element in l]
-    raise ValueError(f"Cannot merge items of type {t}")
+    raise ValueError(
+        f"Cannot merge items of type {t}. Context: {items}"
+    )
 
 
 def mergeeach(dicts_seq, seq=list):
@@ -74,7 +76,7 @@ def isoperator(x):
 
 
 def iterate(thing, seq=list):
-    # print("process", thing)
+    # print("### iterate", thing)
     if isoperator(thing):
         operator, operands = tuple(thing.items())[0]
         # print("op:", operator, operands)
