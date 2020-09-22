@@ -20,7 +20,10 @@ def parse_ncWMS_exception(xml):
             "ServiceExceptionReport" in ed
             and "ServiceException" in ed["ServiceExceptionReport"]
         ):
-            return ed["ServiceExceptionReport"]["ServiceException"]
+            report = ed["ServiceExceptionReport"]["ServiceException"]
+            if "@code" in report:
+                return report["@code"]
+            return report
         return None
     except:
         return "((no XML response))"
@@ -130,6 +133,7 @@ async def fetch(session, url, params, content_type="text"):
 def print_ncwms_task_results(results):
     columns = (
         ("Job", 3),
+        ("?", 1),
         ("Sched time", 12),
         ("Delta", 6),
         ("Req time", 12),
@@ -151,15 +155,10 @@ def print_ncwms_task_results(results):
         delta = req_time - sched_time
         resp_lag = resp_time - req_time
         print()
-        print(
-            f"{jobid}\t{'✔' if status == 200 else '❌'} "
-            f"{format_list(params['title'])} "
-            f"{params['dataset']} "
-        )
-        # print(f"\t{url}")
         print(tabulate(
             [
-                '',
+                jobid,
+                '✔' if status == 200 else '❌',
                 time_format(sched_time),
                 round(delta, 3),
                 time_format(req_time),
@@ -170,6 +169,12 @@ def print_ncwms_task_results(results):
             ],
             widths=widths,
         ))
+        print(
+            f"\t{format_list(params['title'])}; "
+            f"{params['unique_id']}; "
+            f"{params['timestep']}; "
+        )
+        # print(f"\t{url}")
 
         # Check for file's existence if the request failed
         if status != 200 and params["dataset"].startswith('x/'):
@@ -177,10 +182,17 @@ def print_ncwms_task_results(results):
             exists = os.path.isfile(filepath)
             print(f"\t{'Exists' if exists else 'Absent'}: {filepath}")
             if exists:
-                ncdump = subprocess.run([
+                # There should be a utility for this. Geez.
+                ncdump = subprocess.Popen([
                     "ncdump", "-v", "time", filepath,
                 ], stdout=subprocess.PIPE)
-                print(f'{ncdump.stdout.decode("utf-8")}')
+                filter = subprocess.Popen([
+                    # "grep", "time"
+                    "sed", r"/^\/\/ global attributes:/,/^data:/{//p;d;}"
+                ], stdin=ncdump.stdout, stdout=subprocess.PIPE)
+                ncdump.stdout.close()
+                result = filter.communicate()[0]
+                print(f'{result.decode("utf-8")}')
 
         # Print some stuff extracted from the response for GetCapabilities
         if status == 200 and params["request"] == "GetCapabilities":

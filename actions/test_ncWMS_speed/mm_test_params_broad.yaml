@@ -1,6 +1,8 @@
 # This is a parameter-spec file for `test-from-modelmeta.py`.
 # It defines how to generate the combinations of parameters that script uses
-# to make ncWMS requests.
+# to make ncWMS requests. This file in particular covers combinations of
+# many different variables, years, timesteps, ncWMS servers, and ncWMS request
+# types, but issues only one request per combination.
 
 layer_params:
   # layer parameter keys:

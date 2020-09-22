@@ -172,8 +172,10 @@ async def ncwms_request(
     ncwms=None,
     request="GetMap",
     dataset=None,
+    unique_id=None,
+    filepath=None,
     variable=None,
-    timestamp=None,
+    timestep=None,
     bbox="-125.00000000000001,65,-112.5,77.5",
     width=256,
     height=256,
@@ -205,7 +207,7 @@ async def ncwms_request(
             "WIDTH": width,
             "HEIGHT": height,
             "COLORSCALERANGE": "-5,15",
-            "TIME": timestamp,
+            "TIME": timestep,
         }
     else:
         raise ValueError(f"Invalid request type '{request}'")
@@ -220,8 +222,10 @@ async def ncwms_request(
         ncwms= ncwms,
         request= request,
         dataset=dataset,
+        unique_id=unique_id,
+        filepath=filepath,
         variable=variable,
-        timestamp=timestamp,
+        timestep=timestep,
         bbox= bbox,
         width= width,
         height= height,
@@ -235,6 +239,7 @@ async def main(
     params=None,
     dry_run=False,
 ):
+    print('### params', params)
     layer_params = params["layer_params"]
     ncwms_params = params["ncwms_params"]
 
@@ -275,8 +280,10 @@ async def main(
                                 id=job_id,
                                 delay=timing["delay"] + i * timing["interval"],
                                 dataset=dataset,
+                                unique_id=query_result.unique_id,
+                                filepath=query_result.filepath,
                                 variable=query_result.variable,
-                                timestamp=format(query_result.timestep),
+                                timestep=format(query_result.timestep),
                                 **http,
                             )
                         )
@@ -299,10 +306,10 @@ async def main(
 
         print()
         print(f"{len(errors)} errors in {len(results)} requests")
-
-        print()
-        print(f"Error results only")
-        print_ncwms_task_results(errors)
+        #
+        # print()
+        # print(f"Error results only")
+        # print_ncwms_task_results(errors)
 
 
 
