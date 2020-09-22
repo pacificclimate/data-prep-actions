@@ -1,0 +1,42 @@
+# Error InvalidDimensionValue (for time) appears to be provoked by
+# requesting a map layer for the following parameter combinations:
+#   variable_name: pr, year: 2025,  timescale: monthly, month: jan.
+# Is this because the date is the first in the set of times in the file?
+# This is not upheld by the
+
+$combinations:
+  - $one:
+      ensemble_name: p2a_classic
+      models: [PCIC12, anusplin]
+      emissions:
+        - "historical,rcp85"
+        - "historical, rcp85"
+        - "historical"
+  - $each:
+      variable_name:
+        - cdd
+        - ffd
+        - gdd
+        - hdd
+        - pr
+        - prsn
+        - tasmean
+  - $each:
+      year:
+        - 2025
+        - 2055
+        - 2085
+  - $each:
+      - [timescale, season, month, delay]
+      - [monthly, ~, jan, 1]
+      - [monthly, ~, jun, 2]
+      - [seasonal, winter, ~, 3]
+      - [seasonal, spring, ~, 4]
+      - [yearly, ~, ~, 5]
+  - $one:
+      interval: 0
+      count: 1
+      ncwms: https://services.pacificclimate.org/dev/pcex/ncwms
+      request: GetMap
+      dataset_type: dynamic
+      title: dev, GetMap, dynamic

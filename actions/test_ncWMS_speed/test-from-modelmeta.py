@@ -25,6 +25,7 @@ from parts import (
     tabulate,
     time_format,
     print_ncwms_task_results,
+    dict_subset,
 )
 
 
@@ -236,58 +237,73 @@ async def ncwms_request(
 
 async def main(
     mmdb=None,
-    params=None,
+    param_sets=None,
     dry_run=False,
 ):
-    print('### params', params)
-    layer_params = params["layer_params"]
-    ncwms_params = params["ncwms_params"]
+
+    print("Parameter sets")
+    for i, param_set in enumerate(param_sets):
+        print(f'Parameter set {i}', param_set)
 
     db_session = get_db_session(mmdb)
     # print(tabulate(titles, widths=widths))
 
     tasks = []
     job_id= 0
-    print(f"{len(layer_params)} layer parameter sets")
 
     async with aiohttp.ClientSession() as aiohttp_session:
-        for i, lp in enumerate(layer_params):
+        for i, param_set in enumerate(param_sets):
             print()
+            layer_params = dict_subset(param_set, (
+                "ensemble_name",
+                "models",
+                "emissions",
+                "variable_name",
+                "year",
+                "timescale",
+                "season",
+                "month",
+            ))
+            ncwms_params = dict_subset(param_set, (
+                "ncwms",
+                "request",
+                "dataset_type",
+                "bbox",
+                "width",
+                "height",
+                "title",
+            ))
             # print("Layer params", lp)
-            q = get_layer_query(db_session, **lp)
+            q = get_layer_query(db_session, **layer_params)
 
             print(f"Parameter set {i}: {q.count()} layers selected", )
             query_results = q.all()
-            # print("Results")
             print(tabulate(dbq_titles, widths=dbq_widths))
             print(tabulate(dbq_underlines, widths=dbq_widths))
+
             for query_result in query_results:
                 row = [format(getattr(query_result, name)) for name in dbq_attrs]
                 print(tabulate(row, widths=dbq_widths))
-                for np in ncwms_params:
-                    # print("### tasks: np", np)
-                    timing = np["timing"]
-                    http = np["http"]
-                    dataset_type = http["dataset_type"]
-                    dataset = (
-                        query_result.unique_id if dataset_type == "static"
-                        else f"x{query_result.filepath}"
-                    )
-                    for i in range(timing["count"]):
-                        tasks.append(
-                            ncwms_request(
-                                session=aiohttp_session,
-                                id=job_id,
-                                delay=timing["delay"] + i * timing["interval"],
-                                dataset=dataset,
-                                unique_id=query_result.unique_id,
-                                filepath=query_result.filepath,
-                                variable=query_result.variable,
-                                timestep=format(query_result.timestep),
-                                **http,
-                            )
+
+                dataset = (
+                    query_result.unique_id if param_set["dataset_type"] == "static"
+                    else f"x{query_result.filepath}"
+                )
+                for j in range(param_set["count"]):
+                    tasks.append(
+                        ncwms_request(
+                            session=aiohttp_session,
+                            id=job_id,
+                            delay=param_set["delay"] + j * param_set["interval"],
+                            dataset=dataset,
+                            unique_id=query_result.unique_id,
+                            filepath=query_result.filepath,
+                            variable=query_result.variable,
+                            timestep=format(query_result.timestep),
+                            **ncwms_params,
                         )
-                        job_id += 1
+                    )
+                    job_id += 1
 
         print(f"{len(tasks)} tasks to start")
         if dry_run:
@@ -312,7 +328,6 @@ async def main(
         # print_ncwms_task_results(errors)
 
 
-
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument(
@@ -330,10 +345,10 @@ if __name__ == "__main__":
 
     with open(args.file) as file:
         spec = yaml.safe_load(file)
-    params = iterate(spec)
+    param_sets = iterate(spec)
 
     asyncio.run(
-        main(mmdb=args.mmdb, params=params)
+        main(mmdb=args.mmdb, param_sets=param_sets)
     )
 
 

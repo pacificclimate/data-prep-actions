@@ -169,6 +169,7 @@ def print_ncwms_task_results(results):
             ],
             widths=widths,
         ))
+        print("params", params)
         print(
             f"\t{format_list(params['title'])}; "
             f"{params['unique_id']}; "
@@ -201,3 +202,7 @@ def print_ncwms_task_results(results):
         if status != 200:
             errors.append(result)
     return errors
+
+
+def dict_subset(d, keys):
+    return {key: d[key] for key in keys if key in d}

@@ -4,40 +4,29 @@
 # combinations of variable, year, timestep, ncWMS server, and ncWMS request
 # types, and issues many requests in quick succession.
 
-layer_params:
-  $combinations:
-    - $one:
-        ensemble_name: p2a_classic
-        models: [PCIC12, anusplin]
-        emissions:
-          - "historical,rcp85"
-          - "historical, rcp85"
-          - "historical"
-#        variable_name: pr
-        year: 2025
-        timescale: monthly
-        season: winter
-#        month: jan
-    - $each:
-        variable_name:
-          - pr
-#          - tasmean
-    - $each:
-        month:
-          - jan
-          - feb
-#          - mar
-#          - apr
-#          - may
-#          - jun
-
-
-ncwms_params:
-  - timing:
-      delay: 1
+$combinations:
+  - $one:
+      ensemble_name: p2a_classic
+      models: [PCIC12, anusplin]
+      emissions:
+        - "historical,rcp85"
+        - "historical, rcp85"
+        - "historical"
+  - $each:
+      variable_name:
+        - pr
+#        - tasmean
+  - $one:
+      year: 2025
+      timescale: monthly
+      season: winter
+  - $each:
+      - [month, delay]
+      - [jan, 1]
+      - [feb, 2]
+  - $one:
       interval: 0
-      count: 2
-    http:
+      count: 10
       ncwms: https://services.pacificclimate.org/dev/pcex/ncwms
       request: GetMap
       dataset_type: dynamic
