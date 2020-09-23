@@ -130,7 +130,7 @@ async def fetch(session, url, params, content_type="text"):
             return str(response.url), response.status, await response.read()
 
 
-def print_ncwms_task_results(results):
+def print_ncwms_task_results(results, details=False):
     columns = (
         ("Job", 3),
         ("?", 1),
@@ -169,35 +169,37 @@ def print_ncwms_task_results(results):
             ],
             widths=widths,
         ))
-        print("params", params)
         print(
-            f"\t{format_list(params['title'])}; "
-            f"{params['unique_id']}; "
+            f"{format_list(params['title'])}; "
+            f"{params['query_result'].unique_id}; "
             f"{params['timestep']}; "
         )
-        # print(f"\t{url}")
 
-        # Check for file's existence if the request failed
-        if status != 200 and params["dataset"].startswith('x/'):
-            filepath = params["dataset"][1:]
-            exists = os.path.isfile(filepath)
-            print(f"\t{'Exists' if exists else 'Absent'}: {filepath}")
-            if exists:
-                # There should be a utility for this. Geez.
-                ncdump = subprocess.Popen([
-                    "ncdump", "-v", "time", filepath,
-                ], stdout=subprocess.PIPE)
-                filter = subprocess.Popen([
-                    # "grep", "time"
-                    "sed", r"/^\/\/ global attributes:/,/^data:/{//p;d;}"
-                ], stdin=ncdump.stdout, stdout=subprocess.PIPE)
-                ncdump.stdout.close()
-                result = filter.communicate()[0]
-                print(f'{result.decode("utf-8")}')
+        if details:
+            print(f"Params: {params}")
+            print(f"URL: {url}")
 
-        # Print some stuff extracted from the response for GetCapabilities
-        if status == 200 and params["request"] == "GetCapabilities":
-            print(f"\t{extract_capabilities_info(content)}")
+            # Check for file's existence if the request failed
+            if status != 200 and params["dataset"].startswith('x/'):
+                filepath = params["dataset"][1:]
+                exists = os.path.isfile(filepath)
+                print(f"\t{'Exists' if exists else 'Absent'}: {filepath}")
+                if exists:
+                    # There should be a utility for this. Geez.
+                    ncdump = subprocess.Popen([
+                        "ncdump", "-v", "time", filepath,
+                    ], stdout=subprocess.PIPE)
+                    filter = subprocess.Popen([
+                        # "grep", "time"
+                        "sed", r"/^\/\/ global attributes:/,/^data:/{//p;d;}"
+                    ], stdin=ncdump.stdout, stdout=subprocess.PIPE)
+                    ncdump.stdout.close()
+                    result = filter.communicate()[0]
+                    print(f'{result.decode("utf-8")}')
+
+            # Print some stuff extracted from the response for GetCapabilities
+            if status == 200 and params["request"] == "GetCapabilities":
+                print(f"\t{extract_capabilities_info(content)}")
 
         if status != 200:
             errors.append(result)
