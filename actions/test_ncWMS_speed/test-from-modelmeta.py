@@ -169,20 +169,23 @@ dbq_underlines = ["-" * width for width in dbq_widths]
 async def ncwms_request(
     session=None,
     id=0,
-    delay=0,
-    ncwms=None,
-    request="GetMap",
-    dataset=None,
-    unique_id=None,
-    filepath=None,
-    variable=None,
-    timestep=None,
-    bbox="-125.00000000000001,65,-112.5,77.5",
-    width=256,
-    height=256,
-    dataset_type=None,
-    title="title",
+    **kwargs,
 ):
+    # To enable passing additional parameters not directly relevant to the ncwms
+    # request proper, we use a generic kwargs argument for most of them, and extract the
+    # relevant ones by keyword. The entire parameter set is returned by the task so that
+    # anything relevant can be retrieved from its results later.
+
+    start_delay = kwargs["start_delay"]
+    ncwms = kwargs["ncwms"]
+    request = kwargs["request"]
+    dataset = kwargs["dataset"]
+    variable_name = kwargs["variable_name"]
+    timestep = kwargs["timestep"]
+    bbox = kwargs["bbox"]
+    width = kwargs["width"]
+    height = kwargs["height"]
+
     base_query_params = {
         "request": request,
         "service": "WMS",
@@ -197,7 +200,7 @@ async def ncwms_request(
         query_params = {
             **base_query_params,
             # Note: Must use `layers` param, not `dataset` for dynamic datasets
-            "layers": f"{dataset}/{variable}",
+            "layers": f"{dataset}/{variable_name}",
             "TRANSPARENT": "true",
             "STYLES": "default-scalar/x-Occam",
             "NUMCOLORBANDS": "254",
@@ -213,26 +216,12 @@ async def ncwms_request(
     else:
         raise ValueError(f"Invalid request type '{request}'")
 
-    sched_time = time.time() + delay
-    await asyncio.sleep(delay)
+    sched_time = time.time() + start_delay
+    await asyncio.sleep(start_delay)
     req_time = time.time()
     content_type = "text" if request == "GetCapabilities" else "binary"
     url, status, content = await fetch(session, ncwms, query_params, content_type)
-    ncwms_request_params = dict(
-        delay= delay,
-        ncwms= ncwms,
-        request= request,
-        dataset=dataset,
-        unique_id=unique_id,
-        filepath=filepath,
-        variable=variable,
-        timestep=timestep,
-        bbox= bbox,
-        width= width,
-        height= height,
-        title=title,
-    )
-    return id, ncwms_request_params, url, sched_time, req_time, time.time(), status, content
+    return id, kwargs, url, sched_time, req_time, time.time(), status, content
 
 
 async def main(
@@ -249,7 +238,7 @@ async def main(
     # print(tabulate(titles, widths=widths))
 
     tasks = []
-    job_id= 0
+    job_id = 0
 
     async with aiohttp.ClientSession() as aiohttp_session:
         for i, param_set in enumerate(param_sets):
@@ -263,15 +252,6 @@ async def main(
                 "timescale",
                 "season",
                 "month",
-            ))
-            ncwms_params = dict_subset(param_set, (
-                "ncwms",
-                "request",
-                "dataset_type",
-                "bbox",
-                "width",
-                "height",
-                "title",
             ))
             # print("Layer params", lp)
             q = get_layer_query(db_session, **layer_params)
@@ -294,13 +274,11 @@ async def main(
                         ncwms_request(
                             session=aiohttp_session,
                             id=job_id,
-                            delay=param_set["delay"] + j * param_set["interval"],
+                            query_result=query_result,
+                            start_delay=param_set["delay"] + j * param_set["interval"],
                             dataset=dataset,
-                            unique_id=query_result.unique_id,
-                            filepath=query_result.filepath,
-                            variable=query_result.variable,
                             timestep=format(query_result.timestep),
-                            **ncwms_params,
+                            **param_set,
                         )
                     )
                     job_id += 1
@@ -322,10 +300,10 @@ async def main(
 
         print()
         print(f"{len(errors)} errors in {len(results)} requests")
-        #
-        # print()
-        # print(f"Error results only")
-        # print_ncwms_task_results(errors)
+
+        print()
+        print(f"Error results only")
+        print_ncwms_task_results(errors, details=True)
 
 
 if __name__ == "__main__":
