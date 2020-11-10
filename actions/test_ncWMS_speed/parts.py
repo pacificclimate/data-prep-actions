@@ -154,8 +154,12 @@ def print_ncwms_task_results(results, details=False):
             result
         delta = req_time - sched_time
         resp_lag = resp_time - req_time
-        if details:
-            print()
+        print()
+        print(
+            f"{format_list(params['title'])}; "
+            f"{params['query_result'].unique_id}; "
+            f"{params['timestep']}; "
+        )
         print(tabulate(
             [
                 jobid,
@@ -172,11 +176,6 @@ def print_ncwms_task_results(results, details=False):
         ))
 
         if details:
-            print(
-                f"{format_list(params['title'])}; "
-                f"{params['query_result'].unique_id}; "
-                f"{params['timestep']}; "
-            )
             print(f"Params: {params}")
             print(f"URL: {url}")
 
