@@ -1,3 +1,6 @@
+# To test different version number (1.1.1 vs 1.3.0) specifications in
+# requests
+
 # Error InvalidDimensionValue (for time) appears to be provoked by
 # requesting a map layer for the following parameter combinations:
 #   variable_name: pr, year: 2025,  timescale: monthly, month: jan.
@@ -12,6 +15,7 @@
 
 $combinations:
   - $one:
+      version: "1.3.0"
       ensemble_name: p2a_classic
       models: [PCIC12, anusplin]
       emissions:
@@ -26,27 +30,36 @@ $combinations:
 #        - hdd
         - pr
 #        - prsn
-#        - tasmean
+        - tasmean
   - $each:
       year:
         - 1977
-#        - 2025
-#        - 2055
-#        - 2085
+  #        - 2025
+  #        - 2055
+  #        - 2085
   - $each:
       - [timescale, season, month, delay]
-      - [monthly, ~, jan, 0]
-      - [monthly, ~, jun, 0]
-      - [seasonal, winter, ~, 0]
-      - [seasonal, spring, ~, 0]
+#      - [monthly, ~, jan, 0]
+#      - [monthly, ~, jun, 0]
+#      - [seasonal, winter, ~, 0]
+#      - [seasonal, spring, ~, 0]
       - [yearly, ~, ~, 0]
   - $one:
       interval: 0
-      count: 2
-      ncwms: https://services.pacificclimate.org/dev/pcex/ncwms
-      request: GetMap
+      count: 1
+#      request: GetMap
       dataset_type: dynamic
+      crs: "EPSG:4326"
       bbox: "-125.00000000000001,65,-112.5,77.5"
       width: 256
       height: 256
-      title: dev, GetMap, dynamic
+      item: timesteps
+      title: dev
+  - $each:
+      ncwms:
+        - https://services.pacificclimate.org/dev/pcex/ncwms
+        - http://localhost:30580/ncWMS/wms
+  - $each:
+      request:
+        - GetMap
+        - GetMetadata

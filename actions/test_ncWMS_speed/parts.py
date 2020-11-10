@@ -154,7 +154,8 @@ def print_ncwms_task_results(results, details=False):
             result
         delta = req_time - sched_time
         resp_lag = resp_time - req_time
-        print()
+        if details:
+            print()
         print(tabulate(
             [
                 jobid,
@@ -169,18 +170,18 @@ def print_ncwms_task_results(results, details=False):
             ],
             widths=widths,
         ))
-        print(
-            f"{format_list(params['title'])}; "
-            f"{params['query_result'].unique_id}; "
-            f"{params['timestep']}; "
-        )
 
         if details:
+            print(
+                f"{format_list(params['title'])}; "
+                f"{params['query_result'].unique_id}; "
+                f"{params['timestep']}; "
+            )
             print(f"Params: {params}")
             print(f"URL: {url}")
 
             # Check for file's existence if the request failed
-            if status != 200 and params["dataset"].startswith('x/'):
+            if params["dataset"].startswith('x/'):
                 filepath = params["dataset"][1:]
                 exists = os.path.isfile(filepath)
                 print(f"\t{'Exists' if exists else 'Absent'}: {filepath}")
@@ -194,12 +195,16 @@ def print_ncwms_task_results(results, details=False):
                         "sed", r"/^\/\/ global attributes:/,/^data:/{//p;d;}"
                     ], stdin=ncdump.stdout, stdout=subprocess.PIPE)
                     ncdump.stdout.close()
-                    result = filter.communicate()[0]
-                    print(f'{result.decode("utf-8")}')
+                    output = filter.communicate()[0]
+                    print(f'{output.decode("utf-8")}')
 
             # Print some stuff extracted from the response for GetCapabilities
             if status == 200 and params["request"] == "GetCapabilities":
-                print(f"\t{extract_capabilities_info(content)}")
+                print(f"Capabilities: {extract_capabilities_info(content)}")
+
+            if params["request"] == "GetMetadata":
+                print(f"Metadata: {content}")
+
 
         if status != 200:
             errors.append(result)

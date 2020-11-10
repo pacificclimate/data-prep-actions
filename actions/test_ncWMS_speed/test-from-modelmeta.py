@@ -177,19 +177,20 @@ async def ncwms_request(
     # anything relevant can be retrieved from its results later.
 
     start_delay = kwargs["start_delay"]
+
     ncwms = kwargs["ncwms"]
+    ncwms_version = kwargs["version"]
     request = kwargs["request"]
+
     dataset = kwargs["dataset"]
     variable_name = kwargs["variable_name"]
+
     timestep = kwargs["timestep"]
-    bbox = kwargs["bbox"]
-    width = kwargs["width"]
-    height = kwargs["height"]
 
     base_query_params = {
-        "request": request,
         "service": "WMS",
-        "version": "1.1.1",
+        "request": request,
+        "version": ncwms_version,
     }
     if request == "GetCapabilities":
         query_params = {
@@ -207,11 +208,20 @@ async def ncwms_request(
             "SRS": "EPSG:4326",
             "LOGSCALE": "false",
             "FORMAT": "image/png",
-            "BBOX": bbox,
-            "WIDTH": width,
-            "HEIGHT": height,
+            "BBOX": kwargs["bbox"],
+            "CRS": kwargs["crs"],
+            "WIDTH": kwargs["width"],
+            "HEIGHT": kwargs["height"],
             "COLORSCALERANGE": "-5,15",
             "TIME": timestep,
+        }
+    elif request == "GetMetadata":
+        query_params = {
+            **base_query_params,
+            "item": kwargs["item"],
+            "layerName": f"{dataset}/{variable_name}",
+            "day": timestep[0:10],
+            # "time": timestep,
         }
     else:
         raise ValueError(f"Invalid request type '{request}'")
@@ -228,11 +238,18 @@ async def main(
     mmdb=None,
     param_sets=None,
     dry_run=False,
+    print_what=frozenset("results"),
 ):
+    print_param_sets = "params" in print_what
+    print_mm_query_results = "query_results" in print_what
+    print_tasks = "tasks" in print_what
+    print_results = "results" in print_what
+    print_result_details = "result_details" in print_what
 
-    print("Parameter sets")
-    for i, param_set in enumerate(param_sets):
-        print(f'Parameter set {i}', param_set)
+    if print_param_sets:
+        print("Parameter sets")
+        for i, param_set in enumerate(param_sets):
+            print(f'Parameter set {i}', param_set)
 
     db_session = get_db_session(mmdb)
     # print(tabulate(titles, widths=widths))
@@ -242,7 +259,6 @@ async def main(
 
     async with aiohttp.ClientSession() as aiohttp_session:
         for i, param_set in enumerate(param_sets):
-            print()
             layer_params = dict_subset(param_set, (
                 "ensemble_name",
                 "models",
@@ -253,17 +269,18 @@ async def main(
                 "season",
                 "month",
             ))
-            # print("Layer params", lp)
             q = get_layer_query(db_session, **layer_params)
 
-            print(f"Parameter set {i}: {q.count()} layers selected", )
             query_results = q.all()
-            print(tabulate(dbq_titles, widths=dbq_widths))
-            print(tabulate(dbq_underlines, widths=dbq_widths))
+            if print_mm_query_results:
+                print(f"Parameter set {i}: {q.count()} layers selected", )
+                print(tabulate(dbq_titles, widths=dbq_widths))
+                print(tabulate(dbq_underlines, widths=dbq_widths))
 
             for query_result in query_results:
                 row = [format(getattr(query_result, name)) for name in dbq_attrs]
-                print(tabulate(row, widths=dbq_widths))
+                if print_mm_query_results:
+                    print(tabulate(row, widths=dbq_widths))
 
                 dataset = (
                     query_result.unique_id if param_set["dataset_type"] == "static"
@@ -283,27 +300,28 @@ async def main(
                     )
                     job_id += 1
 
-        print(f"{len(tasks)} tasks to start")
+        if print_tasks:
+            print(f"{len(tasks)} tasks to start")
         if dry_run:
             return
 
-        start_time = time.time()
-        print(f"Tasks started at {time_format(start_time)}")
+        if print_tasks:
+            start_time = time.time()
+            print(f"Tasks started at {time_format(start_time)}")
         results = await asyncio.gather(*tasks)
-        end_time = time.time()
-        print(f"Tasks finished at {time_format(end_time)}.")
-        print(f"Elapsed time: {end_time - start_time}")
+        if print_tasks:
+            end_time = time.time()
+            print(f"Tasks finished at {time_format(end_time)}.")
+            print(f"Elapsed time: {end_time - start_time}")
 
-        print()
-        print(f"All results")
-        errors = print_ncwms_task_results(results)
-
-        print()
-        print(f"{len(errors)} errors in {len(results)} requests")
-
-        print()
-        print(f"Error results only")
-        print_ncwms_task_results(errors, details=True)
+        if print_results:
+            print()
+            print(f"All results")
+            errors = print_ncwms_task_results(
+                results, details=print_result_details
+            )
+            print()
+            print(f"{len(errors)} errors in {len(results)} requests")
 
 
 if __name__ == "__main__":
@@ -319,14 +337,17 @@ if __name__ == "__main__":
         help="Specification file for iteration of parameter values."
     )
     parser.add_argument("-y", "--dryrun", dest="dry_run", action="store_true")
+    parser.add_argument("-p", "--print", dest="print_what", default="results")
     args = parser.parse_args()
 
     with open(args.file) as file:
         spec = yaml.safe_load(file)
     param_sets = iterate(spec)
 
+    print_what = set(args.print_what.split(','))
+
     asyncio.run(
-        main(mmdb=args.mmdb, param_sets=param_sets)
+        main(mmdb=args.mmdb, param_sets=param_sets, print_what=print_what)
     )
 
 
