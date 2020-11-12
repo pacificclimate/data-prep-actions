@@ -23,6 +23,6 @@ RUN apt-get install -yq \
     pip3 install -U pip pytest
 
 ADD . /app
-WORKDIR /app
+WORKDIR /app/actions/test_ncWMS_speed
 
 RUN pip3 install -i https://pypi.pacificclimate.org/simple/ -r requirements.txt
