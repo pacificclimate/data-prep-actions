@@ -27,6 +27,7 @@ from parts import (
     print_ncwms_task_results,
     dict_subset,
 )
+import statistics
 
 
 def format(value):
@@ -245,6 +246,7 @@ async def main(
     print_tasks = "tasks" in print_what
     print_results = "results" in print_what
     print_result_details = "result_details" in print_what
+    print_statistics = "statistics" in print_what
 
     if print_param_sets:
         print("Parameter sets")
@@ -322,6 +324,23 @@ async def main(
             )
             print()
             print(f"{len(errors)} errors in {len(results)} requests")
+
+        if print_statistics:
+            # jobid, params, url, sched_time, req_time, resp_time, status,
+            # content = result
+            lags = [r[5] - r[4] for r in results]
+            lag_min = min(lags)
+            lag_max = max(lags)
+            lag_mean = statistics.mean(lags)
+            lag_std = statistics.stdev(lags)
+            lag_median = statistics.median(lags)
+            print()
+            print(f"Request time statistics")
+            print(f"Minimum request time: {lag_min} s")
+            print(f"Mean request time: {lag_mean} s")
+            print(f"Median request time: {lag_median} s")
+            print(f"Maximum request time: {lag_max} s")
+            print(f"Std dev of request time: {lag_std} s")
 
 
 if __name__ == "__main__":
