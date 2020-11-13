@@ -12,8 +12,8 @@ $combinations:
 #        - ffd
 #        - gdd
 #        - hdd
-#        - pr
-#        - prsn
+        - pr
+        - prsn
         - tasmean
   - $each:
       year:
