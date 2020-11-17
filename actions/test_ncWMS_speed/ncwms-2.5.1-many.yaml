@@ -77,66 +77,132 @@ common: &common
         - "-150,40,-137.5,52.50000000000001"
 
 runs:
-  - name: nocache-X
+#  # No cache
+#  - name: nocache-X
+#    params:
+#      $combinations:
+#        $merge:
+#          - *common
+#          -
+#            - $one:
+#                ncwms: http://docker-dev01.pcic.uvic.ca:30510/dynamic/x
+#                title: nocache-X
+#  - name: nocache-A
+#    params:
+#      $combinations:
+#        $merge:
+#          - *common
+#          -
+#            - $one:
+#                ncwms: http://docker-dev01.pcic.uvic.ca:30511/dynamic/x
+#                title: "nocache-A"
+#  - name: nocache-B
+#    params:
+#      $combinations:
+#        $merge:
+#          - *common
+#          -
+#            - $one:
+#                ncwms: http://docker-dev01.pcic.uvic.ca:30512/dynamic/x
+#                title: "nocache-B"
+#  - name: nocache-C
+#    params:
+#      $combinations:
+#        $merge:
+#          - *common
+#          -
+#            - $one:
+#                ncwms: http://docker-dev01.pcic.uvic.ca:30513/dynamic/x
+#                title: "nocache-C"
+#  - name: nocache-D
+#    params:
+#      $combinations:
+#        $merge:
+#          - *common
+#          -
+#            - $one:
+#                ncwms: http://docker-dev01.pcic.uvic.ca:30514/dynamic/x
+#                title: "nocache-D"
+#  - name: nocache-E
+#    params:
+#      $combinations:
+#        $merge:
+#          - *common
+#          -
+#            - $one:
+#                ncwms: http://docker-dev01.pcic.uvic.ca:30515/dynamic/x
+#                title: "nocache-E"
+#  - name: nocache-F
+#    params:
+#      $combinations:
+#        $merge:
+#          - *common
+#          -
+#            - $one:
+#                ncwms: http://docker-dev01.pcic.uvic.ca:30516/dynamic/x
+#                title: "nocache-F"
+
+  # dict cache
+  - name: dictcache-X
     params:
       $combinations:
         $merge:
           - *common
           -
             - $one:
-                ncwms: http://docker-dev01.pcic.uvic.ca:30510/dynamic/x
-                title: nocache-X
-  - name: nocache-A
+                ncwms: http://docker-dev01.pcic.uvic.ca:30520/dynamic/x
+                title: dictcache-X
+  - name: dictcache-A
     params:
       $combinations:
         $merge:
           - *common
           -
             - $one:
-                ncwms: http://docker-dev01.pcic.uvic.ca:30511/dynamic/x
-                title: "nocache-A"
-  - name: nocache-B
+                ncwms: http://docker-dev01.pcic.uvic.ca:30521/dynamic/x
+                title: "dictcache-A"
+  - name: dictcache-B
     params:
       $combinations:
         $merge:
           - *common
           -
             - $one:
-                ncwms: http://docker-dev01.pcic.uvic.ca:30512/dynamic/x
-                title: "nocache-B"
-  - name: nocache-C
+                ncwms: http://docker-dev01.pcic.uvic.ca:30522/dynamic/x
+                title: "dictcache-B"
+  - name: dictcache-C
     params:
       $combinations:
         $merge:
           - *common
           -
             - $one:
-                ncwms: http://docker-dev01.pcic.uvic.ca:30513/dynamic/x
-                title: "nocache-C"
-  - name: nocache-D
+                ncwms: http://docker-dev01.pcic.uvic.ca:30523/dynamic/x
+                title: "dictcache-C"
+  - name: dictcache-D
     params:
       $combinations:
         $merge:
           - *common
           -
             - $one:
-                ncwms: http://docker-dev01.pcic.uvic.ca:30514/dynamic/x
-                title: "nocache-D"
-  - name: nocache-E
+                ncwms: http://docker-dev01.pcic.uvic.ca:30524/dynamic/x
+                title: "dictcache-D"
+  - name: dictcache-E
     params:
       $combinations:
         $merge:
           - *common
           -
             - $one:
-                ncwms: http://docker-dev01.pcic.uvic.ca:30515/dynamic/x
-                title: "nocache-E"
-  - name: nocache-F
+                ncwms: http://docker-dev01.pcic.uvic.ca:30525/dynamic/x
+                title: "dictcache-E"
+  - name: dictcache-F
     params:
       $combinations:
         $merge:
           - *common
           -
             - $one:
-                ncwms: http://docker-dev01.pcic.uvic.ca:30516/dynamic/x
-                title: "nocache-F"
+                ncwms: http://docker-dev01.pcic.uvic.ca:30526/dynamic/x
+                title: "dictcache-F"
