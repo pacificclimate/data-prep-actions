@@ -77,52 +77,66 @@ common: &common
         - "-150,40,-137.5,52.50000000000001"
 
 runs:
-  - $combinations:
-      $merge:
-        - *common
-        -
-          - $one:
-              ncwms: http://docker-dev01.pcic.uvic.ca:30510/dynamic/x
-              title: "nocache-X"
-  - $combinations:
-      $merge:
-        - *common
-        -
-          - $one:
-              ncwms: http://docker-dev01.pcic.uvic.ca:30511/dynamic/x
-              title: "nocache-A"
-  - $combinations:
-      $merge:
-        - *common
-        -
-          - $one:
-              ncwms: http://docker-dev01.pcic.uvic.ca:30512/dynamic/x
-              title: "nocache-B"
-  - $combinations:
-      $merge:
-        - *common
-        -
-          - $one:
-              ncwms: http://docker-dev01.pcic.uvic.ca:30513/dynamic/x
-              title: "nocache-C"
-  - $combinations:
-      $merge:
-        - *common
-        -
-          - $one:
-              ncwms: http://docker-dev01.pcic.uvic.ca:30514/dynamic/x
-              title: "nocache-D"
-  - $combinations:
-      $merge:
-        - *common
-        -
-          - $one:
-              ncwms: http://docker-dev01.pcic.uvic.ca:30515/dynamic/x
-              title: "nocache-E"
-  - $combinations:
-      $merge:
-        - *common
-        -
-          - $one:
-              ncwms: http://docker-dev01.pcic.uvic.ca:30516/dynamic/x
-              title: "nocache-F"
+  - name: nocache-X
+    params:
+      $combinations:
+        $merge:
+          - *common
+          -
+            - $one:
+                ncwms: http://docker-dev01.pcic.uvic.ca:30510/dynamic/x
+                title: nocache-X
+  - name: nocache-A
+    params:
+      $combinations:
+        $merge:
+          - *common
+          -
+            - $one:
+                ncwms: http://docker-dev01.pcic.uvic.ca:30511/dynamic/x
+                title: "nocache-A"
+  - name: nocache-B
+    params:
+      $combinations:
+        $merge:
+          - *common
+          -
+            - $one:
+                ncwms: http://docker-dev01.pcic.uvic.ca:30512/dynamic/x
+                title: "nocache-B"
+  - name: nocache-C
+    params:
+      $combinations:
+        $merge:
+          - *common
+          -
+            - $one:
+                ncwms: http://docker-dev01.pcic.uvic.ca:30513/dynamic/x
+                title: "nocache-C"
+  - name: nocache-D
+    params:
+      $combinations:
+        $merge:
+          - *common
+          -
+            - $one:
+                ncwms: http://docker-dev01.pcic.uvic.ca:30514/dynamic/x
+                title: "nocache-D"
+  - name: nocache-E
+    params:
+      $combinations:
+        $merge:
+          - *common
+          -
+            - $one:
+                ncwms: http://docker-dev01.pcic.uvic.ca:30515/dynamic/x
+                title: "nocache-E"
+  - name: nocache-F
+    params:
+      $combinations:
+        $merge:
+          - *common
+          -
+            - $one:
+                ncwms: http://docker-dev01.pcic.uvic.ca:30516/dynamic/x
+                title: "nocache-F"

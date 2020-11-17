@@ -235,12 +235,19 @@ async def ncwms_request(
     return id, kwargs, url, sched_time, req_time, time.time(), status, content
 
 
-async def run(
+async def single_run(
     mmdb=None,
-    param_sets=None,
+    run=None,
     dry_run=False,
     print_what=frozenset("results"),
 ):
+    if type(run) == dict:
+        run_name = run["name"]
+        param_sets = run["params"]
+    else:
+        run_name = "--unnamed run--"
+        param_sets = run
+
     print_param_sets = "params" in print_what
     print_mm_query_results = "query_results" in print_what
     print_tasks = "tasks" in print_what
@@ -249,17 +256,20 @@ async def run(
     print_statistics = "statistics" in print_what
 
     if print_param_sets:
-        print("Parameter sets")
+        print(f"Run {run_name}: Parameter sets")
         for i, param_set in enumerate(param_sets):
             print(f'Parameter set {i}', param_set)
 
     db_session = get_db_session(mmdb)
     # print(tabulate(titles, widths=widths))
 
+    # Create the tasks for this run
     tasks = []
     job_id = 0
 
     async with aiohttp.ClientSession() as aiohttp_session:
+        if print_mm_query_results:
+            print(f"Run {run_name}: query results")
         for i, param_set in enumerate(param_sets):
             layer_params = dict_subset(param_set, (
                 "ensemble_name",
@@ -303,14 +313,18 @@ async def run(
                     job_id += 1
 
         if print_tasks:
-            print(f"{len(tasks)} tasks to start")
+            print(f"Run {run_name}: {len(tasks)} tasks to start")
         if dry_run:
             return
 
         if print_tasks:
             start_time = time.time()
             print(f"Tasks started at {time_format(start_time)}")
+
+        # Start all the tasks
         results = await asyncio.gather(*tasks)
+
+        # Print stuff
         if print_tasks:
             end_time = time.time()
             print(f"Tasks finished at {time_format(end_time)}.")
@@ -318,7 +332,7 @@ async def run(
 
         if print_results:
             print()
-            print(f"All results")
+            print(f"Run {run_name}: All results")
             errors = print_ncwms_task_results(
                 results, details=print_result_details
             )
@@ -335,7 +349,7 @@ async def run(
             lag_std = statistics.stdev(lags)
             lag_median = statistics.median(lags)
             print()
-            print(f"Request time statistics")
+            print(f"Run {run_name}: Request time statistics")
             print(f"Minimum request time: {lag_min} s")
             print(f"Mean request time: {lag_mean} s")
             print(f"Median request time: {lag_median} s")
@@ -344,9 +358,9 @@ async def run(
 
 
 def main(runs=None, **kwargs):
-    for param_sets in runs:
+    for run in runs:
         asyncio.run(
-            run(param_sets=param_sets, **kwargs)
+            single_run(run=run, **kwargs)
         )
 
 
@@ -370,9 +384,9 @@ if __name__ == "__main__":
         raw_specs = yaml.safe_load(file)
     # print(f"raw_specs {raw_specs}")
     specs = raw_specs["runs"] if "runs" in raw_specs else [raw_specs]
-    print(f"specs {specs}")
+    # print(f"specs {specs}")
     runs = [iterate(spec) for spec in specs]
-    print(f"runs {runs}")
+    # print(f"runs {runs}")
 
     print_what = set(args.print_what.split(','))
 
