@@ -350,11 +350,33 @@ async def single_run(
             lag_median = statistics.median(lags)
             print()
             print(f"Run {run_name}: Request time statistics")
-            print(f"Minimum request time: {lag_min} s")
-            print(f"Mean request time: {lag_mean} s")
-            print(f"Median request time: {lag_median} s")
-            print(f"Maximum request time: {lag_max} s")
-            print(f"Std dev of request time: {lag_std} s")
+            # print(f"Minimum request time: {lag_min} s")
+            # print(f"Mean request time: {lag_mean} s")
+            # print(f"Median request time: {lag_median} s")
+            # print(f"Maximum request time: {lag_max} s")
+            # print(f"Std dev of request time: {lag_std} s")
+            columns = (
+                ("Run", 10),
+                ("Min", 6),
+                ("Mean", 6),
+                ("Med", 6),
+                ("Max", 6),
+                ("SD", 6),
+            )
+            titles, widths = (
+                [col[i] for col in columns] for i in range(2)
+            )
+            underlines = ["-" * width for width in widths]
+            print(tabulate(titles, widths=widths))
+            print(tabulate(underlines, widths=widths))
+            print(tabulate(
+                [run_name] +
+                list(map(
+                    lambda x: round(x, 3),
+                    [lag_min, lag_mean, lag_median, lag_max, lag_std]
+                )),
+                widths=widths
+            ))
 
 
 def main(runs=None, **kwargs):
