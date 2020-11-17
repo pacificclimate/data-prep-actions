@@ -235,7 +235,7 @@ async def ncwms_request(
     return id, kwargs, url, sched_time, req_time, time.time(), status, content
 
 
-async def main(
+async def run(
     mmdb=None,
     param_sets=None,
     dry_run=False,
@@ -343,6 +343,13 @@ async def main(
             print(f"Std dev of request time: {lag_std} s")
 
 
+def main(runs=None, **kwargs):
+    for param_sets in runs:
+        asyncio.run(
+            run(param_sets=param_sets, **kwargs)
+        )
+
+
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument(
@@ -360,14 +367,13 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     with open(args.file) as file:
-        spec = yaml.safe_load(file)
-    param_sets = iterate(spec)
+        raw_specs = yaml.safe_load(file)
+    # print(f"raw_specs {raw_specs}")
+    specs = raw_specs["runs"] if "runs" in raw_specs else [raw_specs]
+    print(f"specs {specs}")
+    runs = [iterate(spec) for spec in specs]
+    print(f"runs {runs}")
 
     print_what = set(args.print_what.split(','))
 
-    asyncio.run(
-        main(mmdb=args.mmdb, param_sets=param_sets, print_what=print_what)
-    )
-
-
-
+    main(runs=runs, mmdb=args.mmdb, dry_run=args.dry_run, print_what=print_what)
