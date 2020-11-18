@@ -28,6 +28,7 @@ from parts import (
     dict_subset,
 )
 import statistics
+import math
 
 
 def format(value):
@@ -356,12 +357,12 @@ async def single_run(
             # print(f"Maximum request time: {lag_max} s")
             # print(f"Std dev of request time: {lag_std} s")
             columns = (
-                ("Run", 10),
-                ("Min", 6),
-                ("Mean", 6),
-                ("Med", 6),
-                ("Max", 6),
-                ("SD", 6),
+                ("Run", 16),
+                ("Min", 8),
+                ("Mean", 8),
+                ("Med", 8),
+                ("Max", 8),
+                ("SD", 8),
             )
             titles, widths = (
                 [col[i] for col in columns] for i in range(2)
@@ -372,7 +373,9 @@ async def single_run(
             print(tabulate(
                 [run_name] +
                 list(map(
-                    lambda x: round(x, 3),
+                    lambda x:
+                        x if x == 0 else
+                        round(x, -int(math.floor(math.log10(abs(x)))) + (3 - 1)),
                     [lag_min, lag_mean, lag_median, lag_max, lag_std]
                 )),
                 widths=widths
