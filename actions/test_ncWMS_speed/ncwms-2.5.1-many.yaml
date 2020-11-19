@@ -132,15 +132,6 @@ runs:
 #            - $one:
 #                ncwms: http://docker-dev01.pcic.uvic.ca:30515/dynamic/x
 #                title: "nocache-E"
-#  - name: nocache-F
-#    params:
-#      $combinations:
-#        $merge:
-#          - *common
-#          -
-#            - $one:
-#                ncwms: http://docker-dev01.pcic.uvic.ca:30516/dynamic/x
-#                title: "nocache-F"
 
   # dict cache
   - name: dictcache-X
@@ -197,12 +188,4 @@ runs:
             - $one:
                 ncwms: http://docker-dev01.pcic.uvic.ca:30525/dynamic/x
                 title: "dictcache-E"
-  - name: dictcache-F
-    params:
-      $combinations:
-        $merge:
-          - *common
-          -
-            - $one:
-                ncwms: http://docker-dev01.pcic.uvic.ca:30526/dynamic/x
-                title: "dictcache-F"
+
