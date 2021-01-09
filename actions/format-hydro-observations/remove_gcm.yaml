@@ -1,0 +1,19 @@
+global:
+  downscaling__method:
+  downscaling__method_id:
+  downscaling__package_id:
+  downscaling__GCM__experiment:
+  downscaling__GCM__experiment_id:
+  downscaling__GCM__initialization_method:
+  downscaling__GCM__institute_id: 
+  downscaling__GCM__institution:
+  downscaling__GCM__model_id:
+  downscaling__GCM__physics_version:
+  downscaling__GCM__realization:
+  downscaling__target__dataset__contact:
+  downscaling__target__dataset:
+  downscaling__target__dataset_id:
+  downscaling__target__institute_id:
+  downscaling__target__institution:
+  downscaling__target__references:
+  downscaling__target__version = "1.0":

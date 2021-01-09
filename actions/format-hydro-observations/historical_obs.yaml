@@ -1,0 +1,50 @@
+global:
+    contact: Markus Schnorbus, mschnorb@uvic.ca
+    Conventions: CF-1.7
+    # creation_date: already present.
+    domain: nwna
+    frequency: day
+    institute_id: PCIC
+    institution: Pacific Climate Impacts Consortium (PCIC), Victoria, BC, www.pacificclimate.org
+    modeling_realm: land surface 
+    product: gridded hydrological output
+    project_id: other
+    table_id: Table day (10 Jun 2010)
+    title: VICGL with glacier dynamics driven with observed forcings
+    #tracking_id: not used 
+
+    forcing_type: gridded observations
+    forcing_domain: Northwestern North America
+
+    observations__contact: Markus Schnorbus, mschnorb@uvic.ca
+    observations__dataset: Thin plate spline w/ ClimateWNA for northwestern North America
+    observations__dataset_id: PNWNAmet
+    observations__frequency: day
+    observations__institute_id: PCIC
+    observations__institution: Pacific Climate Impacts Consortium
+    observations__references: Werner et al. 2019, https://www.nature.com/articles/sdata2018299
+    observations__version: 1.0
+
+    model_cal__contact: Markus Schnorbus, mschnorb@uvic.ca
+    model_cal__dataset: Thin plate spline w/ ClimateWNA for northwestern North America
+    model_cal__dataset_id: PNWNAmet
+    model_cal__start_date: "1985-01-01T00:00:00"
+    # model_cal__frequency: same as data frequency, not used
+    model_cal__institute_id: PCIC
+    model_cal__institution: Pacific Climate Impacts Consortium (PCIC)
+    model_cal__references: http://www.pacificclimate.org
+    model_cal__end_date: "2005-12-31T23:00:00"
+    model_cal__version: columbia:version_1.0 
+
+    configuration_id: VIC_1_0.1; R3_0.0; HC1_0.0
+    domain: nwna
+    method: Variable Infiltration Capacity Model GL with glacier dynamics
+    method_id: VICGL, RGM, and HydroConductor
+    version: VICGL 1.0, RGM 3.0, HydroConductor 1.0
+    # settings: not used
+    resolution: 0.0625dd
+    type: gridded fluxes
+
+    model_id: PNWNAmet
+    experiment_id: historical
+    run: base
