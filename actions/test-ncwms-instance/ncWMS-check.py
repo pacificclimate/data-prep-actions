@@ -77,106 +77,107 @@ for unique_id, filename, var_name, range_min, range_max, variable_standard_name 
         "DATASET": identification,
         }
     response = requests.get('{}'.format(args.ncwms), params=gc_params)
-    if response.status_code == 200:
-        print("  GetCapabilites call OK")
-    else:
+    
+    if response.status_code != 200:
         error = parse_ncWMS_exception(response.content)
         print("  ERROR: GetCapabilities returned {} ({})".format(response.status_code, 
                                                         error if error else "unable to parse error"))
         errors += 1
         error_files.add(identification)
-        
-    # extract spatial and temporal extent from xml returned by GetCapabilities
-    # we'll need this for the other queries
-    cap_metadata = xmltodict.parse(response.content)
-    layers = cap_metadata['WMT_MS_Capabilities']['Capability']['Layer']['Layer']['Layer']
-    if isinstance(layers, collections.OrderedDict):
-        # this dataset contains only one layer
-        layer_metadata = layers
-    elif isinstance(layers, list):
-        # there are multiple layers corresponding to different variables in this file.
-        # we could go through each layer seeking the one that has the current
-        # variable name on it, but we don't actually care -- netCDF's data schema
-        # requires that *all* variables in a file share spatial and temporal dimensions,
-        # so *any* layer in the file will provide the extent metadata we need. 
-        # Use the 0th one.
-        layer_metadata = layers[0]
     else:
-        print("  ERROR: cannot parse GetCapabilities response")
-        errors += 1
-        error_files.add(identification)
-        continue
+        print("  GetCapabilites call OK")
+        
+        
+        # extract spatial and temporal extent from xml returned by GetCapabilities
+        # we'll need this for the other queries
+        cap_metadata = xmltodict.parse(response.content)
+        layers = cap_metadata['WMT_MS_Capabilities']['Capability']['Layer']['Layer']['Layer']
+        if isinstance(layers, collections.OrderedDict):
+            # this dataset contains only one layer
+            layer_metadata = layers
+        elif isinstance(layers, list):
+            # there are multiple layers corresponding to different variables in this file.
+            # we could go through each layer seeking the one that has the current
+            # variable name on it, but we don't actually care -- netCDF's data schema
+            # requires that *all* variables in a file share spatial and temporal dimensions,
+            # so *any* layer in the file will provide the extent metadata we need. 
+            # Use the 0th one.
+            layer_metadata = layers[0]
+        else:
+            print("  ERROR: cannot parse GetCapabilities response")
+            errors += 1
+            error_files.add(identification)
+            continue
         
     
     
-    #get spatial info: bounding box and SRS
-    bounding_box = layer_metadata['BoundingBox']
-    srs = bounding_box['@SRS']
-    minx = bounding_box['@minx']
-    miny = bounding_box['@miny']
-    maxx = bounding_box['@maxx']
-    maxy = bounding_box['@maxy']
-    bbox = "{},{},{},{}".format(minx, miny, maxx, maxy)
+        #get spatial info: bounding box and SRS
+        bounding_box = layer_metadata['BoundingBox']
+        srs = bounding_box['@SRS']
+        minx = bounding_box['@minx']
+        miny = bounding_box['@miny']
+        maxx = bounding_box['@maxx']
+        maxy = bounding_box['@maxy']
+        bbox = "{},{},{},{}".format(minx, miny, maxx, maxy)
     
-    # get a valid timestamp
-    default_timestamp = layer_metadata["Extent"]["@default"]
+        # get a valid timestamp
+        default_timestamp = layer_metadata["Extent"]["@default"]
     
-    # make a GetFeatureInfo query on this dataset
-    # build the query
-    gfi_params = {
-        "REQUEST": "GetFeatureInfo",
-        "SERVICE": "WMS",
-        "VERSION": "1.1.1",
-        "QUERY_LAYERS": "{}/{}".format(identification, var_name),
-        "LAYERS": "{}/{}".format(identification, var_name),
-        "WIDTH": 100,
-        "HEIGHT": 100,
-        "SRS": srs,
-        "BBOX": bbox,
-        "INFO_FORMAT": "text/xml",
-        "X": 50,
-        "Y": 50
-        }
+        # make a GetFeatureInfo query on this dataset
+        # build the query
+        gfi_params = {
+            "REQUEST": "GetFeatureInfo",
+            "SERVICE": "WMS",
+            "VERSION": "1.1.1",
+            "QUERY_LAYERS": "{}/{}".format(identification, var_name),
+            "LAYERS": "{}/{}".format(identification, var_name),
+            "WIDTH": 100,
+            "HEIGHT": 100,
+            "SRS": srs,
+            "BBOX": bbox,
+            "INFO_FORMAT": "text/xml",
+            "X": 50,
+            "Y": 50
+            }
     
-    response = requests.get('{}'.format(args.ncwms), params=gfi_params)
-    if response.status_code == 200:
-        print("  GetFeatureInfo call OK")
-    else:
-        error = parse_ncWMS_exception(response.content)
-        print("  ERROR: GetFeatureInfo returned {} ({})".format(response.status_code, 
+        response = requests.get('{}'.format(args.ncwms), params=gfi_params)
+        if response.status_code == 200:
+            print("  GetFeatureInfo call OK")
+        else:
+            error = parse_ncWMS_exception(response.content)
+            print("  ERROR: GetFeatureInfo returned {} ({})".format(response.status_code, 
                                                         error if error else "unable to parse error"))
-        errors += 1
-        error_files.add(identification)
+            errors += 1
+            error_files.add(identification)
         
-    # make a GetMap query on this dataset
-    #&TIME=2000-01-01T12%3A00%3A00.00Z
-    gm_params = {
-        "REQUEST": "GetMap",
-        "SERVICE": "WMS",
-        "VERSION": "1.1.1",
-        "LAYERS": "{}/{}".format(identification, var_name),
-        "TRANSPARENT": "true",
-        "STYLES": style,
-        "NUMCOLORBANDS": 254,
-        "SRS": srs,
-        "LOGSCALE": "false",
-        "FORMAT": "image/png",
-        "BBOX": bbox,
-        "WIDTH": 100,
-        "HEIGHT": 100,
-        "COLORSCALERANGE": "{},{}".format(range_min, range_max),
-        "TIME": default_timestamp
-        }
+        # make a GetMap query on this dataset
+        gm_params = {
+            "REQUEST": "GetMap",
+            "SERVICE": "WMS",
+            "VERSION": "1.1.1",
+            "LAYERS": "{}/{}".format(identification, var_name),
+            "TRANSPARENT": "true",
+            "STYLES": style,
+            "NUMCOLORBANDS": 254,
+            "SRS": srs,
+            "LOGSCALE": "false",
+            "FORMAT": "image/png",
+            "BBOX": bbox,
+            "WIDTH": 100,
+            "HEIGHT": 100,
+            "COLORSCALERANGE": "{},{}".format(range_min, range_max),
+            "TIME": default_timestamp
+            }
 
-    response = requests.get('{}'.format(args.ncwms), params=gm_params)
-    if response.status_code == 200:
-        print("  GetMap call OK")
-    else:
-        error = parse_ncWMS_exception(response.content)
-        print("  ERROR: GetMap returned {} ({})".format(response.status_code, 
+        response = requests.get('{}'.format(args.ncwms), params=gm_params)
+        if response.status_code == 200:
+            print("  GetMap call OK")
+        else:
+            error = parse_ncWMS_exception(response.content)
+            print("  ERROR: GetMap returned {} ({})".format(response.status_code, 
                                                         error if error else "unable to parse error"))
-        errors += 1
-        error_files.add(identification)
+            errors += 1
+            error_files.add(identification)
         
     files += 1
 
