@@ -1,0 +1,27 @@
+global:
+    product: hydrological model output
+    domain: upper-fraser
+
+#rp5streamflow:
+#    missing_value: 100000000000000000000.00
+#    _FillValue:
+
+#rp50streamflow:
+#    missing_value: 100000000000000000000.00
+#    _FillValue:
+
+#rp2streamflow:
+#    missing_value: 100000000000000000000.00
+#    _FillValue:
+
+#rp20streamflow:
+#    missing_value: 100000000000000000000.00
+#    _FillValue:
+
+#rp200streamflow:
+#    missing_value: 100000000000000000000.00
+#    _FillValue:
+
+#rp100streamflow:
+#    missing_value: 100000000000000000000.00
+#    _FillValue:
