@@ -1,6 +1,9 @@
 global:
     product: hydrological model output
     domain: upper-fraser
+    downscaling__GCM__model_id: CanESM2-LE
+    downscaling__GCM__model_name: Canadian Earth System Model Large Ensemble
+
 
 #rp5streamflow:
 #    missing_value: 100000000000000000000.00
