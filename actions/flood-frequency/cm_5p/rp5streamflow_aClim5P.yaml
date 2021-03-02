@@ -1,0 +1,2 @@
+rp5streamflow:
+    cell_methods: "time: mean within days time: max over days time: mean over days models: percentile[5]"
