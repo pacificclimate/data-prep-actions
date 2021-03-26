@@ -1,0 +1,15 @@
+global:
+  institude_id:
+  institute_id: PCIC
+  product: gridded observations
+  frequency: fx
+  creation_date: 2021-03-23-T17:14:31Z
+  project_id: other
+  domain: nwna
+  experiment_id: historical
+  modeling_realm: land
+  model_id: GMTED2010
+  run: na
+
+elevmax:
+  cell_methods: "area: minimum"

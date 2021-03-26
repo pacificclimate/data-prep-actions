@@ -1,0 +1,21 @@
+global:
+  institution: Pacific Climate Impacts Consortium
+  title: RVIC flow direction data
+  creation_date: 2016-10-18-T15:16:55
+  contact: Markus Schnorbus, mschnorb@uvic.ca
+  domain: upper-fraser
+  modeling_realm: land
+  product: gridded observations
+  frequency: fx
+  project_id: other
+  table_id: na
+  institute_id: PCIC
+  experiment_id: historical
+  run: na
+  model: RVIC streamflow routing model
+  model_id: RVIC
+  model_version: 1.0.0
+
+flow_direction:
+    cell_methods: "area: point"
+    units: "1"

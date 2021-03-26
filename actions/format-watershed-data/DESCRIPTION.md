@@ -22,4 +22,16 @@ cdo chname,Flow_Direction,flow_direction flow-direction_peace.nc.tmp flow-direct
 update_metadata -y flow_direction.yaml flow-direction_peace.nc 
 ```
 
+Elevation minimum and maximum, from files made by Arelia with ArcGIS. Rename variable, then fix global metadata:
+```
+cdo chname,gmted075min,elevmin inputs/gmted075min_RasterToNetCDF.nc elevation_minimum.nc
+update_metadata -u minimum_elevation.yaml elevation_minimum.nc
+
+cdo chname,gmted075max,elevmax inputs/gmted075max_RasterToNetCDF.nc elevation_maximum.nc
+update_metadata -u maximum_elevation.yaml elevation_maximum.nc
+```
+
+
+
+
 At which point the files should be ready for indexing.
