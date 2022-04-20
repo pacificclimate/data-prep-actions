@@ -15,7 +15,6 @@ nc = Dataset(args.nc, "r")
 flow_direction = VicDataGrid.from_nc_dataset(nc, "flow_direction")
 grid = VIC_direction_matrix(flow_direction.lat_step, flow_direction.lon_step) 
 
-
 with open(args.geojson) as f:
     with open(args.csv, 'w', encoding='UTF8') as x:
         writer = csv.writer(x)
@@ -23,17 +22,24 @@ with open(args.geojson) as f:
         writer.writerow(header)
         gj = geojson.load(f)
         for i in gj['features']:
+            visited = set()
             center = shape(i.geometry).centroid
             try:
                 xy = flow_direction.lonlat_to_xy(center.coords[0])
             except:
                 continue
-
+            visited.add(xy)
             while True:
                 cell_routing = flow_direction.values[xy]
                 if cell_routing.mask:
                     break
                 neighbour = vec_add(xy, grid[int(cell_routing)])
+                #if xy = neighbour, then we must be at an outlet
+                if xy == neighbour:
+                    break
+                if neighbour in visited:
+                    cell_routing.mask = True
+                    break
                 if flow_direction.is_valid_index(neighbour):
                     xy = neighbour
                 else:
