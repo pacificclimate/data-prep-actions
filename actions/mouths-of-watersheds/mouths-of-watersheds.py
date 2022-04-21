@@ -1,7 +1,7 @@
 import argparse
 import csv
 from netCDF4 import Dataset
-from shapely.geometry import shape
+from shapely.geometry import shape, Point
 import geojson
 from mow.helpers import *
 from mow.geo_data_grid_2d.vic import VicDataGrid
@@ -30,7 +30,8 @@ with Dataset(args.rvic_flow_direction, "r") as nc, open(
     for i in gj["features"]:
         flag = False
         visited = set()
-        center = shape(i.geometry).centroid
+        polygon = shape(i.geometry)
+        center = polygon.centroid
         try:
             xy = flow_direction.lonlat_to_xy(center.coords[0])
         except:
@@ -53,7 +54,9 @@ with Dataset(args.rvic_flow_direction, "r") as nc, open(
             if neighbour in visited:
                 flag = True
                 break
-            if flow_direction.is_valid_index(neighbour):
+            if flow_direction.is_valid_index(neighbour) and polygon.contains(
+                Point(flow_direction.xy_to_lonlat(neighbour))
+            ):
                 xy = neighbour
             else:
                 break
