@@ -18,7 +18,7 @@ grid = VIC_direction_matrix(flow_direction.lat_step, flow_direction.lon_step)
 with open(args.geojson) as f:
     with open(args.csv, 'w', encoding='UTF8') as x:
         writer = csv.writer(x)
-        header = ['lon', 'lat', 'properties']
+        header = ['lon', 'lat', 'WTRSHDGRPC']
         writer.writerow(header)
         gj = geojson.load(f)
         for i in gj['features']:
@@ -46,7 +46,7 @@ with open(args.geojson) as f:
                     break
             if not cell_routing.mask:
                 mouth = flow_direction.xy_to_lonlat(xy)
-                line = [mouth[0].compressed()[0], mouth[1].compressed()[0], i.properties]
+                line = [mouth[0].compressed()[0], mouth[1].compressed()[0], i.properties['WTRSHDGRPD']]
                 writer.writerow(line)
 
 nc.close()
