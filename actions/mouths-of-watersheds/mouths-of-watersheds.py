@@ -5,6 +5,7 @@ from shapely.geometry import shape, Point
 import geojson
 from mow.helpers import *
 from mow.geo_data_grid_2d.vic import VicDataGrid
+import warnings
 
 parser = argparse.ArgumentParser(
     "Output a CSV file with the lon lat of the mouth of each watershed"
@@ -35,11 +36,13 @@ with Dataset(args.rvic_flow_direction, "r") as nc, open(
         try:
             xy = flow_direction.lonlat_to_xy(center.coords[0])
         except:
+            warnings.warn("watershed center not in netCDF file")
             continue
         visited.add(xy)
         while True:
             cell_routing = flow_direction.values[xy]
             if cell_routing.mask:
+                warnings.warn("watershed center not in netCDF file")
                 break
             neighbour = vec_add(xy, grid[int(cell_routing)])
             # if xy = neighbour, then we must be at an outlet
