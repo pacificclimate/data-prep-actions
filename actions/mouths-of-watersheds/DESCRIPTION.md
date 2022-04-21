@@ -1,8 +1,10 @@
 # Find Mouth of Watershed
 
-This script locates the mouth of a watershed from a geojson file by matching
-it up with a netCDF file. The resulting mouth of the watershed along with
-the watershed code are outputted as a CSV file.
+This script locates the mouth of a watershed whose boundary is defined by
+a polygon from a geojson file by finding the center point and following the
+path to the drainage point defined by a flow matrix provided in a netCDF file.
+The resulting mouth of the watershed along with the watershed code are
+outputted as a CSV file.
 
 ## Usage
 Run with an RVIC file as well as a netCDF file.
