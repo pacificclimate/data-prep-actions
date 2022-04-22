@@ -24,6 +24,7 @@ with Dataset(args.rvic_flow_direction, "r") as nc, open(
     grid = VIC_direction_matrix(
         flow_direction.lat_step, flow_direction.lon_step
     )
+    distance = max(flow_direction.lon_step, flow_direction.lat_step) * -1.2
     writer = csv.writer(x)
     header = ["lon", "lat", "WTRSHDGRPC"]
     writer.writerow(header)
@@ -32,7 +33,7 @@ with Dataset(args.rvic_flow_direction, "r") as nc, open(
         flag = False
         visited = set()
         polygon = shape(i.geometry)
-        center = polygon.centroid
+        center = polygon.buffer(distance).representative_point()
         try:
             xy = flow_direction.lonlat_to_xy(center.coords[0])
         except:
