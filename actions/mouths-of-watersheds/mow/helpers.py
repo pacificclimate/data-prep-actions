@@ -1,3 +1,5 @@
+# This module was copied unmodified from climate-explorer-backend
+# and may contain some unused code
 import math
 import operator
 

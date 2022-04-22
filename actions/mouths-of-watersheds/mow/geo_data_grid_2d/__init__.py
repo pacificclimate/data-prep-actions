@@ -1,3 +1,5 @@
+# This module was copied unmodified from climate-explorer-backend
+# and may contain some unused code
 class GeoDataGrid2DError(Exception):
     """Base class for exceptions in this module."""
 

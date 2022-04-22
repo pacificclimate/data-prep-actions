@@ -30,7 +30,7 @@ with Dataset(args.rvic_flow_direction, "r") as nc, open(
     writer.writerow(header)
     gj = geojson.load(f)
     for i in gj["features"]:
-        flag = False
+        is_cycle = False
         visited = set()
         polygon = shape(i.geometry)
         center = polygon.buffer(distance).representative_point()
@@ -56,7 +56,7 @@ with Dataset(args.rvic_flow_direction, "r") as nc, open(
             if xy == neighbour:
                 break
             if neighbour in visited:
-                flag = True
+                is_cycle = True
                 break
             if flow_direction.is_valid_index(neighbour) and polygon.contains(
                 Point(flow_direction.xy_to_lonlat(neighbour))
