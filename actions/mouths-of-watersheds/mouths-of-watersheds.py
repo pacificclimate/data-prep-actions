@@ -26,7 +26,7 @@ with Dataset(args.rvic_flow_direction, "r") as nc, open(
     )
     distance = max(flow_direction.lon_step, flow_direction.lat_step) * -1.2
     writer = csv.writer(x)
-    header = ["lon", "lat", "WTRSHDGRPC"]
+    header = ["OUTLET", "WTRSHDGRPC"]
     writer.writerow(header)
     gj = geojson.load(f)
     for i in gj["features"]:
@@ -64,11 +64,16 @@ with Dataset(args.rvic_flow_direction, "r") as nc, open(
                 xy = neighbour
             else:
                 break
-        if not cell_routing.mask and not flag:
+        if not cell_routing.mask:
             mouth = flow_direction.xy_to_lonlat(xy)
+            outlet = {
+                "type": "Point", 
+                "coordinates": [
+                    mouth[0].compressed()[0],
+                    mouth[1].compressed()[0]
+                ]}
             line = [
-                mouth[0].compressed()[0],
-                mouth[1].compressed()[0],
-                i.properties["WTRSHDGRPD"],
+                outlet,
+                i.properties["WTRSHDGRPC"],
             ]
             writer.writerow(line)
