@@ -1,0 +1,3 @@
+day_temp:
+  units: degC
+  cell_methods: "time: mean within years time: mean over years"
