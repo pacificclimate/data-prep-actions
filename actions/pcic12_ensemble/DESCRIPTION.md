@@ -1,5 +1,7 @@
 # PCIC12 Ensemble
 
+Note: this script has been superceded by the more flexible one in the ensemble_means directory. It is preserved for historical purposes.
+
 This primitive script scans every file in a directory and reads the metadata attributes. If a file's model metadata attribute is recognized as belonging to one of the PCIC12 models, it uses other metadata attributes to assign the file to a group based on its experiment, variable, frequency, method, and timespan.
 
 After all files in the directory have been scanned, the script checks each resulting group. For any group that ended up with 12 files corresponding to the 12 models in the PCIC ensemble, the cdo ensmean command will be run to generate a file containing the ensemble mean of the input files.
