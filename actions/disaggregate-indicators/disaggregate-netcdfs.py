@@ -22,10 +22,18 @@ with Dataset(args.netcdf, "r") as input:
     for ev in expected_variables:
         if ev not in input.variables:
             raise Exception("Did not find expected variable {}".format(ev))
-            
+    
+    resolution_variables = ["month", "day"]
+
     indicators = []
+    resolution = "year"
     for v in input.variables:
-        if not v in expected_variables:
+        if v in resolution_variables:
+            if resolution == "year":
+                resolution = v
+            else:
+                raise Exception("Multiple time resolution variables: {}, {}".format(v, resolution))
+        elif not v in expected_variables:
             indicators.append(v)
     
     if len(indicators) == 0:
@@ -35,6 +43,8 @@ with Dataset(args.netcdf, "r") as input:
         print("Indicator is {}".format(indicator))
     else:
         raise Exception("Multiple possible indicators found: {}".format(indicators))
+    
+    print("Time resolution is {}".format(resolution))
 
     def check_variable_expectations(var_name, length, long_name):
         #checks that a particular variable has the format we expect.
@@ -42,17 +52,27 @@ with Dataset(args.netcdf, "r") as input:
         if len(var[:]) != length:
             raise Exception("Unexpected length of {} variable. Expected {}, found {}".format(var_name, length, len(var[:])))
         if var.long_name != long_name:
-            raise Exception("Unexpevyed long_name for variable {}. Expected {}, found {}".format(var_name, long_name, var.long_name))
+            raise Exception("Unexpected long_name for variable {}. Expected {}, found {}".format(var_name, long_name, var.long_name))
     
     check_variable_expectations("var_5", 5, "parameters: 1-mean, 2-sd, 3-n, 4-min, 5-max")
     check_variable_expectations("time.int", 4, "1:1971-2000 ; 2:2010-2039 ; 3:2040-2069 ; 4:2070-2099")
     check_variable_expectations("cell", 11794, "Grid cell number")
+    if resolution == "month":
+        check_variable_expectations("month", 12, "calendar month")
+    elif resolution == "day":
+        check_variable_expectations("day", 366, "calendary day: 366 days")
+    
     
     #TODO: check that the variable has the axes in the right order!
     def get_dimension_name(dim):
         return dim.name
     indicator_dimensions = list(map(get_dimension_name, input.variables[indicator].get_dims()))
-    expected_indicator_dimensions = ['var_5', 'time.int', 'cell']
+    expected_indicator_dimensions = ["var_5"]
+    if resolution != "year":
+        expected_indicator_dimensions.append(resolution)
+    expected_indicator_dimensions.append("time.int")
+    expected_indicator_dimensions.append("cell")
+
     if indicator_dimensions != expected_indicator_dimensions:
         raise Exception("Variable {} dimensions in unexpected order. Expected {} got {}".format(indicator, expected_indicator_dimensions, indicator_dimensions))
     
@@ -122,7 +142,9 @@ with Dataset(args.netcdf, "r") as input:
         for climo in range(len(time_int[:])):
             print ("    Now processing {} {}-{}".format(climo, climo_starts[climo], climo_ends[climo]))
             
-            filename = "{}_aClim{}_BCCAQv2_{}_historical-{}_{}_{}0101-{}1231_{}.nc".format(indicator, 
+            freq_abbreviation = {"year": "a", "month": "m"}[resolution]
+            filename = "{}_{}Clim{}_BCCAQv2_{}_historical-{}_{}_{}0101-{}1231_{}.nc".format(indicator, 
+                                              freq_abbreviation,
                                               stats[stat].capitalize(),
                                               input_atts["Model"],
                                               input_atts["RCP scenario"],
@@ -134,9 +156,11 @@ with Dataset(args.netcdf, "r") as input:
             print("      {}".format(filename))
             
             with Dataset(filename, "w", format="NETCDF4") as output:
+                timelen = {"year": 1, "month": 12, "day": 366}[resolution]
+                
                 lat = output.createDimension("lat", len(latitudes))
                 lon = output.createDimension("lon", len(longitudes))
-                time = output.createDimension("time", 1)
+                time = output.createDimension("time", timelen)
                 bnds = output.createDimension("bnds", 2)
                 
                 lats = output.createVariable("lat", "f8", ("lat"))
@@ -175,30 +199,58 @@ with Dataset(args.netcdf, "r") as input:
                     days = date(int(year), int(month), int(day)) - date(1950, 1, 1)
                     days = days.days
                     return days
-
-                time[:] = numpy.array([days_since_1950(
-                                        math.floor(climo_starts[climo] + climo_ends[climo])/2,
-                                        7, 2)])
                 
-                climatology_bnds[:] = numpy.array([
-                    days_since_1950(climo_starts[climo], 1, 1),
-                    days_since_1950(climo_ends[climo], 12, 31)])
+                start_year = climo_starts[climo]
+                end_year = climo_ends[climo]
+                mid_year = (start_year + end_year)/2
+                if resolution == "year":
+                    time[:] = numpy.array([days_since_1950(mid_year, 7, 2)])
+                    climatology_bnds[:] = numpy.array([
+                        days_since_1950(start_year, 1, 1),
+                        days_since_1950(end_year, 12, 31)])
                 
-                data = numpy.full((1, len(latitudes), len(longitudes)), 32767)
+                elif resolution == "month":
+                    times = []
+                    bounds = []
+                    month_lengths = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+                    for month in range(1, 13):
+                        times.append(days_since_1950(mid_year, month, 15))
+                        bounds.append(days_since_1950(start_year, month, 1))
+                        bounds.append(days_since_1950(end_year, month, month_lengths[month]))
+                    time[:] = numpy.array(times)
+                    climatology_bnds[:] = numpy.array(bounds).reshape(timelen, 2)
                 
-                slice = input.variables[indicator][:]
-                slice = slice[stat]
-                slice = slice[climo]
+                elif resolution == "year":
+                    raise Exception("yearly data translation is not implemented yet")
+                
+                data = numpy.full((timelen, len(latitudes), len(longitudes)), 32767)
                 
                 #translate data from numbered cells to latitude and longitude
-                for i in range(len(index_tuples)):
-                    #skip the fake one
-                    if i > 0:
-                        tup = index_tuples[i]
-                        row = tup[0]
-                        col = tup[1]
-                        datum = slice[i - 1]
-                        data[0, row - row_offset, col - col_offset] = datum
+                if resolution == "year":
+                    slice = input.variables[indicator][:]
+                    slice = slice[stat]
+                    slice = slice[climo]
+                    for i in range(len(index_tuples)):
+                        #skip the fake one
+                        if i > 0:
+                            tup = index_tuples[i]
+                            row = tup[0]
+                            col = tup[1]
+                            datum = slice[i - 1]
+                            data[0, row - row_offset, col - col_offset] = datum
+                else:
+                    for t in range(timelen):
+                        slice = input.variables[indicator][:]
+                        slice = slice[stat]
+                        slice = slice[t]
+                        slice = slice[climo]
+                        for i in range(len(index_tuples)):
+                            if i > 0:
+                                tup = index_tuples[i]
+                                row = tup[0]
+                                col = tup[1]
+                                datum = slice[i - 1]
+                                data[t, row - row_offset, col - col_offset] = datum
                 
                 indicator_var[:] = data
 
@@ -207,9 +259,9 @@ with Dataset(args.netcdf, "r") as input:
                 # it's expected a lot of the metadata will be filled in later
                 
                 #global data
-                output.climo_start_time = "{}-01-01T00:00:00Z".format(climo_starts[climo])
-                output.climo_end_time = "{}-12-31T00:00:00Z".format(climo_ends[climo])
-                output.frequency = "aClim{}".format(stats[stat].capitalize())
+                output.climo_start_time = "{}-01-01T00:00:00Z".format(start_year)
+                output.climo_end_time = "{}-12-31T00:00:00Z".format(end_year)
+                output.frequency = "{}Clim{}".format(freq_abbreviation, stats[stat].capitalize())
                 output.domain = input_atts["Major drainage"]
                 output.creation_date = "{}T-00*00:00Z".format(input_atts["Date"])
                 output.title = input_atts["Title"]
