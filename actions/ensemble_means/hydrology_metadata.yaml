@@ -1,6 +1,6 @@
 global:
-  GCM__realization: X
-  GCM__institution: Pacific Climate Impacts Consortium
-  GCM__institute_id: PCIC
-  GCM__model_id: PCIC-HYDRO
-  creation_date: "2022-09-22T17:29:00Z"
+  hydromodel__downscaling__GCM__realization: X
+  hydromodel__downscaling__GCM__institution: Pacific Climate Impacts Consortium
+  hydromodel__downscaling__GCM__institute_id: PCIC
+  hydromodel__downscaling__GCM__model_id: PCIC-HYDRO
+  creation_date: "2022-10-11T17:29:00Z"
