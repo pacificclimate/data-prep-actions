@@ -46,6 +46,7 @@ with Dataset(args.netcdf, "r") as input:
     
     print("Time resolution is {}".format(resolution))
 
+    print("Resolution is {}".format(resolution))
     def check_variable_expectations(var_name, length, long_name):
         #checks that a particular variable has the format we expect.
         var = input.variables[var_name]
@@ -142,7 +143,7 @@ with Dataset(args.netcdf, "r") as input:
         for climo in range(len(time_int[:])):
             print ("    Now processing {} {}-{}".format(climo, climo_starts[climo], climo_ends[climo]))
             
-            freq_abbreviation = {"year": "a", "month": "m"}[resolution]
+            freq_abbreviation = {"year": "a", "month": "m", "day": "d"}[resolution]
             filename = "{}_{}Clim{}_BCCAQv2_{}_historical-{}_{}_{}0101-{}1231_{}.nc".format(indicator, 
                                               freq_abbreviation,
                                               stats[stat].capitalize(),
@@ -156,7 +157,7 @@ with Dataset(args.netcdf, "r") as input:
             print("      {}".format(filename))
             
             with Dataset(filename, "w", format="NETCDF4") as output:
-                timelen = {"year": 1, "month": 12, "day": 366}[resolution]
+                timelen = {"year": 1, "month": 12, "day": 365}[resolution]
                 
                 lat = output.createDimension("lat", len(latitudes))
                 lon = output.createDimension("lon", len(longitudes))
@@ -220,8 +221,13 @@ with Dataset(args.netcdf, "r") as input:
                     time[:] = numpy.array(times)
                     climatology_bnds[:] = numpy.array(bounds).reshape(timelen, 2)
                 
-                elif resolution == "year":
-                    raise Exception("yearly data translation is not implemented yet")
+                elif resolution == "day":
+                    time[:] = numpy.array(range(1, 366, 1)) + (days_since_1950(mid_year, 1, 1) - 1)
+                    bounds = []
+                    for day in range(365):
+                        bounds.append(days_since_1950(start_year, 1, 1) + day)
+                        bounds.append(days_since_1950(end_year, 1, 1) + day)
+                    climatology_bnds[:] = numpy.array(bounds).reshape(timelen, 2)
                 
                 data = numpy.full((timelen, len(latitudes), len(longitudes)), 32767)
                 
@@ -240,18 +246,35 @@ with Dataset(args.netcdf, "r") as input:
                             data[0, row - row_offset, col - col_offset] = datum
                 else:
                     for t in range(timelen):
-                        slice = input.variables[indicator][:]
-                        slice = slice[stat]
-                        slice = slice[t]
-                        slice = slice[climo]
-                        for i in range(len(index_tuples)):
-                            if i > 0:
-                                tup = index_tuples[i]
-                                row = tup[0]
-                                col = tup[1]
-                                datum = slice[i - 1]
-                                data[t, row - row_offset, col - col_offset] = datum
-                
+                        # for DAILY datasets, skip day 60 - February 29
+                        # data as received is on a 366 day calendar, but we can't actually
+                        # assign a measurement to February 29 1950 in the database, 
+                        # we need to drop this datapoint and "scoot down" all the ones 
+                        # after it.
+                        # monthly datasets processed by this code never reach timestamp 60, 
+                        # so their indexes are never translated and no timestamp
+                        # is skipped.
+                        translated_index = -1
+                        if t < 60:
+                            translated_index = t
+                        if t > 60:
+                            translated_index = t-1
+
+                        if translated_index > -1:
+                            slice = input.variables[indicator][:]
+                            slice = slice[stat]
+                            slice = slice[t]
+                            slice = slice[climo]
+                            for i in range(len(index_tuples)):
+                                if i > 0:
+                                    tup = index_tuples[i]
+                                    row = tup[0]
+                                    col = tup[1]
+                                    datum = slice[i - 1]
+                                    data[t, row - row_offset, col - col_offset] = datum
+                        else:
+                            print("      Dropping data associated with February 29.")
+
                 indicator_var[:] = data
 
                 # translate global metadata on input file into PCIC standards
