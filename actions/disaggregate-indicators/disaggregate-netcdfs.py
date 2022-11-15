@@ -271,7 +271,7 @@ with Dataset(args.netcdf, "r") as input:
                                     row = tup[0]
                                     col = tup[1]
                                     datum = slice[i - 1]
-                                    data[t, row - row_offset, col - col_offset] = datum
+                                    data[translated_index, row - row_offset, col - col_offset] = datum
                         else:
                             print("      Dropping data associated with February 29.")
 
