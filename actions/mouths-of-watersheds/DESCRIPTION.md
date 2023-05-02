@@ -22,3 +22,7 @@ To build virtual environment:
 `source venv/bin/activate`
 `pip install {requirement}`
 After this point, use source to re-enter environment
+
+## Usages
+
+This script was used to calculate the mouths of the salmon conservation units and BC Freshwater Atlas watersheds, both using RVIC flowmaps for the Fraser Watershed. Input and output files are in the "cu_data" and "watershed_data" directories.
