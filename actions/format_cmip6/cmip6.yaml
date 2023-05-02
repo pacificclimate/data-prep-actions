@@ -1,0 +1,36 @@
+global:
+    project_id: CMIP6
+    product: downscaled output
+
+    GCM__branch_method: <-driving_branch_method
+    GCM__data_specs_version: <-driving_data_specs_version
+    GCM__experiment: <-driving_experiment
+    GCM__experiment_id: <-driving_experiment_id
+    GCM__forcing_index: <-driving_forcing_index
+    GCM__grid: <-driving_grid
+    GCM__grid_label: <-driving_grid_label
+    GCM__further_url_info: <-driving_further_url_info
+    GCM__institution: <-driving_institution
+    GCM__institute_id: <-driving_institute_id
+    GCM__model_id: <-driving_model_id
+    GCM__nominal_resolution: <-driving_nominal_resolution
+    GCM__realization_index: <-driving_realization_index
+    GCM__initialization_index: <-driving_initialization_index
+    GCM__physics_index: <-driving_physics_index
+    GCM__source_id: <-driving_source_id
+    GCM__source_type: <-driving_source_type
+
+    method: <-downscaling_method
+    method_id: <-downscaling_method_id
+    package_id: <-downscaling_package_id
+
+    institution_id: <-institute_id
+    GCM__institution_id: <-GCM__institute_id
+
+    target__institution: <-target_institution
+    target__institution_id: <-target_institute_id
+    target__dataset: <-target_dataset
+    target__dataset_id: <-target_dataset_id
+    target__references: <-target_references
+    target__version: <-target_version
+    target__contact: <-target_contact
