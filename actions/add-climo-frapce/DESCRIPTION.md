@@ -47,6 +47,10 @@ for file in *.nc ; do echo $file ; python ../../add-time-bounds.py $file $file.t
 
 But be careful if you run it with this command - if the script can't complete for any reason, it will output a blank netcdf file that the following `mv` bash command will copy overtop your input file.
 
+### Updating time variable data
+
+All "time" data in this data collection was initially set to "365" - that is, all measurements are associated with 365 days after January 1 1950. The fix_annual_climo_times.py is a one-time script that sets the time variable in each dataset to July 1 in the middle year of the climatology. It relies on the data set during previous steps to determine which climatology a dataset describes, so you need to do all the previous steps in this section first. 
+
 ## Formatting cell methods
 
 Because each variable must be named explicitly to set a variable attribute on it, and because the cell methods vary based on whether the datafile is an ensemble mean or ensemble percentile, it takes 42 separate configuration files to set all the cell methods for this dataset, one for each combination of variable (14 variables) and aggregating operation (mean, 2.5 percentile, 97.5 percentile).
