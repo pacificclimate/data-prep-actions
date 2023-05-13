@@ -24,21 +24,17 @@ try:
     outfile = Dataset(args.outfile, "w")
     
     #make sure input lacks time_bnds
-    if "time_bnds" in infile.variables:
-        raise Exception("Input file already has climatology bounds variable")
+    assert "time_bnds" not in infile.variables, "Input file already has climatology bounds variable"
     
     #make sure input has necessary metadata
     for attribute in ["climo_start_time", "climo_end_time", "frequency"]:
-        if not attribute in infile.ncattrs():
-            raise Exception("Input file does not have {} attribute".format(attribute))
+        assert attribute in infile.ncattrs(), "Input file does not have {} attribute".format(attribute)
     
     #make sure input has a time variable
-    if not "time" in infile.variables:
-        raise Exception("Input file has no time variable!")
+    assert "time" in infile.variables, "Input file has no time variable"
     
     #make sure input is annual
-    if not infile.frequency.startswith("aClim"):
-        raise Exception("Input file is not an annual climatology: {}".format(infile.frequency))
+    assert infile.frequency.startswith("aClim"), "Input file is not an annual climatology: {}".format(infile.frequency)
     
     #write output
     print("Creating dimensions")
@@ -63,7 +59,15 @@ try:
     #get start and end dates
     start_date = datetime.datetime.strptime(infile.climo_start_time, '%Y-%m-%dT%H:%M:%SZ')
     end_date = datetime.datetime.strptime(infile.climo_end_time, '%Y-%m-%dT%H:%M:%SZ')
-    outfile.variables["time_bnds"][:] = np.array([[(start_date - ref_date).days, (end_date - ref_date).days]])    
+    if infile.variables["time"].calendar == "standard":
+        outfile.variables["time_bnds"][:] = np.array([[(start_date - ref_date).days, (end_date - ref_date).days]])
+        print("Using standard calendar")
+    elif infile.variables["time"].calendar == "365_day":
+        assert start_date.month == 1 and start_date.day == 1, "This script assumes climatologies that start Jan 1: {}".format(start_date)
+        assert end_date.month == 12 and end_date.day == 31, "This script assumes climatologies that end Dec 31: {}".format(end_date)
+        start_year = (start_date.year - ref_date.year) * 365
+        end_year = (end_date.year - ref_date.year) * 365
+        outfile.variables["time_bnds"][:] = np.array([[start_year + 1, end_year + 365]])
     
     print("Creating attributes")
     for attr in infile.ncattrs():
