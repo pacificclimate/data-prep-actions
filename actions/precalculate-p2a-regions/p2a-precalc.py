@@ -70,7 +70,7 @@ parser.add_argument('-d', '--dsn', help='connection string for a modelmeta datab
 args = parser.parse_args()
 
 # these are the variables plan2adapt needs
-variables = ['tasmean', 'ffd', 'pr', 'prsn', 'gdd', 'hdd']
+variables = ['tasmean', 'ffd', 'pr', 'prsn', 'gdd', 'hdd', 'cdd']
 
 standard_climo_years = {
     "6190": (1961, 1990),
