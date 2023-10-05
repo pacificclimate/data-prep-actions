@@ -43,7 +43,7 @@ for file in input/*p1*.nc ; do echo $file; update_metadata -u yamls/p1.yaml $fil
 
 ## Fix Units
 
-DAP does not allow unicode characters in netCDF attributes. So units using the degree symbol are not allowed. These YAML files update the units string of temperature indicators to say "degC" instead of "<degreesymbol>C"
+DAP does not allow unicode characters in netCDF attributes. So units using the degree symbol are not allowed. These YAML files update the units string of temperature indicators to say "degC" instead of "&deg;C"
 
 ```
 for file in input/twMonth*.nc ; do echo $file ; update_metadata -u yamls/tw_month.yaml $file ; done
