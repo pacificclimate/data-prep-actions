@@ -47,5 +47,14 @@ DAP does not allow unicode characters in netCDF attributes. So units using the d
 
 ```
 for file in input/twMonth*.nc ; do echo $file ; update_metadata -u yamls/tw_month.yaml $file ; done
-for file in input/twDay*.nc ; do echo $file ; update_metadata -y yamls/tw_day.yaml $file ; done
+for file in input/twDay*.nc ; do echo $file ; update_metadata -u yamls/tw_day.yaml $file ; done
+```
+
+## Adjust scenario
+
+Datasets typically use historical data for the reference period and modelled data for the future periods. For ease in connecting all the temporal segments of a dataset, their scenario for both reference and projected data is given a unified string like "historical, rcp85". Future data was understandably labeled just "rcp85". Update the scenario string. 
+
+```
+for file in input/*rcp45*.nc ; fo echo $file ; update_metadata -u yamls/rcp45.yaml $file ; done
+for file in input/*rcp85*.nc ; do echo $file ; update_metadata -u yamls/rcp85.yaml $file ; done
 ```
