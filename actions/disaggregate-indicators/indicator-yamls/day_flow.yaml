@@ -1,0 +1,3 @@
+day_flow:
+  units: m3 sec-1
+  cell_methods: "time: mean within years time: mean over years" 

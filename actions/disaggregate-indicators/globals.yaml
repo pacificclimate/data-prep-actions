@@ -1,0 +1,63 @@
+global:
+    Conventions: CF-1.4
+    institution: Pacific Climate Impacts Consortium (PCIC), Victoria, BC, www.pacificclimate.org
+    contact: Travis Tai, ttai@uvic.ca
+    institute_id: PCIC
+    table_id: Table day (10 Jun 2010)
+
+#VIC parameters
+    hydromodel__model_start_year: 1950 
+    hydromodel__model_start_month: 1
+    hydromodel__model_start_day: 1
+    hydromodel__model_start_hour: 0
+    hydromodel__configuration_id: "https://github.com/mschnorb/configuration_files/blob/main/model_configurations/VICGL/vicgl_run_configuration_nwna_v1.0.0.yml"
+    hydromodel__method: Variable Infiltration Capacity Model GL
+    hydromodel__method_id: VICGL
+    hydromodel__version: VICGL 1.0
+    hydromodel__resolution: 0.0625dd
+    hydromodel__type: gridded fluxes
+    hydromodel__model_end_year: 2099
+    hydromodel__model_end_month: 12
+    hydromodel__model_end_day: 31
+
+
+#Downscaling parameters
+    hydromodel__forcing_type: downscaled gcm
+    hydromodel__downscaling__method: Bias Correction/Constructed Analogue Quantile Mapping version 2.0 (BCCAQ2)
+    hydromodel__downscaling__method_id: BCCAQ
+    hydromodel__downscaling__package_id: CLIMDOWN 1.0.2
+
+#Target parameters
+    hydromodel__downscaling__target__dataset__contact: Arelia Schoeneberg, wernera@uvic.ca
+    hydromodel__downscaling__target__dataset: Thin plate spline w/ ClimateWNA for northwestern North America
+    hydromodel__downscaling__target__dataset_id: PNWNAmet
+    hydromodel__downscaling__target__institute_id: PCIC
+    hydromodel__downscaling__target__institution: Pacific Climate Impacts Consortium (PCIC)
+    hydromodel__downscaling__target__references: "Werner et al. 2019 https://www.nature.com/articles/sdata2018299" 
+    hydromodel__downscaling__target__version: 1
+
+#Calibration parameters
+    hydromodel__model_cal__contact: Markus Schnorbus, mschnorb@uvic.ca
+    hydromodel__model_cal__dataset: Thin plate spline w/ ClimateWNA for northwestern North America
+    hydromodel__model_cal__dataset_id: PNWNAmet
+    hydromodel__model_cal__start_date: "1985-01-01T00:00:00" 
+    hydromodel__model_cal__end_date: "2005-12-31T23:00:00" 
+    hydromodel__model_cal__institute_id: PCIC
+    hydromodel__model_cal__institution: Pacific Climate Impacts Consortium (PCIC)
+    hydromodel__model_cal__references: "http://www.pacificclimate.org" 
+    hydromodel__model_cal__version: "fraser:version_1.0"
+
+#no GCM parameters - they're already present
+
+#RVIC parameters (top level)
+    modeling_realm: land surface
+    configuration_id: RVIC_1_1.0
+    parameter_config: "https://github.com/mschnorb/configuration_files/blob/main/model_configurations/RVIC/rvic_configuration_upper_fraser_20210322.yml"
+    method: RVIC Streamflow Model
+    method_id: "RVIC"
+    resolution: 0.0625dd
+    version: 1.1.1
+    type: gridded streamflow
+    long_description: "The RVIC streamflow routing model is based on the original model of Lohmann, et al., 1996, https://github.com/UW-Hydro/RVIC, author=Joe Hamman"
+    project_id: CMIP5
+    product: streamflow model output

@@ -1,0 +1,2 @@
+apd_flow:
+  cell_methods: "time: point time: mean over years"
