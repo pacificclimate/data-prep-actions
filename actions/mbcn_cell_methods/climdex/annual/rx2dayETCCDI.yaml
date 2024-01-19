@@ -1,0 +1,2 @@
+rx2dayETCCDI:
+    cell_methods: "time: mean within days time: maximum within years time: mean over years"

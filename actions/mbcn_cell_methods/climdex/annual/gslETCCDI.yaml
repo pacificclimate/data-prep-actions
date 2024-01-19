@@ -1,0 +1,2 @@
+gslETCCDI:
+    cell_methods: "time: mean within days time: sum within years time: mean over years"

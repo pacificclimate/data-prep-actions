@@ -1,0 +1,2 @@
+rl10tasmin:
+    cell_methods: "time: minimum within days time: minimum within years time: return level over years"

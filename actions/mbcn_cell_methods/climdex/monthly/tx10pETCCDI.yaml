@@ -1,0 +1,2 @@
+tx10pETCCDI:
+    cell_methods: "time: maximum within days time: sum within months time: mean over years"

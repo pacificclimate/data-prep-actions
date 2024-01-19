@@ -1,0 +1,2 @@
+tasmax:
+    cell_methods: "time: maximum within days time: mean within seasons time: mean over years"

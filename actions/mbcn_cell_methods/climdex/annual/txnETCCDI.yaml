@@ -1,0 +1,2 @@
+txnETCCDI:
+    cell_methods: "time: maximum within days time: minimum within years time: mean over years"

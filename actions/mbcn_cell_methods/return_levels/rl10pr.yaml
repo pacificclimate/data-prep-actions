@@ -1,0 +1,2 @@
+rl10pr:
+    cell_methods: "time: mean within days time: maximum within years time: return level over years"

@@ -1,0 +1,2 @@
+cdd:
+    cell_methods: "time: mean within days time: sum within months time: mean over years"

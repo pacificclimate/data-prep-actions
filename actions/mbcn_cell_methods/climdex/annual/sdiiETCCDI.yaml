@@ -1,0 +1,2 @@
+sdiiETCCDI:
+    cell_methods: "time: mean within days time: mean within years time: mean over years"

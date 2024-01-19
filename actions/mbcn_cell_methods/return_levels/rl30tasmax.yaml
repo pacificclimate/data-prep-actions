@@ -1,0 +1,2 @@
+rl30tasmax:
+    cell_methods: "time: maximum within days time: maximum within years time: return level over years"
