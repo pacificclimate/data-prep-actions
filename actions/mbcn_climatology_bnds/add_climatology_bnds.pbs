@@ -1,0 +1,53 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/add_climatology_bnds_mbcn/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/add_climatology_bnds_mbcn/
+#PBS -m ae
+#PBS -N MODEL_mbcn_derived_add_climatology_bnds
+
+module load cdo-bin
+
+venv=/storage/home/eyvorchuk/code/climate-explorer-data-prep
+cd $venv
+source venv/bin/activate
+#input_dir=DIRNAME
+model=MODEL
+root_dir=/storage/data/climate/downscale/MBCn/CMIP6_MBCn/${model}_10/Derived
+update_dir=/storage/home/eyvorchuk/code/data-prep-actions/actions/mbcn_climatology_bnds
+subdirs="annual climdex degree_days monthly return_levels seasonal"
+#subdirs="climdex"
+scenarios="ssp126 ssp245 ssp585"
+for scenario in $scenarios
+do
+    scenario_dir=${model}_${scenario}_*
+    for subdir in $subdirs
+    do
+        if [ "$subdir" = "return_levels" ]; then
+            files=$root_dir/$scenario_dir/$subdir/*.nc
+        else
+            files=$root_dir/$scenario_dir/$subdir/climatologies/*.nc 
+        fi
+        for file in $files
+        do
+            base=$(basename $file)
+
+            if [[ $base = *'tas_average'* ]]; then
+                continue
+            fi
+
+            echo "$(date) Copying $base to $TMPDIR"
+            cp $file $TMPDIR
+
+            echo "$(date) Adding climatology_bnds and updating times for $base"
+            python $update_dir/add_bnds.py $TMPDIR/$base
+
+            echo "$(date) Copying $base from $TMPDIR back to original location"
+            mv $TMPDIR/$base $file
+
+            echo "$(date) Granting write permissions to staff for $file"
+            chmod g+w $file
+        done
+    done
+done
