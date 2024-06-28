@@ -44,29 +44,33 @@ for file in os.listdir(indir):
     globals = nc.__dict__
     frequency = globals["frequency"]
     method = globals["method_id"]
-    
+    resolutions = {"aClimMean": "annual", "mClimMean": "monthly", "sClimMean": "seasonal"}    
+    res = resolutions[frequency] if frequency else None
+
     experiment = globals["GCM__experiment_id"]
     experiment = experiment.replace(",", "+") if experiment else None
     experiment = experiment.replace(" ", "") if experiment else None
+    experiment = experiment.split("+")[1] if experiment else None
     
     PCIC12_models = {
-        "ACCESS1-0": "r1i1p1",
-        "CanESM2": "r1i1p1",
-        "CCSM4": "r2i1p1",
-        "CNRM-CM5": "r1i1p1",
-        "CSIRO-Mk3-6-0": "r1i1p1",
-        "GFDL-ESM2G": "r1i1p1",
-        "HadGEM2-CC": "r1i1p1",
-        "HadGEM2-ES": "r1i1p1",
-        "inmcm4": "r1i1p1",
-        "MIROC5": "r3i1p1",
-        "MPI-ESM-LR": "r3i1p1",
-        "MRI-CGCM3": "r1i1p1",
+        "BCC-CSM2-MR": "r1i1p1f1",
+        "NorESM2-LM": "r1i1p1f1",
+        "MIROC-ES2L": "r1i1p1f2",
+        "MPI-ESM1-2-HR": "r1i1p1f1",
+        "MRI-ESM2-0": "r1i1p1f1",
+        "UKESM1-0-LL": "r1i1p1f2",
+        "EC-Earth3-Veg": "r1i1p1f1",
+        "CMCC-ESM2": "r1i1p1f1",
+        "INM-CM5-0": "r1i1p1f1",
+        "FGOALS-g3": "r1i1p1f1",
+        "TaiESM1": "r1i1p1f1",
+        "IPSL-CM6A-LR": "r1i1p1f1",
         }
     model = globals["GCM__model_id"]
-    ensemble_member = "r{}i{}p{}".format(globals["GCM__realization"],
-                                         globals["GCM__initialization_method"],
-                                         globals["GCM__physics_version"])
+    ensemble_member = "r{}i{}p{}f{}".format(globals["GCM__realization_index"],
+                                         globals["GCM__initialization_index"],
+                                         globals["GCM__physics_index"],
+                                         globals["GCM__forcing_index"])
     if model not in PCIC12_models:
         print("  WARNING: Unexpected model found: {}".format(model))
         model = None
@@ -76,17 +80,24 @@ for file in os.listdir(indir):
     
     startmatch = re.match(r'^(\d\d\d\d)-01-01T00:00:00Z$', globals["climo_start_time"])
     if(startmatch):
-        startyear = startmatch.group(1) + "0101"
+        startyear = startmatch.group(1)
     
     # end match will accept either December 30 or December 31 - HadGEM uses a
     # 360 day calendar.
     endmatch = re.match(r'^(\d\d\d\d)-12-3\dT00:00:00Z$', globals["climo_end_time"])
     if(endmatch):
-        endyear = endmatch.group(1) + "1231"   
+        endyear = endmatch.group(1)  
     
-    if variable and frequency and experiment and method and startyear and endyear and model:
-        ensemble = "{}_{}_{}_PCIC12_{}_rXi1p1_{}-{}_Canada".format(variable, frequency, method,
-                                                            experiment, startyear, endyear)
+    if variable and res and experiment and method and startyear and endyear and model:
+        #if variable in ["tas", "tasmax", "tasmin"] and res == "annual":
+        #    res_fname = "average_annual"
+        #else:
+        #    res_fname = "{}_average".format(res)
+        #ensemble = "{}_{}_climatology_{}+PCIC-Blend_PCIC12_Ensemble_Average_{}_{}-{}".format(variable, res, method,
+        #                                                    experiment, startyear, endyear)
+        ensemble = file.replace(model, "PCIC12_Ensemble_Average")
+        ensemble = ensemble.replace(ensemble_member + "_", "")
+        ensemble = ensemble.replace(".nc", "")
         if ensemble in ensembles:
             l = ensembles[ensemble]
             l.append(file)
