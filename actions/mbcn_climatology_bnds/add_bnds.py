@@ -21,6 +21,8 @@ with CFDataset(filepath, mode="r+") as cf:
     interval = next(iter(interval_set))
     prefixes = {"monthly": "m", "seasonal": "s", "annual": "a"}
     prefix = prefixes[interval]
+    if "tas" in cf.variables:
+        cf.variable_id = "tas"
     cf.frequency = prefix + "ClimMean"
     
     times, climo_bounds = generate_climo_time_var(
