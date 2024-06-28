@@ -1,0 +1,37 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/convert_classic_mbcn_derived/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/convert_classic_mbcn_derived/
+#PBS -m ae
+#PBS -N MODEL_derived_convert_classic
+
+module load cdo-bin
+
+model=MODEL
+root_dir=/storage/data/climate/downscale/MBCn/CMIP6_MBCn/${model}_10/Derived
+#root_dir=/storage/data/climate/downscale/BCCAQ2/CMIP6_BCCAQv2/${model}/Derived
+periods="1971-2000 1981-2010 2011-2040 2041-2070 2071-2100"
+for period in $periods
+do
+for file in $root_dir/*/return_levels/tasm*RL50*${period}.nc
+do
+    base=$(basename $file)
+
+    echo "$(date) Copying $base to $TMPDIR"
+    cp $file $TMPDIR
+
+    echo "$(date) Converting $base from classic to netCDF4 format"
+    cdo -f nc4 copy $TMPDIR/$base $TMPDIR/nc4_$base
+
+    echo "$(date) Removing $base with classic format"
+    rm $TMPDIR/$base
+
+    echo "$(date) Moving nc4_$base back to original location"
+    mv $TMPDIR/nc4_$base $file
+
+    echo "$(date) Giving staff write permissions to $file"
+    chmod g+w $file
+done
+done
