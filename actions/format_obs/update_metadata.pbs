@@ -1,0 +1,30 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=4000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/update_metadata/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/update_metadata/
+#PBS -m ae
+#PBS -N PCIC_Blend_tasmin_update_metadata       
+
+venv=/storage/home/eyvorchuk/code/climate-explorer-data-prep
+cd $venv
+source venv/bin/activate
+#input_dir=DIRNAME
+input_dir=/storage/data/climate/observations/gridded/PCIC_Blend/diagonal    
+for file in $input_dir/tasmin_day_PCIC_Blended_Observations_v1_1950-2012.nc
+do
+    base=$(basename $file)
+
+    echo "$(date) Copying $base to $TMPDIR"
+    cp $file $TMPDIR
+
+    echo "$(date) Updating metadata for $base"
+    python scripts/update_metadata -u tasmin.yaml $TMPDIR/$base
+
+    echo "$(date) Copying $base from $TMPDIR back to original location"
+    mv $TMPDIR/$base $file
+
+    echo "$(date) Granting write permissions to staff for $base"
+    chmod g+w $file
+done

@@ -1,0 +1,5 @@
+global:
+    project_id: other
+    product: gridded observations
+    model_id: PCIC_BLEND_v1
+    experiment_id: historical
