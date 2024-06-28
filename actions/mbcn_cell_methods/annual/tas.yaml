@@ -1,0 +1,6 @@
+global:
+    variable_id: tas
+tas:
+    standard_name: "Annual Average Daily Mean Temperature"
+    long_name: "Annual Average Daily Mean Temperature"
+    cell_methods: "time: mean within days time: mean within years time: mean over years"

@@ -1,2 +1,2 @@
-rl50pr:
+rl10prGumbel:
     cell_methods: "time: mean within days time: maximum within years time: return_level over years"

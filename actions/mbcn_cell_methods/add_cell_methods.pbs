@@ -13,22 +13,32 @@ source venv/bin/activate
 #input_dir=DIRNAME
 model=MODEL
 root_dir=/storage/data/climate/downscale/MBCn/CMIP6_MBCn/${model}_10/Derived
+#root_dir=/storage/data/climate/downscale/BCCAQ2/CMIP6_BCCAQv2/${model}/Derived
 update_dir=/storage/home/eyvorchuk/code/data-prep-actions/actions/mbcn_cell_methods
-subdirs="annual climdex degree_days monthly return_levels seasonal"
-#subdirs="climdex"
+#subdirs="annual climdex degree_days monthly return_levels seasonal"
+subdirs="return_levels"
 scenarios="ssp126 ssp245 ssp585"
+#scenarios="ssp370"
+periods="1971-2000 1981-2010 2011-2040 2041-2070 2071-2100"
+#vars="pr rain snow"
 for scenario in $scenarios
 do
     scenario_dir=${model}_${scenario}_*
     for subdir in $subdirs
     do
+    for period in $periods
+    do
         if [ "$subdir" = "return_levels" ]; then
-            files=$root_dir/$scenario_dir/$subdir/*.nc
+            files=$root_dir/$scenario_dir/$subdir/tas*RL50*${period}.nc
         else
-            files=$root_dir/$scenario_dir/$subdir/climatologies/*.nc 
+            #files=$root_dir/$scenario_dir/$subdir/climatologies/*.nc
+            files=$root_dir/$scenario_dir/$subdir/climatologies/tas_*${period}.nc 
         fi
         for file in $files
         do
+            #if !([[ $file =~ "pr" ]] || [[ $file =~ "rain" ]] || [[ $file =~ "snow" ]]); then
+            #    continue
+            #fi
             base=$(basename $file)
             
             echo "$(date) Copying $base to $TMPDIR"
@@ -42,10 +52,15 @@ do
                 
                 python scripts/update_metadata -u $update_dir/$subdir/$res/${var}.yaml $TMPDIR/$base
             elif [ "$subdir" = "return_levels" ]; then
-                [[ $base =~ ([[:lower:]]+)_[[:alpha:]]+_RL([[:digit:]]+)* ]]
+                [[ $base =~ ([[:lower:]]+)_([[:alpha:]]+)_RL([[:digit:]]+)* ]]
                 var=${BASH_REMATCH[1]}
-                level=${BASH_REMATCH[2]}
-                python scripts/update_metadata -u $update_dir/$subdir/rl${level}${var}.yaml $TMPDIR/$base
+                dist=${BASH_REMATCH[2]}
+                level=${BASH_REMATCH[3]}
+                if [ "$var" = "pr" ]; then
+                    python scripts/update_metadata -u $update_dir/$subdir/rl${level}${var}${dist}.yaml $TMPDIR/$base
+                else
+                    python scripts/update_metadata -u $update_dir/$subdir/rl${level}${var}.yaml $TMPDIR/$base
+                fi
             else
                 [[ $base =~ ([[:lower:]]+)* ]]
                 var=${BASH_REMATCH[1]}
@@ -58,5 +73,6 @@ do
             echo "$(date) Granting write permissions to staff for $file"
             chmod g+w $file
         done
+    done
     done
 done
