@@ -1,0 +1,73 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/change_standard_long_names_mbcn/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/change_standard_long_names_mbcn/
+#PBS -m ae
+#PBS -N MODEL_mbcn_derived_change_standard_long_names
+
+venv=/storage/home/eyvorchuk/code/climate-explorer-data-prep
+cd $venv
+source venv/bin/activate
+#input_dir=DIRNAME
+model=MODEL
+root_dir=/storage/data/climate/downscale/MBCn/CMIP6_MBCn/${model}_10/Derived
+update_dir=/storage/home/eyvorchuk/code/data-prep-actions/actions/mbcn_variable_names
+#subdirs="annual climdex degree_days monthly return_levels seasonal"
+subdirs="seasonal"
+scenarios="ssp126 ssp245 ssp585"
+periods="1971-2000 1981-2010 1991-2020 2011-2040 2021-2050 2041-2070 2071-2100"
+for scenario in $scenarios
+do
+    scenario_dir=${model}_${scenario}_*
+    for subdir in $subdirs
+    do
+    for period in $periods
+    do
+        if [ "$subdir" = "return_levels" ]; then
+            files=$root_dir/$scenario_dir/$subdir/*.nc
+        else
+            #files=$root_dir/$scenario_dir/$subdir/climatologies/*.nc
+            files=$root_dir/$scenario_dir/$subdir/climatologies/tas_*${period}.nc 
+        fi
+        for file in $files
+        do
+            #if [[ "$file" == *"total"* ]]; then
+            #    continue
+            #fi
+            #if !([[ $file =~ "pr" ]] || [[ $file =~ "rain" ]] || [[ $file =~ "snow" ]]); then
+            #    continue
+            #fi
+            base=$(basename $file)
+            
+            echo "$(date) Copying $base to $TMPDIR"
+            cp $file $TMPDIR
+
+            echo "$(date) Updating standard/long name for $base"
+            if [[ "$subdir" = "climdex" || "$subdir" = "degree_days" ]]; then
+                [[ $base =~ ([[:alnum:]]+)_([[:lower:]]+)* ]]
+                var=${BASH_REMATCH[1]}
+                res=${BASH_REMATCH[2]}
+                
+                python scripts/update_metadata -u $update_dir/$subdir/$res/${var}.yaml $TMPDIR/$base
+            elif [ "$subdir" = "return_levels" ]; then
+                [[ $base =~ ([[:lower:]]+)_[[:alpha:]]+_RL([[:digit:]]+)* ]]
+                var=${BASH_REMATCH[1]}
+                level=${BASH_REMATCH[2]}
+                python scripts/update_metadata -u $update_dir/$subdir/rl${level}${var}.yaml $TMPDIR/$base
+            else
+                [[ $base =~ ([[:lower:]]+)* ]]
+                var=${BASH_REMATCH[1]}
+                python scripts/update_metadata -u $update_dir/$subdir/${var}.yaml $TMPDIR/$base
+            fi
+
+            echo "$(date) Copying $base from $TMPDIR back to original location"
+            mv $TMPDIR/$base $file
+
+            echo "$(date) Granting write permissions to staff for $file"
+            chmod g+w $file
+        done
+    done
+    done
+done
