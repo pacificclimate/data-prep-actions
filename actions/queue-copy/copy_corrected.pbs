@@ -1,0 +1,18 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/copy_corrected/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/copy_corrected/
+#PBS -m ae
+#PBS -N UKESM1-0-LL_copy_corrected
+
+model=UKESM1-0-LL
+corrected_dir=/storage/data/climate/downscale/BCCAQ2/nobackup/Corrected_Outliers/$model
+bccaq2_dir=/storage/data/climate/downscale/BCCAQ2/CMIP6_BCCAQv2/$model
+for file in $corrected_dir/*
+do
+	base=$(basename $file)
+	echo "$(date) Copying $base to $bccaq2_dir for replacement"
+	cp $file $bccaq2_dir
+done

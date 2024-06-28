@@ -1,0 +1,17 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/copy_archived/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/copy_archived/
+#PBS -m ae
+#PBS -N KACE-1-0-G_copy_archived
+
+subdir=/storage/data/climate/downscale/BCCAQ2/CMIP6_BCCAQv2/KACE-1-0-G
+cd $subdir
+for file in $subdir/tas*.nc
+do
+	base=$(basename $file)
+	echo "$(date) Copying $base to archived subdirectory"
+	cp $base archived
+done
