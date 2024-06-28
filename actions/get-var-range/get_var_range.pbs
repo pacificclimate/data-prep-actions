@@ -1,0 +1,28 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/get_var_range/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/get_var_range/
+#PBS -m ae
+#PBS -N PNWNAmet_tasmin_get_var_range
+
+venv=/storage/home/eyvorchuk/code/modelmeta
+cd $venv
+source venv/bin/activate
+
+#index_dir=DIRNAME
+index_dir=/storage/data/projects/dataportal/data/vic-gen2-forcing
+for file in $index_dir/PNWNAmet_tasmin.nc
+do
+	base=$(basename $file)
+
+	echo "$(date) Copying $base to $TMPDIR"
+	cp $file $TMPDIR
+
+	echo "$(date) Getting var range for $base"
+	python scripts/get_var_range.py -f $TMPDIR/$base -v tasmin
+
+	echo "$(date) removing $base"
+	rm $TMPDIR/$base
+done
