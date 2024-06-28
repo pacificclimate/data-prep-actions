@@ -1,0 +1,50 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/update_metadata/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/update_metadata/
+#PBS -m ae
+#PBS -N MODEL_mbcn_derived_update_metadata
+
+venv=/storage/home/eyvorchuk/code/climate-explorer-data-prep
+cd $venv
+source venv/bin/activate
+#input_dir=DIRNAME
+model=MODEL
+root_dir=/storage/data/climate/downscale/MBCn/CMIP6_MBCn/${model}_10/Derived
+#root_dir=/storage/data/climate/downscale/BCCAQ2/CMIP6_BCCAQv2/${model}/Derived
+#root_dir=/storage/data/climate/downscale/MBCn/CMIP6_MBCn/Ensemble_Averages
+update_dir=/storage/home/eyvorchuk/code/data-prep-actions/actions/format_cmip6
+subdirs="climdex"
+scenarios="ssp126 ssp245 ssp585"
+periods="1971-2000 1981-2010 2011-2040 2041-2070 2071-2100"
+vars="tx10p tx90p tn10p tn90p"
+for subdir in $subdirs
+do
+    for scenario in $scenarios
+    do
+    for period in $periods
+    do
+        for var in $vars
+        do
+            for file in $root_dir/*${scenario}*/$subdir/climatologies/${var}*${period}.nc
+            do
+                base=$(basename $file)
+
+                echo "$(date) Copying $base to $TMPDIR"
+                cp $file $TMPDIR
+
+                echo "$(date) Updating metadata for $base"
+                #python scripts/update_metadata -u $update_dir/cmip6.yaml $TMPDIR/$base
+                python scripts/update_metadata -u $update_dir/climdex/${var}ETCCDI.yaml $TMPDIR/$base
+                echo "$(date) Copying $base from $TMPDIR back to original location"
+                mv $TMPDIR/$base $file
+
+                echo "$(date) Granting write permissions to staff for $base"
+                chmod g+w $file
+            done
+        done
+    done
+    done
+done
