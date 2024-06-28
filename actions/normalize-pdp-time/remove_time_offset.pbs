@@ -1,0 +1,30 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=4000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/remove_time_offset/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/remove_time_offset/
+#PBS -m ae
+#PBS -N bccaq2_remove_time_offset_MODEL 
+
+venv=/storage/home/eyvorchuk/code/modelmeta
+cd $venv
+source venv/bin/activate
+
+input_dir=DIRNAME
+for file in $input_dir/*.nc
+do
+    base=$(basename $file)
+
+    echo "$(date) Copying $base to $TMPDIR"
+    cp $file $TMPDIR
+
+    echo "$(date) Normalizing PDP time for $base"
+    python scripts/remove_time_offset.py $TMPDIR/$base
+
+    echo "$(date) Copying $base from $TMPDIR back to original location"
+    mv $TMPDIR/$base $file
+
+    echo "$(date) Granting write permissions to staff for $base"
+    chmod g+w $file
+done

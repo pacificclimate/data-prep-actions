@@ -48,7 +48,13 @@ print("{}: Now {} {}".format(time.ctime(time.time()),
 nc = Dataset(filename, "r+")
 
 # check assumptions
-# 1. make sure there's a time variable
+# 1. make sure file is in netCDF-4 format
+if not nc.file_format == "NETCDF4":
+    print("  ERROR: File is in {} format, not NETCDF4".format(nc.file_format))
+    nc.close()
+    sys.exit()
+
+# 2. make sure there's a time variable
 if not "time" in nc.variables:
     print("  ERROR: time variable not found".format(filename))
     nc.close()
@@ -56,7 +62,7 @@ if not "time" in nc.variables:
 
 timevar = nc.variables["time"]
 
-# 2. make sure time has units of the form "days since YYYY-MM-DD"
+# 3. make sure time has units of the form "days since YYYY-MM-DD"
 if not "units" in timevar.ncattrs():
     print("  ERROR: time variable has no units attribute")
     nc.close()
@@ -65,9 +71,10 @@ units = timevar.units
 # valid units formats:
 #  "days since YYYY-MM-DD HH:MM:SS"
 #  "days since YYYY-MM-DD"
-# common invalid format we accept as well:
+# common invalid formats we accept as well:
 #  "days since Y-MM-DD" ("days since 1-01-01")
-units_format = r'days since (\d\d?\d?\d?)-(\d\d)-(\d\d)( \d\d:\d\d:\d\d)?'
+#  "days since YYYY-M-D" ("days since 1850-1-1")
+units_format = r'days since (\d\d?\d?\d?)-(\d\d?)-(\d\d?)( \d\d:\d\d:\d\d)?'
 units_match = re.match(units_format, units)
 
 if units_match:
@@ -79,7 +86,7 @@ else:
     nc.close()
     sys.exit()
 
-# 3. make sure time has a calendar attribute, and it's one we understand
+# 4. make sure time has a calendar attribute, and it's one we understand
 if not "calendar" in timevar.ncattrs():
     print("  ERROR: time variable has no calendar attribute")
     nc.close()
@@ -93,13 +100,13 @@ if not calendar in ["standard", "gregorian", "proleptic_gregorian",
     nc.close()
     sys.exit()
     
-# 4. make sure the file is daily frequency
+# 5. make sure the file is daily frequency
 if not "frequency" in nc.ncattrs() or not nc.frequency == "day":
     print("  Error: file is not daily resolution")
     nc.close()
     sys.exit()
 
-# 5. make sure starting timestamp isn't already < 1
+# 6. make sure starting timestamp isn't already < 1
 days = timevar[:]
 if days[0] < 1:
     print("  ERROR: time variable has no offset; no correction needed")
