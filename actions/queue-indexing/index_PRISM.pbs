@@ -1,0 +1,31 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/index_PRISM/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/index_PRISM/
+#PBS -m ae
+#PBS -N PRISM_9120_index
+
+database='postgresql://pcic_meta:PASSWORD@db.pcic.uvic.ca:5433/pcic_meta'
+venv=/storage/home/eyvorchuk/code/modelmeta
+cd $venv
+source venv/bin/activate
+
+root_dir=/storage/data/climate/observations/gridded/PRISM/split_climos
+for file in $root_dir/*_199101*.nc
+do
+    base=$(basename $file)
+
+    echo "$(date) Copying $base to $TMPDIR"
+    cp $file $TMPDIR
+
+    echo "$(date) Indexing $base"
+    python scripts/index_netcdf -d $database $TMPDIR/$base
+
+    echo "$(date) removing $base"
+    rm $TMPDIR/$base
+
+    echo "$(date) updating file location in database"
+    python scripts/index_netcdf -d $database $file
+done

@@ -1,0 +1,62 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=2
+#PBS -l vmem=12000mb
+#PBS -l walltime=48:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/assoc_ensemble_mbcn/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/assoc_ensemble_mbcn/
+#PBS -m ae
+#PBS -N MODEL_assoc_ensemble_ce_meta
+
+database='postgresql://ce_meta_rw:PASSWORD@db.pcic.uvic.ca:5433/ce_meta'
+venv=/storage/home/eyvorchuk/code/modelmeta
+cd $venv
+source venv/bin/activate
+
+model=MODEL
+#index_dir=DIRNAME
+root_dir=/storage/data/climate/downscale/MBCn/CMIP6_MBCn/${model}_10/Derived
+#subdirs="annual climdex degree_days monthly return_levels seasonal"
+subdirs="return_levels"
+scenarios="ssp126 ssp245 ssp585"
+periods="1971-2000 1981-2010 2011-2040 2041-2070 2071-2100"
+#scenarios="ssp126"
+for scenario in $scenarios
+do
+    #if [ "$scenario" = "ssp245" ]; then
+    #    subdirs="return_levels seasonal"
+    #else
+    #    subdirs="annual climdex degree_days monthly return_levels seasonal"
+    #fi
+    scenario_dir=${model}_${scenario}_*
+    for subdir in $subdirs
+    do
+        for period in $periods
+        do
+            if [ "$subdir" = "return_levels" ]; then
+                #full_dir=$root_dir/$scenario_dir/$subdir
+                #files=$root_dir/$scenario_dir/$subdir/*.nc
+                files=$root_dir/$scenario_dir/$subdir/tas*RL50*${period}.nc
+            elif [ "$subdir" = "degree_days" ]; then
+                #full_dir=$root_dir/$scenario_dir/$subdir/climatologies
+                files=$root_dir/$scenario_dir/$subdir/climatologies/*_seasonal*_${period}.nc
+                #files=$root_dir/$scenario_dir/$subdir/climatologies/tas_*.nc
+            else
+                files=$root_dir/$scenario_dir/$subdir/climatologies/tas*_${period}.nc
+            fi
+            for file in $files
+            do
+                #if [[ $file =~ "total" ]]; then
+                #if !([[ $file =~ "pr" ]] || [[ $file =~ "rain" ]] || [[ $file =~ "snow" ]]); then
+                #    continue
+                #fi 
+                ensemble=all_files
+                echo "$(date) Associating $file with $ensemble"
+                python scripts/associate_ensemble -n $ensemble -v 1 -d $database $file
+
+                ensemble=ce_cmip6_mbcn
+                echo "$(date) Associating $file with $ensemble"
+                python scripts/associate_ensemble -n $ensemble -v 1 -d $database $file
+            done
+        done
+    done
+done

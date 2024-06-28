@@ -1,0 +1,63 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/index_cmip6_multi_ce_meta/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/index_cmip6_multi_ce_meta/
+#PBS -m ae
+#PBS -N MODEL_index_ce_meta
+
+database='postgresql://ce_meta_rw:PASSWORD@db.pcic.uvic.ca:5433/ce_meta'
+venv=/storage/home/eyvorchuk/code/modelmeta
+cd $venv
+source venv/bin/activate
+
+model=MODEL
+#index_dir=DIRNAME
+root_dir=/storage/data/climate/downscale/MBCn/CMIP6_MBCn/${model}_10/Derived
+#subdirs="annual climdex degree_days monthly return_levels seasonal"
+subdirs="return_levels"
+scenarios="ssp126 ssp245 ssp585"
+periods="1971-2000 1981-2010 2011-2040 2041-2070 2071-2100"
+#periods="2021-2050"
+#scenarios="ssp126"
+for scenario in $scenarios
+do
+    scenario_dir=${model}_${scenario}_*
+    for subdir in $subdirs
+    do
+        for period in $periods
+        do
+            if [ "$subdir" = "return_levels" ]; then
+                files=$root_dir/$scenario_dir/$subdir/tas*RL50*_${period}.nc
+                #files=$root_dir/$scenario_dir/$subdir/tasmin*.nc
+            else
+                #files=$root_dir/$scenario_dir/$subdir/climatologies/*.nc
+                files=$root_dir/$scenario_dir/$subdir/climatologies/tas_*${period}.nc
+            fi
+            for file in $files
+            do
+                #if [[ $file =~ "total" ]]; then
+                #if !([[ $file =~ "pr" ]] || [[ $file =~ "rain" ]] || [[ $file =~ "snow" ]]); then
+                #    continue
+                #fi
+                base=$(basename $file)
+
+                #if [[ $base = *'tas_average'* ]]; then
+                #    continue
+                #fi
+                echo "$(date) Copying $base to $TMPDIR"
+                cp $file $TMPDIR
+
+                echo "$(date) Indexing $base"
+                python scripts/index_netcdf -d $database $TMPDIR/$base
+
+                echo "$(date) removing $base"
+                rm $TMPDIR/$base
+
+                echo "$(date) updating file location in database"
+                python scripts/index_netcdf -d $database $file
+            done
+        done
+    done
+done
