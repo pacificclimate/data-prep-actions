@@ -1,0 +1,115 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=1
+#PBS -l vmem=12000mb
+#PBS -l walltime=24:00:00
+#PBS -o /storage/home/eyvorchuk/nobackup/logs/pr_climo_mbcn/
+#PBS -e /storage/home/eyvorchuk/nobackup/errors/pr_climo_mbcn/
+#PBS -m ae
+#PBS -N MODEL_pr_gen_climos
+
+module load cdo-bin
+module load netcdf-bin
+module load nco-bin
+
+model=MODEL
+venv=/storage/home/eyvorchuk/code/climate-explorer-data-prep
+cd $venv
+source venv/bin/activate
+root_dir=/storage/data/climate/downscale/MBCn/CMIP6_MBCn/${model}_10/Derived
+subdirs="annual monthly seasonal"
+scenarios="ssp126 ssp245 ssp585"
+vars="pr rain snow"
+if [ "$model" = "CanESM5" ]; then
+    run=r1i1p2f1
+else
+    ls_out=$(ls $root_dir)
+    [[ $ls_out =~ (r[0-9][[:alnum:]]*) ]]
+    run=${BASH_REMATCH[1]}
+fi
+
+for scenario in $scenarios
+do
+    scenario_dir=${model}_${scenario}_${run}
+    for subdir in $subdirs
+    do
+        full_dir=$root_dir/$scenario_dir/$subdir
+        for var in $vars
+        do
+            if [ "$var" = "pr" ]; then
+                var_name="Precipitation"
+            elif [ "$var" = "rain" ]; then
+                var_name="Rainfall"
+            else
+                var_name="Snowfall"
+            fi
+            tot_file=${var}_${subdir}_total_MBCn+PCIC-Blend_${model}_historical+${scenario}_${run}_1950-2100.nc
+            avg_file=${tot_file/total/average}
+            cp $full_dir/$avg_file $TMPDIR
+            #declare -a periods=("1971-2000" "1981-2010" "1991-2020" "2011-2040" "2041-2070" "2071-2100")
+            declare -a periods=("2021-2050")
+            #echo "$(date) Computing averages from totals in $tot_file"
+            if [ "$subdir" = "annual" ]; then
+                #cdo divdpy $TMPDIR/$tot_file $TMPDIR/$avg_file
+                #ncatted -O -a standard_name,${var},m,c,"Annual Average ${var_name}" -a long_name,${var},m,c,"Annual Average ${var_name}" $TMPDIR/$avg_file
+                #declare -a timesteps=("21,50" "31,60" "41,70" "61,90" "91,120" "121,150")
+                declare -a timesteps=("71,100")
+                for i in ${!periods[@]}
+                do
+                    echo "$(date) Computing climatology from $avg_file in ${periods[$i]}"
+                    ncks --overwrite -d time,${timesteps[$i]} $TMPDIR/$avg_file $TMPDIR/sub.nc
+                    clim_file=${avg_file/average/average_climatology}
+                    clim_file=${clim_file/1950-2100/${periods[$i]}}
+                    cdo -s -O timmean $TMPDIR/sub.nc $TMPDIR/$clim_file
+                    
+                    echo "$(date) Granting write permissions to staff for $clim_file and converting to netCDF4 format"
+                    cdo -f nc4 copy $TMPDIR/$clim_file $TMPDIR/nc4_$clim_file
+                    chmod g+w $TMPDIR/nc4_$clim_file
+
+                    echo "$(date) Copying $clim_file from $TMPDIR to $full_dir/climatologies"
+                    mv $TMPDIR/nc4_$clim_file $full_dir/climatologies/$clim_file
+                done
+            elif [ "$subdir" = "monthly" ]; then
+                #cdo divdpm $TMPDIR/$tot_file $TMPDIR/$avg_file
+                #ncatted -O -a standard_name,${var},m,c,"Monthly Average ${var_name}" -a long_name,${var},m,c,"Monthly Average ${var_name}" $TMPDIR/$avg_file
+                #declare -a timesteps=("252,611" "372,731" "492,851" "732,1091" "1092,1451" "1452,1811")
+                declare -a timesteps=("852,1211")
+                for i in ${!periods[@]}
+                do
+                    echo "$(date) Computing climatology from $avg_file in ${periods[$i]}"
+                    ncks --overwrite -d time,${timesteps[$i]} $TMPDIR/$avg_file $TMPDIR/sub.nc
+                    clim_file=${avg_file/average/average_climatology}
+                    clim_file=${clim_file/1950-2100/${periods[$i]}}
+                    cdo -s -O ymonmean $TMPDIR/sub.nc $TMPDIR/$clim_file
+
+                    echo "$(date) Granting write permissions to staff for $clim_file and converting to netCDF4 format"
+                    cdo -f nc4 copy $TMPDIR/$clim_file $TMPDIR/nc4_$clim_file
+                    chmod g+w $TMPDIR/nc4_$clim_file
+
+                    echo "$(date) Copying $clim_file from $TMPDIR to $full_dir/climatologies"
+                    mv $TMPDIR/nc4_$clim_file $full_dir/climatologies/$clim_file
+                done
+            else
+                #python /storage/home/eyvorchuk/code/data-prep-actions/actions/gen-pr-climos/generate_seasonal_average.py $TMPDIR/$tot_file
+                #declare -a timesteps=("84,203" "124,243" "164,283" "244,363" "364,483" "484,603")
+                declare -a timesteps=("284,403")
+                for i in ${!periods[@]}
+                do
+                    echo "$(date) Computing climatology from $avg_file in ${periods[$i]}"
+                    ncks --overwrite -d time,${timesteps[$i]} $TMPDIR/$avg_file $TMPDIR/sub.nc
+                    clim_file=${avg_file/average/average_climatology}
+                    clim_file=${clim_file/1950-2100/${periods[$i]}}
+                    cdo -s -O yseasmean $TMPDIR/sub.nc $TMPDIR/$clim_file
+
+                    echo "$(date) Granting write permissions to staff for $clim_file and converting to netCDF4 format"
+                    cdo -f nc4 copy $TMPDIR/$clim_file $TMPDIR/nc4_$clim_file
+                    chmod g+w $TMPDIR/nc4_$clim_file
+
+                    echo "$(date) Copying $clim_file from $TMPDIR to $full_dir/climatologies"
+                    mv $TMPDIR/nc4_$clim_file $full_dir/climatologies/$clim_file
+                done
+            fi
+            #echo "$(date) Copying $avg_file from $TMPDIR to $full_dir"
+            #mv $TMPDIR/$avg_file $full_dir
+        done
+    done
+done
