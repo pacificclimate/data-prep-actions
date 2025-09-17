@@ -1,0 +1,12 @@
+global:
+  domain: frapce
+  product: streamflow model output
+  project_id: CMIP5
+  mip_era: CMIP5
+  hydromodel__downscaling__GCM__realization: X
+
+time:
+  units: "days since 1950-01-01 00:00:00"
+  bounds: time_bnds
+
+  
